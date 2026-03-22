@@ -1,0 +1,14 @@
+{
+"page_title": "Entradanan Registrá",
+    "search_placeholder": "Buska pa kódigo di barranan, kódigo, deskripshon, pasio...",
+    "table_barcode": "Kódigo di Barranan",
+    "table_code": "Kódigo",
+    "table_description": "Deskripshon",
+    "table_quantity": "Kantidat",
+    "table_date": "Fecha",
+    "table_price": "Prijs",
+    "table_aisle": "Pasio",
+    "table_actions": "Akshonnan",
+    "export_by_date_range_title": "Eksportá Registronan pa Rango di Fecha",
+    "detailed_product_list_title": "Lista Detalyá di Produktonan"
+  }

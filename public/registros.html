@@ -14,98 +14,195 @@
     <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <link rel="icon" href="favicons/favicon.ico" type="image/x-icon"> <!-- El favicon principal en formato .ico -->
+    <link rel="icon" href="favicons/android-chrome-192x192.png" type="image/x-icon"> <!-- El favicon principal en formato .ico -->
     <!-- FIN: Codigo de Favicons Corregido y Optimizado -->
     
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">-->
-    <link rel="stylesheet" href="css/styles.css"> 
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"crossorigin="anonymous">
 </head>
-<body class="background-login"> <!-- ¡CLAVE! Añadir esta clase -->
-
-    <!-- Incluir la misma barra de navegación -->
+<body class="background-login">
     <header class="main-header">
-        <nav class="main-nav">
-            <div class="nav-logo-container">
-                <a href="/ingreso-productos"> <!-- Enlace al inicio de tu app despues del login -->
-                    <img src="favicons/favicon.ico" alt="Logo de la Empresa" class="nav-logo-img">
-                </a>
-            </div>
+        <div class="header-left">
+            <a href="/ingreso-productos">
+                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
+            </a>
+        </div>
+
+    <div id="live-clock" class="centered-clock"></div>
+
             <ul class="nav-list">
-                <li><a href="/ingreso-productos" class="nav-link" data-i18n="common.home_link">Inicio</a></li>
+                <!--<li><a href="/ingreso-productos" class="nav-link" data-i18n="common.home_link">Inicio</a></li>-->
                 <li class="dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-i18n="common.actions_dropdown">Acciones <span class="arrow-down"></span></a>
+                    <!--<a href="#" class="nav-link dropdown-toggle" data-i18n="common.actions_dropdown">Acciones <span class="arrow-down"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/ingreso-productos" class="dropdown-item" data-i18n="common.product_entry_link">Ingreso Productos</a></li>
                         <li><a href="/registros" class="dropdown-item" data-i18n="common.recorded_entries_link">Ingresos Realizados</a></li>
                         <li><a href="/averias" class="dropdown-item" data-i18n="common.report_damage_link">Reportar Avería</a></li>
+                        <li><a href="/subir" class="dropdown-item" data-i18n="common.import_link">Importar Productos</a></li>
                     </ul>
-                </li>
-                <li><a href="/logout" class="nav-link" id="logout-btn-nav" data-i18n="common.logout_button">Cerrar Sesión</a></li>
+                </li>-->
+                
+                <li>
+    <a href="javascript:void(0)" class="nav-link" id="logout-btn-nav" data-i18n="common.logout_button">Cerrar Sesión</a>
+</li>
             </ul>
         </nav>
     </header>
-
-    <main class="container">
-        <h1 class="page-title" data-i18n="registros.page_title">Ingresos de Productos Realizados</h1>
-
-        <!-- SECCIÓN: EXPORTAR POR RANGO DE FECHA -->
-        <h2 data-i18n="registros.export_by_date_range_title">Exportar Registros por Rango de Fecha</h2>
-        <div class="filter-section">
-            <div class="date-filter-group">
-                <label for="fecha-inicio" data-i18n="common.date_start_label">Fecha Inicio:</label>
-                <input type="date" id="fecha-inicio">
-                <label for="fecha-fin" data-i18n="common.date_end_label">Fecha Fin:</label>
-                <input type="date" id="fecha-fin">
-                <button id="filter-btn" class="btn-secondary" data-i18n="common.filter_button">Filtrar</button>
-                <button id="clear-filter-btn" class="btn-secondary" data-i18n="common.clear_filter_button">Limpiar Filtro</button>
-            </div>
-
-            <div class="export-controls">
-                <!--<i class="fas fa-file-excel export-icon"></i> -->
-                <a id="export-excel-btn" class="btn-primary" href="ruta/a/tu/archivo/excel.xlsx" download>
-                    <img src="imagenes/excel.png" alt="Exportar a Excel">
+<div class="user-info-bar">
+    <nav class="header-nav">
+        <ul class="nav-main-horizontal">
+            <li>
+                <a href="/ingreso-productos" class="nav-item">
+                    <span class="nav-icon">📥</span>
+                    <span class="nav-text" data-i18n="common:product_entry_link">Ingreso</span>
                 </a>
-                <!--<button id="export-excel-btn" class="btn-primary" data-i18n="common.export_button">Exportar</button>-->
+            </li>
+            <li>
+                <a href="/averias" class="nav-item">
+                    <span class="nav-icon">⚠️</span>
+                    <span class="nav-text" data-i18n="common:report_damage_link">Averías</span>
+                </a>
+                
+            </li>
+            <li>
+                <a href="/registros" class="nav-item">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text" data-i18n="common:recorded_entries_link">Registros</span>
+                </a>
+            </li>
+            <li>
+                <a href="/subir" class="nav-item">
+                    <span class="nav-icon">🚀</span>
+                    <span class="nav-text" data-i18n="common:import_link">Importar</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="user-tag">
+        <i class="fa-solid fa-circle-user" style="color: red;"></i>
+        <span id="nombre-usuario-display">Cargando...</span>
+    </div>
+</div>
+<main id="app-container">
+    </main>
+    <main class="container">
+    <h1 class="page-title" data-i18n="registros:page_title">Ingresos de Productos Realizados</h1>
+
+    <div class="toolbar-container">
+        
+        <div class="search-group">
+            <div class="input-with-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="search-input" placeholder="Buscar por código o descripción..." class="search-input">
+            </div>
+            <button id="clear-search-btn" class="common:btn-text">Limpiar</button>
+        </div>
+
+        <div class="filter-group">
+            <div class="date-input">
+    <label for="fecha-inicio" data-i18n="common:date_start_label">Inicio</label>
+    <input type="date" id="fecha-inicio">
+</div>
+<div class="date-input">
+    <label for="fecha-fin" data-i18n="common:date_end_label">Fin</label>
+    <input type="date" id="fecha-fin">
+</div>
+            <div class="filter-actions">
+<button id="filter-btn" class="btn-action" data-tooltip="Aplicar filtro de fecha" onclick="cargarProductosFiltrados()">
+    <i class="fa-solid fa-filter"></i>
+</button>
+
+<button id="clear-filter-btn" class="btn-action btn-clear" title="Borrar filtros y ver todo">
+    <i class="fa-solid fa-trash-can"></i>
+</button>
+
+<a id="export-excel-btn" class="btn-excel" href="#" title="Descargar reporte en Excel">
+    <i class="fa-solid fa-file-excel"></i>
+    <span>Exportar</span>
+</a>
+        </div>
+    </div>
+
+<div class="pagination-container" style="display: flex; justify-content: center; align-items: center; gap: 10px; margin: 10px 0;">
+    <button onclick="paginaAnterior()" class="btn-paging"> <i class="fas fa-chevron-left"></i> Anterior</button>
+    <span id="n-pagina" style="font-weight: bold; background: #eee; padding: 5px 12px; border-radius: 4px;">1</span>
+    <button onclick="paginaSiguiente()" class="btn-paging">Siguiente <i class="fas fa-chevron-right"></i></button>
+</div>
+
+<div class="table-container">
+    <table id="productos-table">
+        <thead>
+            <tr>
+                <th>Código de Barras</th>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Fecha</th>
+                <th>Precio</th>
+                <th>Pasillo</th>
+                <th>Acciones</th> 
+            </tr>
+        </thead>
+        <tbody id="cuerpo-tabla-principal">
+            </tbody>
+    </table>
+    <p id="no-products-message" style="display:none; text-align: center; color: #888; margin-top: 20px;">No se encontraron productos.</p>
+</div>
+    </main>
+
+    <div id="modal-historial" class="custom-modal" style="display: none;">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3><i class="fa-solid fa-clock-rotate-left"></i> Historial de Registros</h3>
+        </div>
+        
+        <div class="modal-content">
+            <div class="table-container-modal">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Tipo</th>
+                            <th>Cant.</th>
+                            <th>Precio</th>
+                            <th>Ubicación</th>
+                            <th>Usuario</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-historial">
+                        </tbody>
+                </table>
             </div>
         </div>
+        <div class="modal-footer">
+            <button onclick="cerrarModal()" class="btn-close">Cerrar</button>
+            </div>
 
-        <hr style="margin: 40px auto; width: 100%; border-top: 1px solid #eee;"> 
-
-        <h2 data-i18n="registros.detailed_product_list_title">Lista Detallada de Productos</h2>
-
-        <!-- CAMPO DE BÚSQUEDA -->
-        <div class="search-container">
-            <label for="search-input" class="sr-only" data-i18n="registros.search_products_label">Buscar productos:</label>
-            <input type="text" id="search-input" placeholder="Buscar..." class="search-input" data-i18n="[placeholder]registros.search_placeholder">
-            <button id="search-btn" class="btn-secondary" data-i18n="common.search_button">Buscar</button>
-            <button id="clear-search-btn" class="btn-secondary" data-i18n="common.clear_search_button">Limpiar Búsqueda</button>
+            <button onclick="descargarHistorialPDF()" class="btn-pdf-elegante shadow-sm">
+    <i class="fas fa-file-pdf"></i> Descargar Reporte PDF
+</button>
         </div>
-
-        <!-- Contenedor para la tabla de productos -->
-        <div class="table-container">
-            <table id="productos-table">
-                <thead>
-                    <tr>
-                        <th data-i18n="registros.table_barcode">Código de Barras</th>
-                        <th data-i18n="registros.table_code">Código</th>
-                        <th data-i18n="registros.table_description">Descripción</th>
-                        <th data-i18n="registros.table_quantity">Cantidad</th>
-                        <th data-i18n="registros.table_date">Fecha</th>
-                        <th data-i18n="registros.table_price">Precio</th>
-                        <th data-i18n="registros.table_aisle">Pasillo</th>
-                        <th data-i18n="registros.table_actions">Acciones</th> 
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Aquí se insertarán las filas de productos con JavaScript -->
-                </tbody>
-            </table>
-            <p id="no-products-message" style="text-align: center; color: #888; margin-top: 20px;" data-i18n="common.no_products_registered">No hay productos registrados aún.</p>
-        </div>
-    </main>
+    </div>
+</div>
      <!-- El script para esta página -->
-    <script src="js/i18n.js"></script>
-     <script src="js/registros.js"></script>
-    <script src="js/common.js"></script>
+      
+    <script type="importmap">
+{
+  "imports": {
+    "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/+esm",
+    "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/+esm",
+    "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/+esm",
+    "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
+  }
+}
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script src="js/i18n.js" type="module"></script>
+    <script src="js/registros.js" type="module"></script>
+    <script src="js/common.js" type="module"></script>
 </body>
 </html>

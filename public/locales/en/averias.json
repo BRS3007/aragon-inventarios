@@ -1,0 +1,20 @@
+{
+  "page_title": "Report Product Damage",
+  "barcode_label": "Barcode:",
+  "barcode_help_text": "Enter the barcode to autocomplete the product description.",
+  "product_description_label": "Product Description:",
+  "product_description_help_text": "Will autocomplete when you enter the barcode.",
+  "damage_description_label": "Damage Description:",
+  "damage_description_help_text": "Detail the type of damage or problem.",
+  "damage_date_label": "Date of Damage:",
+  "status_label": "Status:",
+  "status_pending": "Pending",
+  "status_in_review": "In Review",
+  "status_repaired": "Repaired",
+  "status_discarded": "Discarded",
+  "report_damage_button": "Report Damage",
+  "clear_form_button": "Clear Form",
+  "report_success": "Damage reported successfully.",
+  "report_error": "Error reporting damage:",
+  "report_connection_error": "A connection error occurred while reporting the damage."
+}

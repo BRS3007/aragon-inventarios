@@ -1,0 +1,20 @@
+{
+"page_title": "报告产品损坏",
+"barcode_label": "条形码:",
+"barcode_help_text": "输入条形码以自动填充产品描述。",
+"product_description_label": "产品描述:",
+"product_description_help_text": "输入条形码后将自动填充。",
+"damage_description_label": "损坏描述:",
+"damage_description_help_text": "详细说明损坏或问题的类型。",
+"damage_date_label": "损坏日期:",
+"status_label": "状态:",
+"status_pending": "待定",
+"status_in_review": "审核中",
+"status_repaired": "已修复",
+"status_discarded": "已丢弃",
+"report_damage_button": "报告损坏",
+"clear_form_button": "清除表单",
+"report_success": "损坏报告成功。",
+"report_error": "报告损坏时出错:",
+"report_connection_error": "报告损坏时发生连接错误。"
+}

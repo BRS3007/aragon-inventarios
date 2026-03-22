@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Setup | Aragon Smart Inventories</title>
+    <link rel="stylesheet" href="css/stye.css">
+    <link rel="icon" href="data:,">
+        </head>
+<body>
+
+    <div class="header">
+        <div class="logo">
+            <!-- INICIO: Codigo de Favicons Corregido y Optimizado -->
+      <link rel="icon" type="image/png" href="favicons/android-chrome-192x192.png"> 
+    <!-- Asegurate que todos estos archivos esten en la carpeta 'public/favicons/' -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="manifest" href="favicons/site.webmanifest"> <!-- Ruta corregida para el manifest -->
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" href="favicons/android-chrome-192x192.png" type="image/x-icon"> <!-- El favicon principal en formato .ico -->
+    <!-- FIN: Codigo de Favicons Corregido y Optimizado -->
+
+            <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
+        </div>
+        <div class="fecha-hora">
+            📅 Sábado, 17 de enero de 2026 | 🕒 <span id="clock">--:--:--</span>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="card-roja">
+    <h2>Alta Maestra</h2>
+    
+    <input type="text" id="nombreEmpresa" placeholder="Nombre de Empresa">
+    
+    <span class="section-label" style="color: black; display: block; text-align: left; margin-bottom: 5px; font-size: 0.8rem;">PLAN DE SUSCRIPCIÓN</span>
+    <select id="planSuscripcion" style="width: 100%; padding: 12px; margin-bottom: 15px; border: none; background-color: white; font-size: 1rem;">
+        <option value="basico">Básico (Solo Inventario)</option>
+        <option value="estandar">Estándar (Con Historial)</option>
+        <option value="premium">Premium (Full Revel POS)</option>
+    </select>
+    <input type="text" id="nombreUsuario" placeholder="Nombre de Usuario">
+    <input type="text" id="rnc_aruba" placeholder="RNC Aruba" required>
+    <input type="text" id="direccion" placeholder="Dirección Física" required>
+    <input type="tel" id="telefono" placeholder="Teléfono de Contacto" required>
+    <input type="email" id="correo" placeholder="Correo Electrónico de Contacto" required>
+    <input type="number" id="idPersonal" placeholder="ID Personal">
+    <input type="password" id="contrasena" placeholder="Contraseña">
+    <button type="button" onclick="registrarNuevo()">Registrar</button>
+    <div id="response"></div>
+</div>
+        <div class="info-text">
+            <h3>¿Nuevo Cliente en Aruba?</h3>
+            <p>Usa este panel maestro para crear una base de datos aislada y una cuenta de administrador en un solo paso.</p>
+        </div>
+    </div>
+
+    <script src="js/registros_empresas.js"></script>
+</body>
+</html>

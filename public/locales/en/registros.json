@@ -1,0 +1,14 @@
+{
+"page_title": "Recorded Entries",
+"search_placeholder": "Search by barcode, code, description, aisle...",
+"table_barcode": "Barcode",
+"table_code": "Code",
+"table_description": "Description",
+"table_quantity": "Quantity",
+"table_date": "Date",
+"table_price": "Price",
+"table_aisle": "Aisle",
+"table_actions": "Actions",
+"export_by_date_range_title": "Export Records by Date Range",
+"detailed_product_list_title": "Detailed Product List"
+}

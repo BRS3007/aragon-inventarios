@@ -1,0 +1,117 @@
+:root {
+            --rojo-aragon: #ff0000; /* El rojo brillante de tu logo */
+            --blanco: #ffffff;
+            --fondo: #f9f9f9;
+            --texto-negro: #000000;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--blanco);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header similar al de tu imagen */
+        .header {
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo img {
+            height: 60px; /* Ajusta según tu logo real */
+        }
+
+        .fecha-hora {
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        /* Contenedor Principal */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-top: 80px;
+            padding: 20px;
+        }
+
+        /* El cuadro rojo de Aragon */
+        .card-roja {
+            background-color: var(--rojo-aragon);
+            padding: 40px;
+            border-radius: 15px;
+            width: 350px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .card-roja h2 {
+            color: var(--texto-negro);
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: none;
+            background-color: var(--blanco);
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        input::placeholder {
+            color: #aaa;
+        }
+
+        .btn-ingresar {
+            background-color: #f5f5f5;
+            color: var(--rojo-aragon);
+            border: none;
+            padding: 10px 25px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-ingresar:hover {
+            background-color: #eeeeee;
+        }
+
+        /* Sección Derecha (Información) */
+        .info-text {
+            max-width: 300px;
+        }
+
+        .info-text h3 {
+            font-size: 1.8rem;
+            color: var(--texto-negro);
+            margin-bottom: 20px;
+        }
+
+        .info-text p {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        #response {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .success { color: #fff; background: #28a745; padding: 5px; }
+        .error { color: #fff; background: #000; padding: 5px; }
+    

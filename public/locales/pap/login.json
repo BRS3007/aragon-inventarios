@@ -1,0 +1,12 @@
+{
+  "login_title": "Log In",
+    "username_label": "ID Personal",
+    "password_label": "Password",
+    "login_button": "Log In",
+    "register_link": "Registrá",
+    "logout_button": "Sera Sesion",
+"already_registered_title": "Ya bo ta Registrá?",
+    "already_registered_text": "Log in pa aksedé na e Formulario",
+    "not_registered_title": "Ainda bo no ta Registrá?",
+    "not_registered_text": "Registrá pa bo por aksedé na e Formulario"
+  }

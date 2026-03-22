@@ -1,0 +1,20 @@
+{
+    "page_title": "Raportá Daño di Produkto",
+    "barcode_label": "Kódigo di Barranan:",
+    "barcode_help_text": "Drenta e kódigo di barranan pa outokompletá e deskripshon di produkto.",
+    "product_description_label": "Deskripshon di Produkto:",
+    "product_description_help_text": "Lo outokompletá ora bo drenta e kódigo di barranan.",
+    "damage_description_label": "Deskripshon di Daño:",
+    "damage_description_help_text": "Detalye e tipo di daño òf problema.",
+    "damage_date_label": "Fecha di Daño:",
+    "status_label": "Estado:",
+    "status_pending": "Pendiente",
+    "status_in_review": "Den Revishon",
+    "status_repaired": "Repará",
+    "status_discarded": "Descartá",
+    "report_damage_button": "Raportá Daño",
+    "clear_form_button": "Limpia Formulario",
+    "report_success": "Daño raportá ku éksito.",
+    "report_error": "Eror raportando daño:",
+    "report_connection_error": "A surgi un eror di konekshon ora di raportá daño."
+  }

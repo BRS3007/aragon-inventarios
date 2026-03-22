@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> ARAGON Smart Inventories</title>
+    <title data-i18n="app_title">ARAGON Smart Inventories</title>
 
     <!-- INICIO: Codigo de Favicons Corregido y Optimizado -->
      <link rel="icon" type="image/png" href="favicons/apple-touch-icon.png"> 
@@ -21,59 +21,88 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    
+  
 <link rel="stylesheet" href="css/estilo.css">
-
+<link href="/dist/output.css" rel="stylesheet">
 </head>
 <body class="background-login"> <!-- ¡CLAVE! Añadir esta clase -->
- <header class="main-header">
-        <nav class="main-nav login-nav"> <!-- Añadimos una clase 'login-nav' para estilos específicos -->
-            <!-- Contenedor del Logo -->
-            <div class="nav-logo-container">
-                <a href="/"> <!-- Enlace a la pagina de inicio de sesion -->
-                    <img src="favicons/android-chrome-192x192.png" alt="Logo de la Empresa" class="nav-logo-img">
-                </a>
-            </div>
-            <!-- Selector de Idioma (Movido aqui) -->
-            <div class="language-switcher">
-                <select id="language-select">
-                    <option value="en">English</option>
-                    <option value="es">Español</option>
-                    <option value="pap">Papiamento</option>
-                    <option value="zh">中文</option>
-                </select>
-            </div>
-        </nav>
-    </header>
+    <header class="main-header">
+    <div class="header-left">
+        <a href="/">
+            <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
+        </a>
+    </div>
+
+    <div id="live-clock" class="centered-clock"></div>
+
+    <div class="header-right">
+        <div class="language-switcher">
+            <select id="language-switcher">
+                <option value="en">English</option>
+                <option value="es" selected>Español</option>
+                <option value="pap">Papiamento</option>
+                <option value="zh">中文</option>
+            </select>
+        </div>
+    </div>
+</header>
+<main id="app-container" class="main-content">
+    </main>
     <div class="contenedor__todo">
             <div class="caja__trasera">
                 <div class="caja__trasera-login">
-                    <h3 data-i18n="login.already_registered_title">¿Ya estas Registrado?</h3>
-                    <p data-i18n="login.already_registered_text">Inicia sesion para Ingresar al Formulario</p>
-                    <button id="btn__iniciar-Sesion" data-i18n="common.login_button">Iniciar Sesion</button>
+                    <h3 data-i18n="login:already_registered_title">¿Ya estas Registrado?</h3>
+                    <p data-i18n="login:already_registered_text">Inicia sesion para Ingresar al Formulario</p>
+                    <button id="btn__iniciar-Sesion" data-i18n="login.login_button">Iniciar Sesion</button>
                 </div>
                 <div class="caja__trasera-register">
-                    <h3 data-i18n="login.not_registered_title">¿Aun no estas Registrado?</h3>
-                    <p data-i18n="login.not_registered_text">Registrate para que Puedas Ingresar al Formulario</p>
-                    <button id="btn__registrarse" data-i18n="common.register_link">Registrarse</button>
+                    <h3 data-i18n="login:not_registered_title">¿Aun no estas Registrado?</h3>
+                    <p data-i18n="login:not_registered_text">Registrate para que Puedas Ingresar al Formulario</p>
+                    <button id="btn__registrarse" data-i18n="login.register_link">Registrarse</button>
                 </div>
             </div>
             <div class="contenedor__login-register">
                 <form id="login-form" action="/login" method="POST" class="formulario__login">
-                    <h2 data-i18n="common.login_title">Iniciar Sesion</h2>
-                    <input type="text" placeholder="ID Personal" name="id_personal" required data-i18n="[placeholder]common.username_label"> 
-                    <input type="password" placeholder="Contraseña" name="contrasena" required data-i18n="[placeholder]common.password_label">
-                    <button type="submit" data-i18n="common.login_button">Ingresar</button>
+                    <h2 data-i18n="login:login_title">Iniciar Sesion</h2>
+                    <input type="text" placeholder="ID Personal" name="id_personal" required data-i18n="[placeholder]login.username_label"> 
+                    <input type="password" placeholder="Contraseña" name="contrasena" required data-i18n="[placeholder]login.password_label">
+                    <button type="submit" data-i18n="login:login_button">Ingresar</button>
                 </form>
                 <div id="mensaje-login" style="text-align: center; margin-top: 10px; font-weight: bold;"></div>
                 
-                <form id="register-form" action="/register" method="POST" class="formulario__register">
-                    <h2 data-i18n="common.register_link">Registrarse</h2>
-                    <input type="text" placeholder="ID Personal" name="id_personal" required data-i18n="[placeholder]common.username_label"> 
-                    <input type="text" placeholder="Nombre de Usuario" name="nombre_usuario" required data-i18n="[placeholder]common.username_label_register"> 
-                    <input type="password" placeholder="Contraseña" name="contrasena" required data-i18n="[placeholder]common.password_label">
-                    <button type="submit" data-i18n="common.register_button">Registrarse</button>
-                </form>
+                <form id="register-form" class="formulario__register" action="/api/registrar-nuevo" method="POST">
+    <h2 data-i18n="login:register_link">Registrar Nuevo Empleado</h2>
+    
+    <input type="text" 
+           placeholder="Nombre Completo" 
+           name="nombre_real" 
+           required 
+           data-i18n="[placeholder]login.name_label_placeholder"> 
+
+    <input type="email" 
+           placeholder="Correo Electrónico" 
+           name="email_usuario" 
+           required> 
+
+    <input type="text" 
+           placeholder="Nombre de la Empresa" 
+           name="nombre_empresa" 
+           required> 
+    
+    <input type="text" 
+           placeholder="ID Personal" 
+           name="nombre_usuario" 
+           required 
+           data-i18n="[placeholder]login.username_label"> 
+    
+    <input type="password" 
+           placeholder="Contraseña" 
+           name="contrasena" 
+           required 
+           data-i18n="[placeholder]login.password_label">
+    
+    <button type="submit" data-i18n="login:register_button">Registrarse</button>
+</form>
             </div>
         </div>
     </main>
@@ -81,8 +110,20 @@
             </div>
         </div>
     </main>
+    
+<script type="importmap">
+{
+  "imports": {
+    "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/+esm",
+    "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/+esm",
+    "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/+esm",
+    "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
+  }
+}
+</script>
+    
+    <script src="js/i18n.js" type="module"></script>
+    <script src="js/script.js" type="module"></script>
+    <script src="js/common.js" type="module"></script>
     </body>
-    <script src="js/i18n.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/common.js"></script>
 </html>

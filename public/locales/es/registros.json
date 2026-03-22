@@ -1,0 +1,14 @@
+{
+"page_title": "Registros Realizados",
+"search_placeholder": "Buscar por código de barras, código, descripción, pasillo...",
+"table_barcode": "Código de Barras",
+"table_code": "Código",
+"table_description": "Descripción",
+"table_quantity": "Cantidad",
+"table_date": "Fecha",
+"table_price": "Precio",
+"table_aisle": "Pasillo",
+"table_actions": "Acciones",
+"export_by_date_range_title": "Exportar Registros por Rango de Fecha",
+"detailed_product_list_title": "Lista Detallada de Productos"
+}

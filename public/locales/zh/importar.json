@@ -1,0 +1,16 @@
+{
+"page_title": "将 Excel 文件上传到数据库",
+"form_title": "从 Excel 上传产品",
+"label_file_input": "选择您的 Excel 文件 (.xlsx):",
+"button_process_upload": "处理并上传",
+"section_result_title": "结果:",
+"msg_select_file": "请选择一个文件。",
+"msg_processing": "正在处理文件...",
+"msg_error_read": "读取文件时出错。",
+"msg_uploading": "正在上传数据...",
+"msg_upload_success": "已成功上传 {count} 个产品到数据库。",
+"msg_upload_error": "上传数据时出错:",
+"msg_api_error": "错误：无法连接到服务器。请确保您的网络服务器正在运行。",
+"import_link": "上传产品",
+"logout_button": "登出"
+}

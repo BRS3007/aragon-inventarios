@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title data-i18n=>Importar</title>
+
+ <!-- INICIO: Codigo de Favicons Corregido y Optimizado -->
+<link rel="icon" type="image/png" href="favicons/apple-touch-icon.png"> 
+<!-- Asegurate que todos estos archivos esten en la carpeta 'public/favicons/' -->
+ <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+ <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+ <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+<link rel="manifest" href="favicons/site.webmanifest"> <!-- Ruta corregida para el manifest -->
+ <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+ <meta name="theme-color" content="#ffffff">
+ <link rel="icon" href="favicons/android-chrome-192x192.png" type="image/x-icon"> <!-- El favicon principal en formato .ico -->
+ <!-- FIN: Codigo de Favicons Corregido y Optimizado -->
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN para estilos -->
+<link href="/dist/output.css" rel="stylesheet">
+ <!-- Inter font from Google Fonts -->
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> <style>
+body { font-family: 'Inter', sans-serif;
+}
+ </style>
+ <!-- ! CLAVE: Enlace al CSS GENERAL de la aplicación ! -->
+ <link rel="stylesheet" href="css/styles.css">
+    
+</head>
+<body class="background-login">
+    <header class="main-header">
+        <div class="header-left">
+            <a href="/ingreso-productos">
+                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
+            </a>
+        </div>
+
+    <div id="live-clock" class="centered-clock"></div>
+
+    
+ <ul class="nav-list">
+                <!--<li><a href="/ingreso-productos" class="nav-link" data-i18n="importar:home_link">Inicio</a></li>-->
+                <li class="dropdown">
+                    <!--<a href="#" class="nav-link dropdown-toggle" data-i18n="importar:actions_dropdown">Acciones <span class="arrow-down"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/ingreso-productos" class="dropdown-item" data-i18n="importar:product_entry_link">Ingreso Productos</a></li>
+                        <li><a href="/registros" class="dropdown-item" data-i18n="importar:recorded_entries_link">Ingresos Realizados</a></li>
+                        <li><a href="/averias" class="dropdown-item" data-i18n="importar:report_damage_link">Reportar Avería</a></li>
+                        <li><a href="/subir" class="dropdown-item" data-i18n="importar:import_link">Importar Productos</a></li>
+                    </ul>
+                </li>-->
+                
+                <li><a href="/logout" class="nav-link" id="logout-btn-nav" data-i18n="importar:logout_button">Cerrar Sesión</a></li>
+            </ul>
+ </nav>
+ </header>
+<div class="user-info-bar">
+    <nav class="header-nav">
+        <ul class="nav-main-horizontal">
+            <li>
+                <a href="/ingreso-productos" class="nav-item">
+                    <span class="nav-icon">📥</span>
+                    <span class="nav-text" data-i18n="common:product_entry_link">Ingreso</span>
+                </a>
+            </li>
+            <li>
+                <a href="/averias" class="nav-item">
+                    <span class="nav-icon">⚠️</span>
+                    <span class="nav-text" data-i18n="common:report_damage_link">Averías</span>
+                </a>
+                
+            </li>
+            <li>
+                <a href="/registros" class="nav-item">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text" data-i18n="common:recorded_entries_link">Registros</span>
+                </a>
+            </li>
+            <li>
+                <a href="/subir" class="nav-item">
+                    <span class="nav-icon">🚀</span>
+                    <span class="nav-text" data-i18n="common:import_link">Importar</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="user-tag">
+        <i class="fa-solid fa-circle-user" style="color: red;"></i>
+        <span id="nombre-usuario-display">Cargando...</span>
+    </div>
+</div>
+<main id="app-container">
+    </main>
+<!-- Main Container para el contenido de subida -->
+ <main>
+ <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-2xl relative">
+
+ <!-- Título principal -->
+ <h1 class="text-3xl font-bold text-center text-gray-800 mb-6" data-i18n="importar:form_title">Subir Productos</h1>
+
+ <!-- Formulario de carga de archivo -->
+ <form id="upload-form" class="space-y-6">
+<div>
+<label for="excel-file" class="block text-sm font-medium text-gray-700" data-i18n="importar:label_file_input">Selecciona tu archivo Excel (.xlsx):</label>
+<input type="file" id="excel-file" accept=".xlsx, .xls" required class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-blue-100">
+</div>
+
+<button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" data-i18n="importar:button_process_upload">
+Procesar y Subir
+ </button>
+ </form>
+
+ <!-- Contenedor para mostrar mensajes y datos procesados -->
+ <div class="mt-6">
+<h2 class="text-xl font-bold text-gray-800" data-i18n="importar:section_result_title">Resultado:</h2>
+<div id="status-message" class="text-center font-bold mt-2"></div>
+ </div>
+ </div>
+</main>
+
+<!-- Librería para leer archivos Excel en el navegador -->
+
+ <script type="importmap">
+{
+  "imports": {
+    "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/+esm",
+    "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/+esm",
+    "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/+esm",
+    "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
+  }
+}
+</script>
+ 
+<div id="modal-progreso" class="modal-carga" style="display:none;">
+    <div class="modal-contenido">
+        <div class="loader-icon">🚀</div>
+        <h3 data-i18n="importar:modal_title">Procesando Inventario Masivo</h3>
+        <p id="texto-progreso">Iniciando lectura de registros...</p>
+        
+        <div class="barra-contenedor">
+            <div id="barra-llenado" class="barra-llenado"></div>
+        </div>
+        
+        <div class="flex-status">
+            <span id="porcentaje-texto">0%</span>
+            <span id="detalles-conteo">0 / 0</span>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts JS - ¡CLAVE: Rutas relativas a la raíz del servidor! -->
+ <script src="js/i18n.js" type="module"></script>
+ <script src="js/subir.js" type="module"></script>
+ <script src="js/common.js" type="module"></script>
+ 
+</body>
+</html>

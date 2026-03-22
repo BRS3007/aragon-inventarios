@@ -1,0 +1,15 @@
+{
+"page_title": "Subi Archivo Excel pa Base di Dato",
+    "form_title": "Subi Producto for di Excel",
+    "label_file_input": "Seleccioná bo archivo Excel (.xlsx):",
+    "button_process_upload": "Procesá i Subi",
+    "section_result_title": "Resultado:",
+    "msg_select_file": "Por fabor, seleccioná un archivo.",
+    "msg_processing": "Procesando archivo...",
+    "msg_error_read": "Error ora di lesa e archivo.",
+    "msg_uploading": "Subiendo data...",
+    "msg_upload_success": "{count} producto a ser subí ku éksito na e base de dato.",
+    "msg_upload_error": "Error ora di subi e data: ",
+    "msg_api_error": "Error: No por konekta ku e servidor. Sigurá ku e servidor web ta funcionando.",
+    "import_link": "Subi Producto"
+  }

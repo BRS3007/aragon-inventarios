@@ -1,0 +1,15 @@
+{
+"page_title": "Subir Archivo Excel a Base de Datos",
+"form_title": "Subir Productos desde Excel",
+"label_file_input": "Selecciona tu archivo Excel (.xlsx):",
+"button_process_upload": "Procesar y Subir",
+"section_result_title": "Resultado:",
+"msg_select_file": "Por favor, selecciona un archivo.",
+"msg_processing": "Procesando archivo...",
+"msg_error_read": "Error al leer el archivo.",
+"msg_uploading": "Subiendo datos...",
+"msg_upload_success": "Se subieron {count} productos con éxito a la base de datos.",
+"msg_upload_error": "Error al subir los datos: ",
+"msg_api_error": "Error: No se pudo conectar con el servidor. Asegúrate de que el servidor web esté funcionando.",
+"import_link": "Subir Productos"
+}

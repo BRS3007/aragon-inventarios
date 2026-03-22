@@ -1,0 +1,12 @@
+{
+"login_title": "Iniciar Sesión",
+"username_label": "ID Personal",
+"password_label": "Contraseña",
+"login_button": "Ingresar",
+"register_link": "Registrarse",
+"logout_button": "Cerrar Sesión",
+"already_registered_title": "¿Ya estás Registrado?",
+"already_registered_text": "Inicia sesión para acceder al Formulario",
+"not_registered_title": "¿Aún no estás Registrado?",
+"not_registered_text": "Regístrate para que puedas acceder al Formulario"
+}

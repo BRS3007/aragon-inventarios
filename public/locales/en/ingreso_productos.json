@@ -1,0 +1,10 @@
+{
+"page_title": "New Product Entry",
+"help_text_barcode": "Enter the product's barcode.",
+"help_text_code": "Enter the product's internal code.",
+"help_text_description": "Enter the product's description. Suggestions will appear.",
+"help_text_quantity": "Enter the quantity of the product.",
+"help_text_date": "Select the entry date.",
+"help_text_price": "Enter the product's price.",
+"help_text_aisle": "Enter the product's aisle location."
+}

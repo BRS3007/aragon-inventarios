@@ -1,0 +1,1878 @@
+/* --- Estilos Generales y del Body --- */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Clase para una transición suave de opacidad */
+        .fade-in {
+            transition: opacity 0.5s ease-in-out;
+        }
+ 
+body {
+    font-family: 'Roboto', sans-serif; 
+    margin: 0;
+    padding: 0;
+    display: flex; 
+    flex-direction: column; /* Cambiado a columna para que el header esté arriba */
+    align-items: center; /* Centrar el contenido horizontalmente */
+    min-height: 100vh; 
+    background-color: #f4f7f6; /* Un color de fondo suave */
+    color: #333;
+}
+
+/* Fondo para la pagina de Ingreso de Productos */
+body.background-ingreso-productos {
+    background-image: url('public/assets/images/herramientas.png'); /* ! CLAVE: AJUSTA ESTA RUTA A TU IMAGEN DE HERRAMIENTAS ! */
+    background-size: cover; /* Cubre todo el fondo */
+    background-position: center; /* Centra la imagen */
+    background-attachment: fixed; /* La imagen se queda fija al hacer scroll */
+    background-repeat: no-repeat;
+}
+
+/* Fondo para la pagina de Ingresos Realizados */
+body.background-registros {
+    background-image: url('public/assets/images/tu-otra-imagen.png'); /* ! CLAVE: AJUSTA ESTA RUTA A TU OTRA IMAGEN ! */
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/* --- Estilos para el Contenedor Principal de Contenido (main) --- */
+main {
+    width: 100%; /* ¡CLAVE! Ocupa el 100% del ancho del body */
+    max-width: none; /* ¡CLAVE! Eliminar el max-width fijo para que se "despliegue" */
+    margin: 0; /* ¡CLAVE! Eliminar los márgenes automáticos para que ocupe todo */
+    padding: 30px; /* Mantener padding interno */
+    border-radius: 0; /* ¡CLAVE! Eliminar border-radius para que se vea como un gran bloque */
+    box-shadow: none; /* ¡CLAVE! Eliminar la sombra para que se vea "desplegado" */
+    box-sizing: border-box; 
+    flex-grow: 1;
+    display: flex; /* Usar flexbox para centrar el contenido */
+    flex-direction: column; /* Apilar titulo y formulario */
+    align-items: center; /* Centrar horizontalmente el contenido del main */
+    justify-content: flex-start; /* Alinear arriba, no centrar verticalmente todo el main */
+}
+
+/* --- Estilos para la Barra de Navegación (Header) --- */
+.main-header {
+    background-color: white; /* Fondo oscuro (azul en tu imagen) */
+    padding: 1px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    width: 100%; /* ¡CLAVE! Ocupa el 100% del ancho del body */
+    position: sticky; 
+    top: 0;
+    z-index: 100; 
+}
+
+.main-nav {
+    display: flex; /* Usar flexbox para alinear el logo y la lista */
+    justify-content: space-between; /* Espacio entre el logo y la lista de navegacion */
+    align-items: center; /* Centrar verticalmente los elementos */
+    max-width: 1200px; /* Opcional: un max-width para el contenido de la nav */
+    margin: 0 auto; /* Centrar la nav */
+    padding: 0 20px; /* Padding a los lados */
+    box-sizing: border-box;
+    width: 100%; /* La navegación interna también ocupa todo el ancho del header */
+}
+
+.nav-logo-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Espacio a la derecha del logo */
+}
+
+/* Contenedor del logo para que no mueva nada afuera */
+.logo-container {
+    display: inline-block;
+    perspective: 1000px;
+}
+
+.logo-container img {
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+}
+
+/* Efecto Holograma al pasar el mouse o dar click */
+.logo-container img:hover, 
+.logo-container img:active {
+    transform: scale(1.3) translateZ(50px); /* Crece hacia adelante */
+    filter: brightness(1.5) 
+            contrast(1.2) 
+            drop-shadow(0 0 15px rgba(0, 255, 255, 0.9)) /* Brillo neón cian */
+            hue-rotate(180deg); /* Cambia tonos para efecto digital */
+    animation: holograma-flicker 0.3s infinite alternate;
+    cursor: pointer;
+}
+
+/* Animación de parpadeo de interferencia */
+@keyframes holograma-flicker {
+    0% { opacity: 0.8; transform: scale(1.3) skewX(0deg); }
+    50% { opacity: 1; transform: scale(1.32) skewX(2deg); }
+    100% { opacity: 0.9; transform: scale(1.3) skewX(-1deg); }
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+}
+
+.nav-list li {
+    position: relative; 
+    margin-right: 30px; 
+}
+
+.nav-list a {
+    color: #ff1908;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.nav-list a:hover {
+    background-color: #555;
+    border-radius: 4px;
+    color: white; /* Asegura que el texto cambie de color al pasar el raton */
+}
+
+/* Estilos para el menú desplegable */
+.dropdown-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    background-color: white; 
+    min-width: 180px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1000; 
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    border-radius: 0 0 4px 4px; /* Bordes redondeados solo abajo */
+}
+
+.dropdown-menu li {
+    margin: 0; 
+}
+
+.dropdown-menu .dropdown-item {
+    color: #ff1908;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #666;
+    color: white; /* Asegura que el texto cambie de color al pasar el raton */
+}
+
+/* Mostrar el menú desplegable al pasar el ratón */
+.nav-list li.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Flecha para el menú desplegable */
+.arrow-down {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    vertical-align: middle;
+    border-top: 5px solid #333; /* Color de la flecha, ajusta si es necesario */
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+}
+
+
+/* --- Estilos para Títulos --- */
+h1, h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 50px;
+    font-size: 2.2em;
+    font-weight: 800;
+}
+h2 {
+    font-size: 1.8em;
+    margin-top: 100px;
+    margin-bottom: 20px;
+}
+
+/* --- Estilos para el Formulario de Ingreso de Productos --- */
+#form-ingreso-productos {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+    gap: 20px; 
+    width: 100%; 
+    max-width: 900px; /* Añadido max-width para el formulario principal */
+    margin: 20px auto; /* Centrar el formulario */
+}
+
+/* Estilos para cada grupo de campo (label + input/textarea) */
+.form-group {
+    display: flex;
+    flex-direction: column; 
+    margin-bottom: 15px; 
+    /* ¡CLAVE! Correccion de flex-basis. Esto asegura 3 columnas con un gap de 20px */
+    flex: 1 1 calc(33.33% - 13.33px); /* flex-grow, flex-shrink, flex-basis */
+    min-width: 200px; /* Mínimo ancho para evitar que se aplasten demasiado */
+    box-sizing: border-box;
+}
+
+
+/* Estilos para las etiquetas (títulos de los campos) */
+.form-group label {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #555;
+    font-size: 0.95em;
+}
+
+/* Estilos para los campos de entrada generales (input y textarea) */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group select { /* Incluido select aqui */
+    width: 100%; 
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px; 
+    font-size: 1em;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    box-sizing: border-box; 
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+
+
+/* Estilos ESPECÍFICOS para el TEXTAREA */
+.form-group textarea {
+    height: 44px; /* Altura fija para que coincida con los input */
+    min-height: 44px; 
+    max-height: 100px; /* Permitir un poco de crecimiento si es necesario, o mantener fijo */
+    resize: vertical; /* Permitir redimensionar solo verticalmente, o 'none' para deshabilitar */
+    overflow: auto; 
+}
+
+/* Efecto hover/focus para los campos de entrada */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus { 
+    border-color: #007bff; 
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+/* --- Estilos para Botones de Formulario y Acciones --- */
+
+/* Estilos generales para botones primarios y secundarios */
+.btn-primary,
+.btn-secondary {
+    padding: 10px 18px;
+    
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    text-align: center;
+    display: inline-block;
+    margin-right: 10px; 
+}
+
+.btn-primary {
+    background-color: #e60000; 
+    color: white;
+    box-shadow: 0 4px 10px rgba(114, 228, 124, 0.2);
+}
+.export-controls img {
+    width: 30px; 
+    height: 30px; 
+    vertical-align: middle; 
+    margin-right: 5px; 
+}
+
+
+.btn-primary:hover {
+    background-color: #5a6268; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(143, 236, 150, 0.2);
+}
+
+.btn-secondary {
+    background-color: #e60000; 
+    color: white;
+    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.2);
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(108, 117, 125, 0.3);
+}
+
+/* Estilos para el botón de Guardar (dentro del formulario de ingreso de productos) */
+#form-ingreso-productos button[type="submit"] {
+    /* ¡CLAVE! Ajustar el ancho y padding para que se vea bien */
+    width: auto; /* Ajustar el ancho al contenido o al 100% */
+    padding: 12px 25px; /* Padding adecuado */
+    margin: 20px auto 0 auto; /* Centrar y dar margen superior */
+    display: block; /* Para que ocupe su propia línea y se pueda centrar con margin: auto */
+    background-color: #ff1908; /* Color que tenias antes */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold; /* Hacerlo más bold */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.2); /* Mantener sombra */
+}
+#form-ingreso-productos button[type="submit"]:hover {
+    background-color: #cc0000; /* Un rojo mas oscuro al hover */
+    transform: translateY(-2px); 
+}
+
+/* Estilos para el botón de cerrar sesión en la barra de navegación */
+#logout-btn-nav { /* Usar el ID para mayor especificidad si es necesario */
+    background-color: #ff1908; /* Rojo para el boton de logout */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+#logout-btn-nav:hover {
+    background-color: #cc0000; /* Rojo mas oscuro al hover */
+    color: white;
+}
+
+
+/* Agrupar los botones para centrarlos (para formularios con multiples botones) */
+.form-buttons {
+    display: flex;
+    justify-content: center; /* Centrar los botones dentro de su contenedor */
+    gap: 20px; /* Espacio entre los botones */
+    margin-top: 10px; /* Margen superior para separarlos de los campos */
+    width: 100%; /* Ocupar todo el ancho para centrar bien */
+}
+
+
+/* Estilos para el contenedor de búsqueda */
+.search-container {
+    width: 100%;
+    max-width: 600px; 
+    margin: 30px auto 20px auto; 
+    padding: 0 10px; 
+    box-sizing: border-box;
+    display: flex; /* Para alinear el input y los botones de busqueda */
+    gap: 10px; /* Espacio entre el input y los botones */
+    align-items: center;
+}
+
+/* Estilos para el campo de entrada de búsqueda */
+.search-input {
+    flex-grow: 1; /* Permite que el input ocupe el espacio restante */
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px; 
+    font-size: 1.1em;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+}
+
+.search-input::placeholder {
+    color: #999;
+}
+
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 12px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+/* Estilo para accesibilidad si usas sr-only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Estilos para el contenedor de exportar por rango de fecha */
+.toolbar-container {
+    background: #ffffff;
+    padding: 15px 25px;
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+    border: 1px solid #f0f0f0;
+}
+
+/* Estilo para los grupos de inputs */
+.search-group, .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.date-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.date-input label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 2px;
+    font-weight: bold;
+}
+
+/* Botón de Excel estilo moderno */
+.btn-excel {
+    background-color: #166534;
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-excel:hover {
+    background-color: #14532d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(22, 101, 52, 0.2);
+}
+
+.btn-excel i {
+    font-size: 1.2em;
+}
+/* --- Estilos para el Selector de Idioma (Dropdown) --- */
+.language-switcher {
+    position: absolute; 
+    top: 15px; 
+    left: 15px; /* Posicion a la izquierda */
+    z-index: 1000; 
+    display: flex;
+    align-items: center;
+}
+.btn-action {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #475569;
+    transition: all 0.2s;
+}
+
+.btn-action:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.btn-clear:hover {
+    background: #fee2e2;
+    color: #dc2626;
+    border-color: #fecaca;
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 10px;
+    color: #94a3b8;
+}
+
+.input-with-icon input {
+    padding-left: 35px; /* Espacio para el icono de lupa */
+}
+
+.language-switcher select {
+    background-color: #f0f0f0; 
+    color: #333; 
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: bold;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('../imagenes/excel.png'); 
+    background-repeat: no-repeat;
+    background-position: right 10px center; 
+    background-size: 12px auto;
+    padding-right: 30px; 
+    min-width: 120px; /* ¡CLAVE! Asegura que el texto del idioma sea visible */
+}
+
+.language-switcher select:hover {
+    background-color: #e0e0e0;
+    border-color: #999;
+}
+
+.language-switcher select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Media query para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+    .language-switcher {
+        position: static; 
+        margin: 10px auto; 
+        justify-content: center; 
+        width: 100%; 
+        padding: 0 10px; 
+        box-sizing: border-box;
+        text-align: center; 
+    }
+    .language-switcher select {
+        width: 100%; 
+        min-width: unset; 
+    }
+}
+
+/* --- Media Queries para Responsividad --- */
+@media screen and (max-width: 992px) {
+    #form-ingreso-productos {
+        max-width: 700px; /* Ajustar max-width para 2 columnas */
+    }
+    .form-group {
+        flex: 1 1 calc(50% - 10px); /* Para 2 columnas */
+    }
+}
+
+@media screen and (max-width: 380px) {
+    main {
+        padding: 20px;
+    }
+    #form-ingreso-productos {
+        max-width: 100%; /* Ocupar todo el ancho en moviles */
+    }
+    .form-group {
+        flex: 1 1 100%; /* 1 columna en pantallas más pequeñas */
+        margin-right: 0; 
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    .main-nav {
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
+    .nav-logo-container {
+        margin-bottom: 10px; 
+    }
+    .nav-list {
+        flex-wrap: wrap; /* Permitir que los elementos de la nav salten de linea */
+        justify-content: center;
+        width: 100%;
+    }
+    .nav-list li {
+        margin: 5px 10px; /* Ajustar margenes en moviles */
+    }
+    .dropdown-menu {
+        position: static; /* Cambiar a estatico para que el menu se muestre debajo */
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0;
+        background-color: #f8f8f8; /* Fondo mas claro para el menu en moviles */
+    }
+    .dropdown-menu .dropdown-item {
+        padding-left: 30px; /* Indentar items del dropdown */
+    }
+
+    /* Para pantallas más pequeñas, los botones de acción se pueden apilar */
+    .form-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .btn-primary, .btn-secondary {
+        width: 100%; 
+        margin-right: 0; 
+    }
+
+    /* Ajustes para la seccion de busqueda y filtro en moviles */
+    .search-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin-top: 50px;
+        max-width: 100%; /* Ocupa mas ancho en móviles */
+    }
+    .search-input {
+        width: 100%; /* Ocupa todo el ancho */
+        font-size: 1em;
+        padding: 10px 12px;
+    }
+    .filter-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    .filter-section .date-filter-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        min-width: unset;
+    }
+    .filter-section .date-filter-group label,
+    .filter-section .date-filter-group input {
+        min-width: unset;
+    }
+    .filter-section .export-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    .btn-export-date {
+        width: 100%;
+        margin: 0;
+        
+    }
+}
+
+/* Estilos para el contenedor de acceso denegado */
+.access-denied-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    max-width: 600px;
+    width: 90%;
+    box-sizing: border-box;
+}
+
+.access-denied-title {
+    color: #dc3545; 
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.access-denied-message {
+    color: #6c757d;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.access-denied-button {
+    display: inline-block;
+    background-color: #ff1908; 
+    color: white; /* Cambiado a blanco para mejor contraste */
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(255, 25, 8, 0.2); /* Sombra con color mas consistente */
+}
+
+.access-denied-button:hover {
+    background-color: #cc0000; 
+    transform: translateY(-2px);
+}
+
+/* Para multiples botones, anadir margen entre ellos */
+.access-denied-button + .access-denied-button {
+    margin-left: 15px;
+}
+
+/* Media queries para responsividad de acceso denegado */
+@media screen and (max-width: 600px) {
+    .access-denied-title {
+        font-size: 2em;
+    }
+    .access-denied-message {
+        font-size: 1em;
+    }
+    .access-denied-button {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+    .access-denied-button + .access-denied-button {
+        margin-left: 0;
+    }
+}
+body {
+            font-family: 'Inter', sans-serif;
+        }
+        .main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Empuja los grupos a los extremos */
+    padding: 0 40px;
+    height: 80px;
+    background-color: #ffffff;
+    border-bottom: 2px solid #f0f0f0;
+    position: relative; /* Clave para el centrado absoluto del reloj */
+}
+
+/* Columna Izquierda */
+.header-left {
+    flex: 1; /* Ocupa espacio a la izquierda */
+    display: flex;
+    justify-content: flex-start;
+}
+
+.logo {
+    height: 60px; /* Ajusta según el tamaño de tu logo */
+    width: auto;
+}
+
+/* Columna Derecha */
+.header-right {
+    flex: 1; /* Ocupa espacio a la derecha */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 25px; /* Espacio entre botones */
+}
+
+.header-right a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+
+.btn-exit {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Reloj Centrado (Independiente de los lados) */
+.centered-clock {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.user-display {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #444;
+    padding-right: 15px;
+    border-right: 1px solid #ddd; /* Una pequeña línea divisoria */
+    margin-right: 10px;
+}
+
+.nav-list {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espacio uniforme entre elementos */
+}
+/* Arreglo para el logo y header */
+.main-header {
+    display: flex;
+    align-items: center; /* Centra el logo verticalmente */
+    justify-content: space-between;
+    height: 70px;
+    padding: 0 40px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+
+.logo-img {
+    height: 55px; /* Tamaño fijo para que no empuje el header */
+    display: block;
+}
+
+/* La franja blanca debajo del header */
+.user-info-bar {
+    width: 100%;
+    background-color: #ffffff; /* Fondo blanco */
+    display: flex;
+    justify-content: flex-end; /* Lo empuja todo a la derecha */
+    padding: 10px 45px; /* Espacio para que quede debajo de 'Cerrar Sesión' */
+}
+
+.user-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #444;
+    font-weight: 600;
+}
+
+.user-tag i {
+    color: #ff0000; /* Icono en rojo como tu marca */
+}
+.main-header {
+    display: flex;
+    align-items: center; /* Alineación vertical perfecta */
+    justify-content: space-between;
+    height: 80px; /* Define una altura fija */
+    padding: 0 40px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+
+.header-left {
+    display: flex;
+    align-items: center; /* Centra el logo dentro de su div */
+    height: 100%;
+}
+
+.logo-img {
+    height: 70px; /* Ajusta según necesites */
+    width: auto;
+    display: block;
+    margin: 0; /* Elimina márgenes que lo bajen */
+}
+.user-info-bar {
+    width: 100%;
+    background: #ffffff;
+    padding: 8px 50px; /* Ajusta para que quede bajo el botón de Salir */
+    display: flex;
+    justify-content: flex-end; /* Lo lleva a la derecha */
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.user-tag {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.user-tag i {
+    color: #e60000; /* Icono rojo para resaltar */
+}
+.user-strip {
+    background-color: #ffffff;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; /* Lo lleva a la derecha */
+    padding: 10px 80px; /* Alineado con el botón de Cerrar Sesión */
+    border-bottom: 1px solid #eee;
+}
+
+.user-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+}
+/* Añade esto a tu archivo CSS */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /* Elimina la barra horizontal de abajo */
+    margin: 0;
+    padding: 0;
+}
+
+/* Si la barra vertical sigue apareciendo y no la quieres */
+body.background-login {
+    height: 100vh;
+    overflow-y: auto; /* Permite scroll solo si es estrictamente necesario */
+}
+
+/* Asegúrate que el contenedor del usuario no empuje el ancho */
+.user-info-bar {
+    box-sizing: border-box; /* Evita que el padding cree scroll horizontal */
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 40px;
+    background: white;
+}
+/* Fondo oscuro translúcido */
+.custom-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px); /* Efecto borroso de fondo */
+    z-index: 2000;
+}
+
+/* Tarjeta del Modal */
+.modal-card {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    animation: slideDown 0.3s ease-out;
+}
+
+.modal-header {
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ff0000; /* Línea roja como tu logo */
+}
+
+.table-container-modal {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table th { background: #eee; padding: 10px; text-align: left; }
+.history-table td { padding: 10px; border-bottom: 1px solid #ddd; }
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+/* Elimina barras dobles y asegura limpieza visual */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* Si tu tabla está dentro de un contenedor, asegúrate de que no fuerce otro scroll */
+.table-container {
+    overflow: visible; 
+    width: 100%;
+}
+/* Limpieza de Scroll */
+body {
+    overflow-x: hidden; /* Quita barra horizontal */
+}
+
+/* Asegúrate de que el contenedor de la tabla no fuerce otra barra */
+.table-container, #productos-table {
+    overflow: visible !important; 
+    height: auto !important;
+}
+
+/* Si usas un modal, solo él debe tener scroll interno */
+.modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+body {
+    overflow-x: hidden; /* Quita el scroll horizontal */
+}
+.table-container { 
+    overflow: visible !important; /* Evita que el contenedor tenga su propio scroll */
+}
+/* Evita que el cuerpo de la página cree un segundo scroll */
+body {
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+/* Solo la tabla debe tener scroll si es muy larga */
+.container {
+    overflow: visible !important;
+}
+/* Contenedor principal para evitar doble scroll */
+.main-content {
+    overflow-y: hidden; /* Elimina el scroll exterior */
+    height: 100vh;
+}
+
+.table-responsive {
+    max-height: 70vh;
+    overflow-y: auto; /* El scroll solo aparece en la tabla */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Estilo de la tabla */
+#productos-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#productos-table th {
+    background-color: #f4f7f6;
+    color: #454d55;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    padding: 15px;
+    position: sticky;
+    top: 0; /* Encabezado fijo al hacer scroll */
+}
+
+.badge-cantidad {
+    background-color: #e3f2fd;
+    color: #1976d2;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+#productos-table tr:hover {
+    background-color: #f1faff;
+}
+/* registros.css */
+.table-responsive {
+    max-height: 600px; /* Altura fija para activar scroll interno */
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+#productos-table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    z-index: 10;
+}
+
+.badge-cantidad {
+    background-color: #007bff;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+/* Estilo Premium para la Tabla */
+#productos-table {
+    border-collapse: separate;
+    border-spacing: 0 8px; /* Filas separadas */
+    width: 100%;
+}
+
+.table-row {
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.table-row:hover {
+    transform: scale(1.01);
+    background: #fdfdfd;
+}
+
+.table-row td {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.stock-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+.stock-badge.low {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.btn-history {
+    background: #607d8b;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85em;
+}
+/* Estilos del Modal */
+.modal-pro {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px); /* Difumina el fondo profesionalmente */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 12px;
+    width: 60%;
+    max-height: 80vh;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    overflow: hidden;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    padding: 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-banner {
+    padding: 15px 20px;
+    background: #e3f2fd;
+    color: #1976d2;
+    font-weight: bold;
+}
+
+.table-container-modal {
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 50vh;
+}
+
+#tabla-historial-detalle {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#tabla-historial-detalle th {
+    position: sticky; /* Encabezado fijo al hacer scroll */
+    top: 0;
+    background: #fff;
+    padding: 12px;
+    border-bottom: 2px solid #dee2e6;
+    text-align: left;
+}
+
+#tabla-historial-detalle td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding-bottom: 30px;
+}
+
+.stock-badge.low {
+    background-color: #ffcccc;
+    color: #cc0000;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+/* Color de resaltado llamativo pero legible */
+mark.highlight {
+    background-color: #ffeb3b; /* Amarillo brillante */
+    color: #000;
+    padding: 0 2px;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+/* Efecto visual al pasar el mouse por la fila */
+.table-row:hover {
+    background-color: #f1f8ff !important;
+    transition: background-color 0.2s;
+}
+
+/* Badge de stock bajo */
+.stock-badge.low {
+    background-color: #ffebee;
+    color: #d32f2f;
+    border: 1px solid #ffcdd2;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+/* Separación de columnas para que no se amontone la información */
+#productos-table th, #productos-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.col-code strong {
+    color: #333;
+    display: block;
+    min-width: 50px; /* Evita que se pegue a la columna anterior */
+}
+/* Contenedor principal del Modal */
+.custom-modal {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px); /* Efecto de cristal esmerilado */
+}
+
+/* La tarjeta del modal */
+.modal-card {
+    background: #ffffff;
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    border: none;
+    max-width: 650px;
+}
+
+/* Encabezado con degradado profesional */
+.modal-header {
+    background: linear-gradient(135deg, #e60000 0%, #f63b3b 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* Estilo para la tabla */
+/* Modifica estas partes en tu archivo CSS */
+/* 1. Expandimos el cuadro blanco principal */
+.modal-content {
+    width: 98%;               /* Ocupa casi todo el ancho en móviles */
+    max-width: 950px;         /* Ancho ideal para ver todas las columnas en PC */
+    margin: 30px auto;
+    border-radius: 12px;
+    overflow: hidden;         /* Para que el encabezado rojo respete las esquinas */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* 2. Ajustamos el contenedor de la tabla para eliminar el scroll lateral */
+.table-container-modal {
+    width: 100% !important;
+    max-height: 450px;        /* Altura generosa para ver muchos registros */
+    overflow-y: auto;         /* Solo scroll hacia abajo */
+    overflow-x: hidden;       /* BLOQUEA el scroll lateral */
+    padding: 0 10px;          /* Pequeño espacio a los lados */
+}
+
+/* 3. La tabla debe estirarse al ancho total del nuevo modal */
+.table-container-modal table {
+    width: 100%;
+    table-layout: auto;       /* Permite que las columnas se acomoden solas */
+    border-spacing: 0;
+}
+.table-container-modal th, 
+.table-container-modal td {
+    padding: 12px 5px;        /* Menos espacio lateral para que quepa todo */
+    font-size: 0.85rem;       /* Tamaño legible pero compacto */
+    text-align: center;
+    border-bottom: 1px solid #f1f5f9;
+}
+/* 1. Animación suave */
+@keyframes slideDownFade {
+    from {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 2. Efecto Cristal al fondo */
+.custom-modal {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px); /* Esto crea el efecto de vidrio esmerilado */
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.modal-card {
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Un borde muy sutil */
+    background: rgba(255, 255, 255, 0.95);
+}
+.btn-action {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #475569;
+    transition: all 0.2s;
+}
+
+.btn-action:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.btn-clear:hover {
+    background: #fee2e2;
+    color: #dc2626;
+    border-color: #fecaca;
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 10px;
+    color: #94a3b8;
+}
+
+.input-with-icon input {
+    padding-left: 35px; /* Espacio para el icono de lupa */
+}
+/* Contenedor de paginación */
+.pagination-container {
+    padding: 20px 0;
+    border-top: 1px solid #f0f0f0;
+    margin-top: 20px;
+}
+
+/* Estilo para los botones Anterior y Siguiente */
+.btn-paging {
+    background-color: #ffffff;
+    color: #3b82f6; /* Azul profesional */
+    border: 1px solid #3b82f6;
+    padding: 8px 20px;
+    border-radius: 50px; /* Forma de cápsula */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-paging:hover {
+    background-color: #3b82f6;
+    color: white;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+/* Estilo para el número de página */
+#n-pagina {
+    font-size: 1rem;
+    color: #1e293b;
+    background: #f1f5f9;
+    padding: 8px 16px;
+    border-radius: 8px;
+    min-width: 40px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+}
+/* Estilo para el letrero flotante */
+[data-tooltip] {
+    position: relative;
+    cursor: pointer;
+}
+
+[data-tooltip]:before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background-color: #333;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+}
+
+[data-tooltip]:hover:before {
+    opacity: 1;
+    visibility: visible;
+}
+/* En tu archivo de CSS registros*/
+.contenedor-tabla {
+    width: 100%;
+    overflow-x: auto; /* Permite deslizar la tabla hacia los lados en el celular */
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    min-width: 600px; /* Asegura que la tabla no se encime en pantallas pequeñas */
+}
+/* Estilo para el pie del modal */
+.modal-footer {
+    padding: 15px;
+    display: flex;
+    justify-content: flex-end; /* Mueve el botón a la derecha */
+    border-top: 1px solid #eee;
+}
+
+.btn-close {
+    background-color: #64748b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+.search-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#clear-search-btn {
+    cursor: pointer;
+    color: #666;
+    font-size: 0.9rem;
+    background: none;
+    border: none;
+    transition: color 0.3s;
+}
+
+#clear-search-btn:hover {
+    color: #dc3545; /* Rojo Aruba al pasar el mouse */
+    text-decoration: underline;
+}
+.btn-limpiar {
+    width: auto; /* Ajustar el ancho al contenido o al 100% */
+    padding: 12px 25px; /* Padding adecuado */
+    margin: 20px auto 0 auto; /* Centrar y dar margen superior */
+    display: block; /* Para que ocupe su propia línea y se pueda centrar con margin: auto */
+    background-color: #ff1908; /* Color que tenias antes */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold; /* Hacerlo más bold */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.2); /* Mantener sombra */
+}
+
+.btn-limpiar:hover {
+    background-color: #dc3545; /* Rojo más oscuro al pasar el mouse */
+    transform: translateY(-2px);
+}
+
+/* Estilo para la notificación Toast */
+.toast-notificacion {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745; /* Verde de éxito */
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+    font-weight: bold;
+    animation: fadeInOut 2s ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-20px); }
+    15% { opacity: 1; transform: translateY(0); }
+    85% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
+/* Estilo para errores */
+.toast-error {
+    background-color: #dc3545; /* Rojo para alertas */
+    animation: fadeInOut 3s ease-in-out forwards;
+}
+.user-info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #f8f9fa; /* Color de fondo de la franja */
+    border-bottom: 2px solid #ddd;
+}
+
+.nav-main-horizontal {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column; /* Icono arriba, texto abajo */
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.85rem;
+    transition: transform 0.2s;
+}
+
+.nav-item:hover {
+    transform: scale(1.1);
+    color: #d32f2f; /* Rojo institucional */
+}
+
+.nav-icon {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+/* Clase que aplicaremos dinámicamente */
+.nav-item.active {
+    color: #ff0000 !important; /* Rojo brillante */
+    font-weight: bold;
+    border-bottom: 3px solid #ff0000;
+    transform: scale(1.05);
+}
+
+.nav-item.active .nav-icon {
+    filter: drop-shadow(0px 0px 5px rgba(255, 0, 0, 0.5));
+}
+/* Contenedor de notificaciones */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+/* Estilo de la notificación */
+.toast {
+    min-width: 250px;
+    background-color: #333;
+    color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.5s, fadeOut 0.5s 2.5s forwards;
+}
+
+.toast.success { border-left: 5px solid #28a745; }
+.toast.error { border-left: 5px solid #dc3545; }
+
+/* Animaciones */
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+.sesion-contador {
+    background: #e9ecef;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #444;
+    border: 1px solid #ddd;
+    margin: 0 15px;
+}
+
+#contador-ingresos {
+    color: #ff0000; /* Rojo brillante para el número */
+    transition: all 0.3s ease;
+}
+
+/* Animación cuando el número aumenta */
+.bump {
+    transform: scale(1.3);
+}
+.form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
+    gap: 30px; /* Espaciado entre columnas */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input, .form-group select {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.help-text {
+    font-size: 12px;
+    color: #6c757d;
+    margin-top: 4px;
+}
+
+/* Estilo de los botones rojos como los de la captura */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-primary-red {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-secondary-red {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.notificacion-contenedor {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+
+.badge-rojo {
+    position: absolute;
+    top: -8px; /* Ajusta según tu icono */
+    right: -8px;
+    background-color: #ff0000;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 11px;
+    font-weight: bold;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+/* Fondo oscuro detrás del modal */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000;
+}
+
+/* Caja del modal */
+.modal-box {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%; max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+
+.btn-cerrar { background: none; border: none; font-size: 24px; cursor: pointer; }
+
+.tabla-aprobaciones { width: 100%; border-collapse: collapse; margin-top: 15px; }
+
+.tabla-aprobaciones th, .tabla-aprobaciones td { padding: 10px; text-align: left; border-bottom: 1px solid #f0f0f0; }
+
+.btn-aprobar { background: #28a745; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+.btn-rechazar {
+    background: #e63946;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-rechazar:hover {
+    background: #c12e3a;
+}
+/* --- Estilos del Modal de Carga Masiva (Progreso) --- */
+.modal-carga-global {
+    display: none; /* Se activa por JS */
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px); /* Efecto cristal como tus otros modales */
+    z-index: 5000;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-progreso {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    animation: slideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-progreso h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+/* Contenedor de la barra */
+.barra-container-premium {
+    background: #f0f0f0;
+    height: 14px;
+    border-radius: 10px;
+    margin: 25px 0;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+/* La barra que se llena */
+.barra-progreso-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff1908, #ff5f54); /* Degradado con tu rojo */
+    border-radius: 10px;
+    transition: width 0.4s ease;
+    position: relative;
+}
+
+/* Animación de brillo moviéndose en la barra */
+.barra-progreso-fill::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.3) 50%,
+        rgba(255,255,255,0) 100%
+    );
+    animation: moveBrillo 1.5s infinite;
+}
+
+@keyframes moveBrillo {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+#porcentaje-label {
+    color: #ff1908;
+}
+
+.btn-pdf-elegante {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn-pdf-elegante:hover {
+    background-color: #b71c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}

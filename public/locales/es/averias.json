@@ -1,0 +1,20 @@
+{
+  "page_title": "Reportar Avería de Producto",
+  "barcode_label": "Código de Barras:",
+  "barcode_help_text": "Introduce el código de barras para autocompletar la descripción del producto.",
+  "product_description_label": "Descripción del Producto:",
+  "product_description_help_text": "Se autocompletará al introducir el código de barras.",
+  "damage_description_label": "Descripción de la Avería:",
+  "damage_description_help_text": "Detalla el tipo de daño o problema.",
+  "damage_date_label": "Fecha de la Avería:",
+  "status_label": "Estado:",
+  "status_pending": "Pendiente",
+  "status_in_review": "En Revisión",
+  "status_repaired": "Reparado",
+  "status_discarded": "Descartado",
+  "report_damage_button": "Reportar Avería",
+  "clear_form_button": "Limpiar Formulario",
+  "report_success": "Avería reportada exitosamente.",
+  "report_error": "Error al reportar avería:",
+  "report_connection_error": "Ha ocurrido un error de conexión al reportar la avería."
+}

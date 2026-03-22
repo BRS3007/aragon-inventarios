@@ -15,88 +15,183 @@
     <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <link rel="icon" href="favicons/favicon.ico" type="image/x-icon"> <!-- El favicon principal en formato .ico -->
+    <link rel="icon" href="favicons/android-chrome-192x192.png" type="image/x-icon"> <!-- El favicon principal en formato .ico -->
     <!-- FIN: Codigo de Favicons Corregido y Optimizado -->
     
     <link rel="stylesheet" href="css/styles.css">
+    <link href="/dist/output.css" rel="stylesheet">
 </head>
-<body class="background-login"> <!-- ¡CLAVE! Añadir esta clase -->
-
-    <!-- Barra de Navegación Principal (Header) -->
+<body class="background-login">
     <header class="main-header">
-        <nav class="main-nav">
-            <div class="nav-logo-container">
-                <a href="/ingreso-productos"> <!-- Enlace al inicio de tu app despues del login -->
-                    <img src="favicons/favicon.ico" alt="Logo de la Empresa" class="nav-logo-img">
-                </a>
-            </div>
+        <div class="header-left">
+            <a href="/ingreso-productos">
+                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
+            </a>
+        </div>
+
+    <div id="live-clock" class="centered-clock"></div>
+
+    <nav class="header-right">
             <ul class="nav-list">
-                <li><a href="/ingreso-productos" class="nav-link" data-i18n="common.home_link">Inicio</a></li>
+                <!--<li><a href="/ingreso-productos" class="nav-link" data-i18n="common:home_link">Inicio</a></li>-->
                 <li class="dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-i18n="common.actions_dropdown">Acciones <span class="arrow-down"></span></a>
+                    <!--<a href="#" class="nav-link dropdown-toggle" data-i18n="common:actions_dropdown">Acciones <span class="arrow-down"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/ingreso-productos" class="dropdown-item" data-i18n="common.product_entry_link">Ingreso Productos</a></li>
-                        <li><a href="/registros" class="dropdown-item" data-i18n="common.recorded_entries_link">Ingresos Realizados</a></li>
-                        <li><a href="/averias" class="dropdown-item" data-i18n="common.report_damage_link">Reportar Avería</a></li>
+                        <li><a href="/ingreso-productos" class="dropdown-item" data-i18n="common:product_entry_link">Ingreso Productos</a></li>
+                        <li><a href="/registros" class="dropdown-item" data-i18n="common:recorded_entries_link">Ingresos Realizados</a></li>
+                        <li><a href="/averias" class="dropdown-item" data-i18n="common:report_damage_link">Reportar Avería</a></li>
+                        <li><a href="/subir" class="dropdown-item" data-i18n="common:import_link">Importar Productos</a></li>
                     </ul>
-                </li>
-                <li><a href="/logout" class="nav-link" id="logout-btn-nav" data-i18n="common.logout_button">Cerrar Sesión</a></li>
+                </li>-->
+                
+    </div>
+
+    <main id="app-container">
+        </main>
+</body>
+    
+                <li>
+    <a href="javascript:void(0)" class="nav-link" id="logout-btn-nav" data-i18n="common.logout_button">Cerrar Sesión</a>
+</li>
             </ul>
         </nav>
     </header>
 
+
+<div class="user-info-bar">
+    <nav class="header-nav">
+        <ul class="nav-main-horizontal">
+            <li>
+                <a href="/ingreso-productos" class="nav-item">
+                    <span class="nav-icon">📥</span>
+                    <span class="nav-text" data-i18n="common:product_entry_link">Ingreso</span>
+                </a>
+            </li>
+            <li>
+                <a href="/averias" class="nav-item">
+                    <span class="nav-icon">⚠️</span>
+                    <span class="nav-text" data-i18n="common:report_damage_link">Averías</span>
+                </a>
+                
+            </li>
+            <li>
+                <li class="admin-only">
+                <a href="/registros" class="nav-item">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text" data-i18n="common:recorded_entries_link">Registros</span>
+                </a>
+            </li>
+            <li class="admin-only">
+                <a href="/subir" class="nav-item">
+                    <span class="nav-icon">🚀</span>
+                    <span class="nav-text" data-i18n="common:import_link">Importar</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="sesion-contador">
+        📦 Ingresos hoy: <span id="contador-ingresos">0</span>
+    </div>
+    <div class="user-tag">
+        <i class="fa-solid fa-circle-user" style="color: red;"></i>
+        <span id="nombre-usuario-display">Cargando...</span>
+    </div>
+</div>
+<div class="notificacion-contenedor admin-only" onclick="abrirModalAprobaciones()">
+    <span class="icono-usuarios">👤</span>
+    <span id="contador-badge" class="badge" style="display: none;">0</span>
+</div>
+
+<main id="app-container">
+    </main>
     <main class="container">
-        <h1 class="page-title" data-i18n="ingreso_productos.page_title">Ingreso de Nuevos Productos</h1>
+        
+        <h1 class="page-title" data-i18n="ingreso_productos:page_title">Ingreso de Nuevos Productos</h1>
 
         <form id="form-ingreso-productos" class="form-container">
             <div class="form-group">
-                <label for="codigo_de_barras" data-i18n="common.product_barcode_label">Código de Barras:</label>
+                <label for="codigo_de_barras" data-i18n="ingreso_productos:product_barcode_label">Código de Barras</label>
                 <input type="text" id="codigo_de_barras" name="codigo_de_barras" required>
-                <small class="help-text" data-i18n="ingreso_productos.help_text_barcode">Ingresa el código de barras del producto.</small>
+                <small class="help-text" data-i18n="ingreso_productos:help_text_barcode">Ingresa el código de barras del producto.</small>
             </div>
 
             <div class="form-group">
-                <label for="codigo" data-i18n="common.product_code_label">Código:</label>
+                <label for="codigo" data-i18n="ingreso_productos:product_code_label">Código:</label>
                 <input type="text" id="codigo" name="codigo" required>
-                <small class="help-text" data-i18n="ingreso_productos.help_text_code">Ingresa el código interno del producto.</small>
+                <small class="help-text" data-i18n="ingreso_productos:help_text_code">Ingresa el código interno del producto.</small>
             </div>
 
             <div class="form-group">
-                <label for="descripcion" data-i18n="common.product_description_label">Descripción:</label>
+                <label for="descripcion" data-i18n="ingreso_productos:product_description_label">Descripción:</label>
                 <input type="text" id="descripcion" name="descripcion" list="sugerencias-descripcion" required>
                 <datalist id="sugerencias-descripcion"></datalist>
-                <small class="help-text" data-i18n="ingreso_productos.help_text_description">Ingresa la descripción del producto. Aparecerán sugerencias.</small>
+                <small class="help-text" data-i18n="ingreso_productos:help_text_description">Ingresa la descripción del producto. Aparecerán sugerencias.</small>
             </div>
 
             <div class="form-group">
-                <label for="cantidad" data-i18n="common.product_quantity_label">Cantidad:</label>
+                <label for="cantidad" data-i18n="ingreso_productos:product_quantity_label">Cantidad:</label>
                 <input type="number" id="cantidad" name="cantidad" required min="1">
-                <small class="help-text" data-i18n="ingreso_productos.help_text_quantity">Ingresa la cantidad del producto.</small>
+                <small class="help-text" data-i18n="ingreso_productos:help_text_quantity">Ingresa la cantidad del producto.</small>
             </div>
 
             <div class="form-group">
-                <label for="fecha" data-i18n="common.product_date_label">Fecha:</label>
+                <label for="fecha" data-i18n="ingreso_productos:product_date_label">Fecha:</label>
                 <input type="date" id="fecha" name="fecha" required>
-                <small class="help-text" data-i18n="ingreso_productos.help_text_date">Selecciona la fecha de ingreso.</small>
+                <small class="help-text" data-i18n="ingreso_productos:help_text_date">Selecciona la fecha de ingreso.</small>
             </div>
 
             <div class="form-group">
-                <label for="precio" data-i18n="common.product_price_label">Precio:</label>
+                <label for="precio" data-i18n="ingreso_productos:product_price_label">Precio:</label>
                 <input type="number" id="precio" name="precio" required step="0.01" min="0">
-                <small class="help-text" data-i18n="ingreso_productos.help_text_price">Ingresa el precio del producto.</small>
+                <small class="help-text" data-i18n="ingreso_productos:help_text_price">Ingresa el precio del producto.</small>
             </div>
 
             <div class="form-group">
-                <label for="pasillo" data-i18n="common.product_aisle_label">Pasillo:</label>
+                <label for="pasillo" data-i18n="ingreso_productos:product_aisle_label">Pasillo:</label>
                 <input type="text" id="pasillo" name="pasillo" required>
-                <small class="help-text" data-i18n="ingreso_productos.help_text_aisle">Ingresa la ubicación del pasillo del producto.</small>
+                <small class="help-text" data-i18n="ingreso_productos:help_text_aisle">Ingresa la ubicación del pasillo del producto.</small>
             </div>
 
-            <button type="submit" data-i18n="common.save_product_button">Guardar Producto</button>
+            <button type="submit" data-i18n="ingreso_productos:save_product_button">Guardar Producto</button>
+            <button type="button" id="btn-limpiar" class="btn-limpiar">
+        <i class="fas fa-eraser"></i> Limpiar Formulario
         </form>
     </main>
-    <script src="js/i18n.js"></script>
-    <script src="js/ingreso-productos.js"></script>
-    <script src="js/common.js"></script>
+    
+    <div id="modal-aprobaciones" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3>Aprobaciones Pendientes</h3>
+            <button onclick="cerrarModal()" class="btn-cerrar">&times;</button>
+        </div>
+        <div class="modal-body">
+            <table class="tabla-aprobaciones">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cédula/ID</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-pendientes-modal">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+ 
+<script type="importmap">
+{
+  "imports": {
+    "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/+esm",
+    "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/+esm",
+    "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/+esm",
+    "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
+  }
+}
+</script>
+    <script src="js/i18n.js" type="module"></script>
+    <script src="js/ingreso-productos.js" type="module"></script>
+    <script src="js/common.js" type="module"></script>
     </body>
 </html>

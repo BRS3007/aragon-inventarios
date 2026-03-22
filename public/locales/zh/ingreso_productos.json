@@ -1,0 +1,18 @@
+{
+"page_title": "新产品录入",
+"help_text_barcode": "输入产品的条形码。",
+"help_text_code": "输入产品的内部代码。",
+"help_text_description": "输入产品的描述。将出现建议。",
+"help_text_quantity": "输入产品的数量。",
+"help_text_date": "选择录入日期。",
+"help_text_price": "输入产品的价格。",
+"help_text_aisle": "输入产品的通道位置。",
+"save_product_button": "保存产品",
+"product_aisle_label": "通道:",
+"product_price_label": "价格:",
+"product_barcode_label": "条形码:",
+"product_code_label": "代码:",
+"product_description_label": "描述:",
+"product_quantity_label": "数量:",
+"product_date_label": "日期:"
+}

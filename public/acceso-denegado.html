@@ -22,11 +22,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/styles.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <header class="main-header">
         <nav class="main-nav">
+            <div id="live-clock" class="centered-clock"></div>
             <!-- Contenedor del Logo -->
             <div class="nav-logo-container">
                 <a href="/ingreso-productos"> <!-- Enlace al inicio de tu app despues del login -->
@@ -35,28 +36,38 @@
             </div>
              <!-- Lista de Navegacion -->
             <ul class="nav-list">
-                <li><a href="/ingreso-productos" class="nav-link" data-i18n="common.home_link">Inicio</a></li> <!-- Cambiado a /ingreso-productos para consistencia -->
+                <li><a href="/ingreso-productos" class="nav-link" data-i18n="common:home_link">Inicio</a></li> <!-- Cambiado a /ingreso-productos para consistencia -->
                 <li class="dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-i18n="common.actions_dropdown">Acciones <span class="arrow-down"></span></a>
+                    <a href="#" class="nav-link dropdown-toggle" data-i18n="common:actions_dropdown">Acciones <span class="arrow-down"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/ingreso-productos" class="dropdown-item" data-i18n="common.product_entry_link">Ingreso Productos</a></li>
-                        <li><a href="/registros" class="dropdown-item" data-i18n="common.recorded_entries_link">Ingresos Realizados</a></li>
-                        <li><a href="/averias" class="dropdown-item" data-i18n="common.report_damage_link">Reportar Avería</a></li>
+                        <li><a href="/ingreso-productos" class="dropdown-item" data-i18n="ingreso-productos:product_entry_link">Ingreso Productos</a></li>
+                        <li><a href="/registros" class="dropdown-item" data-i18n="registros:recorded_entries_link">Ingresos Realizados</a></li>
+                        <li><a href="/averias" class="dropdown-item" data-i18n="averias:report_damage_link">Reportar Avería</a></li>
+                        <li><a href="/subir" class="dropdown-item" data-i18n="importar:import_link">Importar Productos</a></li>
                     </ul>
                 </li>
-                <li><a href="/logout" class="nav-link" id="logout-btn-nav" data-i18n="common.logout_button">Cerrar Sesión</a></li>
+                <nav class="header-right">
+    <ul class="nav-list">
+        <li class="user-display">
+            <i class="fa-solid fa-circle-user" style="color: #666; margin-right: 5px;"></i>
+            <span id="user-name-text">Cargando...</span>
+        </li>
+                <li><a href="/logout" class="nav-link" id="logout-btn-nav" data-i18n="common:logout_button">Cerrar Sesión</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="access-denied-container">
-        <h1 class="access-denied-title" data-i18n="access_denied.title">Acceso Denegado</h1>
-        <p class="access-denied-message" data-i18n="access_denied.message_part1">Lo sentimos, no tienes los permisos necesarios para acceder a esta seccion.</p>
-        <p class="access-denied-message" data-i18n="access_denied.message_part2">Por favor, contacta al administrador si crees que esto es un error.</p>
-        <a href="/ingreso-productos" class="access-denied-button" data-i18n="access_denied.back_button">Volver a Ingreso de Productos</a>
+        <h1 class="access-denied-title" data-i18n="access_denied:title">Acceso Denegado</h1>
+        <p class="access-denied-message" data-i18n="access_denied:message_part1">Lo sentimos, no tienes los permisos necesarios para acceder a esta seccion.</p>
+        <p class="access-denied-message" data-i18n="access_denied:message_part2">Por favor, contacta al administrador si crees que esto es un error.</p>
+        <a href="/ingreso-productos" class="access-denied-button" data-i18n="access_denied.:back_button">Volver a Ingreso de Productos</a>
     </main>
     <!-- Puedes anadir un script para el logout si tienes el boton en esta pagina -->
-    <script src="js/i18n.js"></script>
-    <script src="js/acceso-denegado.js"></script>
+    
+    <script src="cdnjs.cloudflare.com"></script>
+
+    <script src="js/i18n.js" type="module"></script>
+    <script src="js/acceso-denegado.js" type="module"></script>
 </body>
 </html>

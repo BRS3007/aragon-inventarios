@@ -1,0 +1,17 @@
+# Dependencias (Railway las instala solo)
+node_modules/
+
+# Configuración privada (¡NUNCA SUBIR!)
+.env
+
+# Archivos temporales o de subida
+uploads/
+procesados/
+auto_procesar/
+
+# Archivos de PHP/Composer (si ya no los usas en Node)
+vendor/
+composer.lock
+
+# Otros
+.DS_Store

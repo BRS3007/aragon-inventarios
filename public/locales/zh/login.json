@@ -1,0 +1,12 @@
+{
+"login_title": "登录",
+"username_label": "个人ID",
+"password_label": "密码",
+"login_button": "登录",
+"register_link": "注册",
+"logout_button": "退出",
+"already_registered_title": "已注册？",
+"already_registered_text": "登录以访问表格",
+"not_registered_title": "尚未注册？",
+"not_registered_text": "注册即可访问表格"
+}

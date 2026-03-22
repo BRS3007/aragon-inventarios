@@ -1,0 +1,12 @@
+{
+"login_title": "Log In",
+"username_label": "Personal ID",
+"password_label": "Password",
+"login_button": "Log In",
+"register_link": "Register",
+"logout_button": "Log Out",
+"already_registered_title": "Already Registered?",
+"already_registered_text": "Log in to access the Form",
+"not_registered_title": "Not Registered Yet?",
+"not_registered_text": "Register so you can access the Form"
+}
