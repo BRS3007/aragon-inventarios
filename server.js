@@ -328,14 +328,13 @@ app.use(session({
 }));
 
 // CONFIGURACIÓN DEL TRANSPORTADOR
+// CONFIGURACIÓN DEL TRANSPORTADOR (GMAIL)
 const transporter = nodemailer.createTransport({
-  host: 'smtp.resend.com',
-  secure: true,
-  port: 465,
-  auth: {
-    user: 'resend', // Literalmente la palabra 'resend'
-    pass: process.env.RESEND_API_KEY, // Tu clave re_...
-  },
+    service: 'gmail',
+    auth: {
+        user: process.env.GMAIL_USER, // Usamos variables
+        pass: process.env.GMAIL_PASS  // Usamos variables
+    }
 });
 
 // Verificar la conexión
@@ -1495,14 +1494,6 @@ app.post('/api/registrar-empresa', async (req, res) => {
             fs.mkdirSync(rutaProcesados, { recursive: true });
         }
 
-        // 3. Configurar el transporte de correo (Usa tus credenciales de Gmail)
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'gustavoarag.sala@gmail.com', // Basado en tu configuración previa
-                pass: 'yfdytvhtincgjytf' 
-            }
-        });
 
         // 4. Contenido del correo mejorado
         const funcionesTexto = Object.keys(funciones[plan])
@@ -1511,21 +1502,23 @@ app.post('/api/registrar-empresa', async (req, res) => {
             .join('');
 
         const mailOptions = {
-            from: '"Aragon Smart Inventories" <gustavoarag.sala@gmail.com>',
-            to: email,
-            subject: `¡Bienvenido! Plan ${plan.toUpperCase()} activado`,
-            html: `
-                <div style="font-family: sans-serif; max-width: 600px; padding: 20px; border: 1px solid #eee;">
-                    <h2 style="color: #e63946;">¡Bienvenido a Aragon Smart Inventories!</h2>
-                    <p>Hola <strong>${nombre}</strong>,</p>
-                    <p>Tu empresa ha sido registrada con el plan <strong>${plan.toUpperCase()}</strong>.</p>
-                    <p><strong>Funciones habilitadas:</strong></p>
-                    <ul>${funcionesTexto}</ul>
-                    <p>Ya puedes empezar a subir tus inventarios a través del portal o usando tu carpeta dedicada.</p>
-                </div>`
-        };
+  from: '"Aragon Smart Inventories" <tu-correo@gmail.com>',
+  to: correoCliente, // La variable del correo que escribiste en el formulario
+  subject: '¡Bienvenido a Aragon Smart Inventories! 🚀',
+  html: `
+    <div style="font-family: sans-serif; border: 1px solid #ddd; padding: 20px; border-radius: 10px;">
+      <h2 style="color: #2563eb;">¡Hola, ${nombreCliente}!</h2>
+      <p>Es un gusto saludarte. Tu empresa <strong>${nombreEmpresa}</strong> ha sido registrada con éxito en nuestro sistema.</p>
+      <p>A partir de ahora, podrás gestionar tus inventarios de manera inteligente desde cualquier lugar.</p>
+      <hr>
+      <p style="font-size: 0.9em; color: #555;">Si tienes dudas, responde a este correo. <br> 
+      Atentamente, <br> <strong>El equipo de Aragon (Aruba)</strong></p>
+    </div>
+  `
+};
 
-        await transporter.sendMail(mailOptions);
+// Enviar el correo
+await transporter.sendMail(mailOptions);
         
         console.log(`✅ Empresa ${nombre} registrada y carpetas creadas.`);
         res.json({ success: true, funciones: funciones[plan] });
