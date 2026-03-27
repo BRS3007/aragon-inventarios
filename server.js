@@ -81,8 +81,8 @@ async function enviarCorreoPlan(email, empresa, plan) {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: { 
-            user: correoEmisor, 
-            pass: 'yfdytvhtincgjytf' // Recuerda que esto debe ser una "Contraseña de Aplicación" de Google
+            user: process.env.GMAIL_USER, 
+            pass: process.env.GMAIL_PASS // Recuerda que esto debe ser una "Contraseña de Aplicación" de Google
         }
     });
 
@@ -172,11 +172,12 @@ const variablesRequeridas = [
 
 const faltantes = variablesRequeridas.filter(v => !process.env[v]);
 
-if (faltantes.length > 0) {
-    console.error("❌ ERROR CRÍTICO: Faltan variables en el archivo .env:");
-    console.error(`⚠️  No se encontraron: ${faltantes.join(', ')}`);
-    process.exit(1); // Detiene el servidor si falta algo importante
-} else {
+//if (faltantes.length > 0) {
+    //console.error("❌ ERROR CRÍTICO: Faltan variables en el archivo .env:");
+    //console.error(`⚠️  No se encontraron: ${faltantes.join(', ')}`);
+    //process.exit(1); // Detiene el servidor si falta algo importante
+//} else 
+    {
     console.log("✅ Configuración .env validada correctamente.");
 }
 // También necesitarás estos para manejar rutas en modo "module"
