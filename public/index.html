@@ -31,8 +31,10 @@
                 <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
             </div>
 
-            <div id="live-clock" class="text-gray-600 text-sm text-center font-medium bg-gray-50 px-4 py-2 rounded-lg shadow-sm border border-gray-100 max-w-max mx-auto md:mx-0">
-                </div>
+            <div class="text-gray-600 text-sm text-center font-medium bg-gray-50 px-4 py-2 rounded-lg shadow-sm border border-gray-100 max-w-max mx-auto md:mx-0 flex items-center">
+    <span id="reloj-fecha" class="text-gray-500"></span> 
+    <span id="reloj-hora" class="font-bold text-gray-800 ml-2"></span>
+</div>
 
             <div class="flex justify-center md:justify-end">
                 <div class="language-switcher">
@@ -94,27 +96,26 @@
     function actualizarReloj() {
         const ahora = new Date();
         
-        // Opciones solo para la fecha
+        // 1. Opciones solo para la fecha
         const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const fechaTexto = ahora.toLocaleDateString('es-ES', opcionesFecha).replace(',', '');
         
-        // Formato para la hora (HH:MM:SS)
+        // 2. Formato para la hora (HH:MM:SS)
         const horas = String(ahora.getHours()).padStart(2, '0');
         const minutos = String(ahora.getMinutes()).padStart(2, '0');
         const segundos = String(ahora.getSeconds()).padStart(2, '0');
         const horaTexto = `${horas}:${minutos}:${segundos}`;
         
-        // Inyectamos el HTML dividiendo fecha y hora para que no parpadee
-        document.getElementById('live-clock').innerHTML = `
-            <span class="text-gray-500">${fechaTexto}</span> 
-            <span class="font-bold text-gray-800 ml-2">${horaTexto}</span>
-        `;
+        // 🔥 LA CLAVE: Usamos 'textContent' en lugar de 'innerHTML'. 
+        // Esto solo cambia el texto plano y no redibuja la caja. ¡Cero parpadeos!
+        document.getElementById('reloj-fecha').textContent = fechaTexto;
+        document.getElementById('reloj-hora').textContent = horaTexto;
     }
 
     // Carga instantánea
     actualizarReloj();
     
-    // Se actualiza cada segundo de manera fluida
+    // Se actualiza cada segundo de manera 100% fluida
     setInterval(actualizarReloj, 1000);
 </script>
     
