@@ -34,10 +34,9 @@
                 <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
             </div>
 
-            <div class="flex justify-center items-center">
-                <div class="text-gray-600 text-xs md:text-sm font-medium bg-gray-50 px-4 py-2 rounded-lg shadow-sm border border-gray-100 max-w-max">
-                    <span id="reloj-fecha" class="text-gray-500">domingo, 29 de marzo de 2026</span> 
-                    <span id="reloj-hora" class="font-bold text-gray-800 ml-1.5">19:12:28</span>
+            <div class="flex flex-col items-center space-y-2">
+                <div id="reloj-vivo" class="text-gray-600 text-sm text-center font-medium">
+                    Cargando hora...
                 </div>
             </div>
 
@@ -98,31 +97,15 @@
             </div> </div> </main>
 
             <script>
-    function actualizarReloj() {
-        const ahora = new Date();
-        
-        // 1. Opciones solo para la fecha
-        const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const fechaTexto = ahora.toLocaleDateString('es-ES', opcionesFecha).replace(',', '');
-        
-        // 2. Formato para la hora (HH:MM:SS)
-        const horas = String(ahora.getHours()).padStart(2, '0');
-        const minutos = String(ahora.getMinutes()).padStart(2, '0');
-        const segundos = String(ahora.getSeconds()).padStart(2, '0');
-        const horaTexto = `${horas}:${minutos}:${segundos}`;
-        
-        // 🔥 LA CLAVE: Usamos 'textContent' en lugar de 'innerHTML'. 
-        // Esto solo cambia el texto plano y no redibuja la caja. ¡Cero parpadeos!
-        document.getElementById('reloj-fecha').textContent = fechaTexto;
-        document.getElementById('reloj-hora').textContent = horaTexto;
-    }
-
-    // Carga instantánea
-    actualizarReloj();
-    
-    // Se actualiza cada segundo de manera 100% fluida
-    setInterval(actualizarReloj, 1000);
-</script>
+        function actualizarReloj() {
+            const ahora = new Date();
+            const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const textoFinal = ahora.toLocaleDateString('es-ES', opciones).replace(',', '');
+            document.getElementById('reloj-vivo').innerText = textoFinal;
+        }
+        actualizarReloj();
+        setInterval(actualizarReloj, 1000);
+    </script>
     
 <script type="importmap">
 {
