@@ -1161,10 +1161,7 @@ app.get('/api/ingresos-hoy', async (req, res) => {
 });
 // Rutas de navegación faltantes
 app.get('/averias', (req, res) => {
-    // Si esto funciona, el problema está en que no encuentra la carpeta 'views'
-    res.send("¡Hola Jose! Si ves esto, el servidor funciona y solo falta enlazar la vista.");
-    
-    // Cuando confirmes que esto funciona, volvemos a poner: res.render('averias');
+    res.render('averias');
 });
 
 app.post('/api/guardar-averia', async (req, res) => {
