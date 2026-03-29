@@ -21,86 +21,74 @@
     <link rel="stylesheet" href="css/styles.css">
     <link href="/dist/output.css" rel="stylesheet">
 </head>
-<body class="background-login">
-    <header class="main-header">
-        <div class="header-left">
-            <a href="/ingreso-productos">
-                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
-            </a>
-        </div>
-
-    <div id="live-clock" class="centered-clock"></div>
-
-    <nav class="header-right">
-            <ul class="nav-list">
-                <!--<li><a href="/ingreso-productos" class="nav-link" data-i18n="common:home_link">Inicio</a></li>-->
-                <li class="dropdown">
-                    <!--<a href="#" class="nav-link dropdown-toggle" data-i18n="common:actions_dropdown">Acciones <span class="arrow-down"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/ingreso-productos" class="dropdown-item" data-i18n="common:product_entry_link">Ingreso Productos</a></li>
-                        <li><a href="/registros" class="dropdown-item" data-i18n="common:recorded_entries_link">Ingresos Realizados</a></li>
-                        <li><a href="/averias" class="dropdown-item" data-i18n="common:report_damage_link">Reportar Avería</a></li>
-                        <li><a href="/subir" class="dropdown-item" data-i18n="common:import_link">Importar Productos</a></li>
-                    </ul>
-                </li>-->
-                
-    </div>
-
-    <main id="app-container">
-        </main>
-</body>
+<body class="background-login font-sans">
     
-                <li>
-    <a href="javascript:void(0)" class="nav-link" id="logout-btn-nav" data-i18n="common.logout_button">Cerrar Sesión</a>
-</li>
-            </ul>
-        </nav>
+    <header class="bg-white p-4 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between md:items-center space-y-3 md:space-y-0 text-center md:text-left">
+            
+            <div class="flex flex-col items-center md:items-start">
+                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
+            </div>
+
+            <div class="flex flex-col items-center space-y-2">
+                <div id="reloj-vivo" class="text-gray-600 text-sm text-center font-medium">
+                    Cargando hora...
+                </div>
+            </div>
+
+            <div class="flex justify-center md:justify-end">
+                <a href="/logout" class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-700 transition text-sm flex items-center justify-center shadow-sm">
+                    🚪 <span class="ml-1.5" data-i18n="common.logout_button">Cerrar Sesión</span>
+                </a>
+            </div>
+
+        </div>
     </header>
 
+    <div class="bg-gray-100 border-b border-gray-200 p-3">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+            
+            <nav class="w-full md:w-auto">
+                <ul class="flex justify-center md:justify-start space-x-6 text-sm font-medium text-gray-700">
+                    <li>
+                        <a href="/ingreso-productos" class="flex items-center text-red-600 hover:text-red-700">
+                            <span>📥</span> <span class="ml-1 hidden md:inline" data-i18n="common:product_entry_link">Ingreso</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/averias" class="flex items-center hover:text-red-600">
+                            <span>⚠️</span> <span class="ml-1 hidden md:inline" data-i18n="common:report_damage_link">Averías</span>
+                        </a>
+                    </li>
+                    <li class="admin-only">
+                        <a href="/registros" class="flex items-center hover:text-red-600">
+                            <span>📋</span> <span class="ml-1 hidden md:inline" data-i18n="common:recorded_entries_link">Registros</span>
+                        </a>
+                    </li>
+                    <li class="admin-only">
+                        <a href="/subir" class="flex items-center hover:text-red-600">
+                            <span>🚀</span> <span class="ml-1 hidden md:inline" data-i18n="common:import_link">Importar</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
 
-<div class="user-info-bar">
-    <nav class="header-nav">
-        <ul class="nav-main-horizontal">
-            <li>
-                <a href="/ingreso-productos" class="nav-item">
-                    <span class="nav-icon">📥</span>
-                    <span class="nav-text" data-i18n="common:product_entry_link">Ingreso</span>
-                </a>
-            </li>
-            <li>
-                <a href="/averias" class="nav-item">
-                    <span class="nav-icon">⚠️</span>
-                    <span class="nav-text" data-i18n="common:report_damage_link">Averías</span>
-                </a>
-                
-            </li>
-            <li>
-                <li class="admin-only">
-                <a href="/registros" class="nav-item">
-                    <span class="nav-icon">📋</span>
-                    <span class="nav-text" data-i18n="common:recorded_entries_link">Registros</span>
-                </a>
-            </li>
-            <li class="admin-only">
-                <a href="/subir" class="nav-item">
-                    <span class="nav-icon">🚀</span>
-                    <span class="nav-text" data-i18n="common:import_link">Importar</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <div class="sesion-contador">
-        📦 Ingresos hoy: <span id="contador-ingresos">0</span>
+            <div class="flex items-center space-x-4 text-xs md:text-sm">
+                <div class="bg-white px-3 py-1.5 rounded border border-gray-200 shadow-sm">
+                    📦 Ingresos hoy: <span id="contador-ingresos" class="font-bold text-red-600">0</span>
+                </div>
+                <div class="flex items-center bg-white px-3 py-1.5 rounded border border-gray-200 shadow-sm">
+                    <span class="text-red-600 mr-1.5">👤</span>
+                    <span id="nombre-usuario-display" class="font-bold text-gray-800">Cargando...</span>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="user-tag">
-        <i class="fa-solid fa-circle-user" style="color: red;"></i>
-        <span id="nombre-usuario-display">Cargando...</span>
+
+    <div class="notificacion-contenedor admin-only fixed bottom-5 right-5 bg-red-600 text-white p-3 rounded-full shadow-lg cursor-pointer" onclick="abrirModalAprobaciones()">
+        <span class="icono-usuarios">👥</span>
+        <span id="contador-badge" class="bg-white text-red-600 font-bold text-xs rounded-full px-1.5 ml-1" style="display: none;">0</span>
     </div>
-</div>
-<div class="notificacion-contenedor admin-only" onclick="abrirModalAprobaciones()">
-    <span class="icono-usuarios">👤</span>
-    <span id="contador-badge" class="badge" style="display: none;">0</span>
-</div>
 
 <main id="app-container">
     </main>
@@ -179,6 +167,17 @@
         </div>
     </div>
 </div>
+
+<script>
+        function actualizarReloj() {
+            const ahora = new Date();
+            const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const textoFinal = ahora.toLocaleDateString('es-ES', opciones).replace(',', '');
+            document.getElementById('reloj-vivo').innerText = textoFinal;
+        }
+        actualizarReloj();
+        setInterval(actualizarReloj, 1000);
+    </script>
  
 <script type="importmap">
 {
