@@ -5,6 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reportar Avería - ARAGON</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        .form-row {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 4px;
+        }
+        .form-group input, .form-group select {
+            padding: 12px;
+            border: 1px solid #D1D5DB;
+            border-radius: 8px;
+        }
+        .help-text {
+            font-size: 0.75rem;
+            color: #6B7280;
+            margin-top: 4px;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* 📱 Cuando se abra en un Celular se ponen en vertical */
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .form-actions {
+                flex-direction: column;
+            }
+            .form-actions button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body class="bg-gray-50 font-sans">
 
@@ -42,64 +93,79 @@
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 py-8">
+    <main class="max-w-6xl mx-auto px-4 py-8">
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-200">
             
             <div class="text-center md:text-left mb-6">
                 <h2 class="text-3xl font-bold text-gray-900">Reportar Avería de Producto</h2>
             </div>
 
-            <form action="/api/guardar-averia" method="POST" class="space-y-5">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Código de Barras:</label>
-                    <input type="text" name="codigo_barras" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500" placeholder="Escribe el código de barras">
-                    <p class="text-xs text-gray-500 mt-1">Introduce el código de barras del producto.</p>
+            <form id="form-reportar-averia" class="form-grid">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="codigo_de_barras_averia" data-i18n="averias:barcode_label">Código de Barras:</label>
+                        <input type="text" id="codigo_de_barras_averia" name="codigo_de_barras" required>
+                        <small class="help-text">Introduce el código de barras del producto.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cantidad_averia" data-i18n="averias:quantity_label">Cantidad:</label>
+                        <input type="number" id="cantidad_averia" name="cantidad" min="1" value="1" required>
+                        <small class="help-text">Indica la cantidad que se descontará del stock.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion_producto_averia" data-i18n="averias:product_description_label">Descripción:</label>
+                        <input type="text" id="descripcion_producto_averia" name="descripcion_producto" class="bg-gray-100" readonly>
+                        <small class="help-text">Se autocompletará automáticamente.</small>
+                    </div>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Cantidad:</label>
-                    <input type="number" name="cantidad" value="1" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
-                    <p class="text-xs text-gray-500 mt-1">Indica la cantidad que se descontará del stock.</p>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="descripcion_averia" data-i18n="averias:damage_description_label">Motivo de Avería:</label>
+                        <input type="text" id="descripcion_averia" name="descripcion_averia" required>
+                        <small class="help-text">Detalla el daño (ej: empaque roto).</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha_averia" data-i18n="averias:damage_date_label">Fecha:</label>
+                        <input type="date" id="fecha_averia" name="fecha_averia" required>
+                        <small class="help-text">Selecciona la fecha del reporte.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado_averia" data-i18n="averias:status_label">Estado:</label>
+                        <select id="estado_averia" name="estado" required>
+                            <option value="Pendiente" data-i18n="averias:status_pending">Pendiente</option>
+                            <option value="En Revisión" data-i18n="averias:status_in_review">En Revisión</option>
+                            <option value="Descartado" data-i18n="averias:status_discarded">Descartado</option>
+                        </select>
+                        <small class="help-text">Estado actual del proceso.</small>
+                    </div>
                 </div>
 
-                <div class="flex justify-center md:justify-end mt-6">
-                    <button type="submit" class="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg transition duration-150 ease-in-out">
-                        Guardar Reporte
+                <div class="form-actions">
+                    <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition" id="btn-limpiar-averia">
+                        <i class="fas fa-trash mr-2"></i> Limpiar Formulario
+                    </button>
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg transition">
+                        Reportar Avería
                     </button>
                 </div>
             </form>
-
         </div>
     </main>
 
     <script>
         function actualizarReloj() {
             const ahora = new Date();
-            
-            // Opciones para formatear la fecha en español
-            const opciones = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                hour: '2-digit', 
-                minute: '2-digit', 
-                second: '2-digit',
-                hour12: false 
-            };
-            
-            const fechaFormateada = ahora.toLocaleDateString('es-ES', opciones);
-            
-            // Reemplazar la coma que pone el sistema por el formato que usabas
-            const textoFinal = fechaFormateada.replace(',', '');
-            
+            const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const textoFinal = ahora.toLocaleDateString('es-ES', opciones).replace(',', '');
             document.getElementById('reloj-vivo').innerText = textoFinal;
         }
-
-        // Ejecutar la función inmediatamente para que no nazca vacío
         actualizarReloj();
-        
-        // Hacer que se ejecute cada 1 segundo (1000 milisegundos)
         setInterval(actualizarReloj, 1000);
     </script>
 
