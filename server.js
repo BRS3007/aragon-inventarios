@@ -1113,18 +1113,18 @@ app.get('/api/verify/:token', async (req, res) => {
 });
 // --- 8. CIERRE DE SESIÓN ---
 // Asegúrate de que esta ruta sea POST y coincida con el fetch de common.js
-app.post('/api/logout', (req, res) => {
+// Ruta GET para cerrar sesión desde cualquier formulario
+app.get('/logout', (req, res) => {
     if (req.session) {
         req.session.destroy(err => {
             if (err) {
                 console.error("Error al destruir sesión:", err);
-                return res.status(500).json({ success: false, message: "Error en el servidor" });
             }
-            res.clearCookie('connect.sid'); // Limpia la cookie de sesión
-            return res.json({ success: true, message: "Sesión cerrada correctamente" });
+            res.clearCookie('connect.sid'); // Limpia la cookie del navegador
+            return res.redirect('/'); // Te manda de vuelta al login
         });
     } else {
-        res.status(400).json({ success: false, message: "No hay sesión activa" });
+        res.redirect('/');
     }
 });
 
