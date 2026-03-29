@@ -8,48 +8,100 @@
 </head>
 <body class="bg-gray-50 font-sans">
 
-    <header class="bg-white p-4 flex flex-col items-center border-b border-gray-200">
-        
-        <div class="mb-2">
-            <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-12 mx-auto">
-        </div>
+    <header class="bg-white p-4 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
+            
+            <div class="flex flex-col items-center md:items-start">
+                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-12 mb-1">
+                <p class="text-xs text-gray-500 text-center md:text-left">Smart Inventories</p>
+            </div>
 
-        <div class="text-gray-600 text-sm mb-3 text-center">
-            domingo, 29 de marzo de 2026, 17:29:11
-        </div>
+            <div class="flex flex-col items-center space-y-2">
+                <div id="reloj-vivo" class="text-gray-600 text-sm text-center font-medium">
+                    Cargando hora...
+                </div>
+                <a href="/logout" class="bg-red-600 text-white px-5 py-1.5 rounded-lg font-bold hover:bg-red-700 transition text-sm">
+                    Cerrar Sesión
+                </a>
+            </div>
 
-        <div class="mb-4">
-            <a href="/logout" class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-700 transition">
-                Cerrar Sesión
-            </a>
-        </div>
+            <div class="flex flex-col items-center md:items-end space-y-3">
+                <nav class="w-full">
+                    <ul class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 text-sm font-medium text-gray-700">
+                        <li><a href="/ingreso" class="flex items-center hover:text-red-600"><span class="mr-1">📥</span> Ingreso</a></li>
+                        <li><a href="/averias" class="flex items-center text-red-600 font-bold border-b-2 border-red-600 pb-1"><span class="mr-1">⚠️</span> Averías</a></li>
+                        <li><a href="/registros" class="flex items-center hover:text-red-600"><span class="mr-1">📋</span> Registros</a></li>
+                        <li><a href="/importar" class="flex items-center hover:text-red-600"><span class="mr-1">🚀</span> Importar</a></li>
+                    </ul>
+                </nav>
+                <div class="bg-gray-100 px-3 py-1 rounded-full text-xs font-semibold text-gray-600 flex items-center">
+                    <span class="w-2 h-2 bg-red-500 rounded-full mr-1.5"></span> Hola: claudia
+                </div>
+            </div>
 
-        <nav class="w-full max-w-4xl">
-            <ul class="flex flex-col md:flex-row justify-center items-center space-y-3 md:space-y-0 md:space-x-6 text-sm font-medium text-gray-700">
-                <li>
-                    <a href="/ingreso" class="flex items-center hover:text-red-600">
-                        <span class="mr-1">📥</span> Ingreso de Productos
-                    </a>
-                </li>
-                <li>
-                    <a href="/averias" class="flex items-center text-red-600 font-bold border-b-2 border-red-600 pb-1">
-                        <span class="mr-1">⚠️</span> Reportar Avería
-                    </a>
-                </li>
-                <li>
-                    <a href="/registros" class="flex items-center hover:text-red-600">
-                        <span class="mr-1">📋</span> Ingresos Realizados
-                    </a>
-                </li>
-                <li>
-                    <a href="/importar" class="flex items-center hover:text-red-600">
-                        <span class="mr-1">🚀</span> Importar
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <div class="mt-4 bg-gray-100 px-4 py-1 rounded-full text-xs font-semibold text-gray-600">
-            🔴 Hola: claudia
         </div>
     </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-200">
+            
+            <div class="text-center md:text-left mb-6">
+                <h2 class="text-3xl font-bold text-gray-900">Reportar Avería de Producto</h2>
+            </div>
+
+            <form action="/api/guardar-averia" method="POST" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Código de Barras:</label>
+                    <input type="text" name="codigo_barras" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500" placeholder="Escribe el código de barras">
+                    <p class="text-xs text-gray-500 mt-1">Introduce el código de barras del producto.</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Cantidad:</label>
+                    <input type="number" name="cantidad" value="1" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                    <p class="text-xs text-gray-500 mt-1">Indica la cantidad que se descontará del stock.</p>
+                </div>
+
+                <div class="flex justify-center md:justify-end mt-6">
+                    <button type="submit" class="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg transition duration-150 ease-in-out">
+                        Guardar Reporte
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </main>
+
+    <script>
+        function actualizarReloj() {
+            const ahora = new Date();
+            
+            // Opciones para formatear la fecha en español
+            const opciones = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: false 
+            };
+            
+            const fechaFormateada = ahora.toLocaleDateString('es-ES', opciones);
+            
+            // Reemplazar la coma que pone el sistema por el formato que usabas
+            const textoFinal = fechaFormateada.replace(',', '');
+            
+            document.getElementById('reloj-vivo').innerText = textoFinal;
+        }
+
+        // Ejecutar la función inmediatamente para que no nazca vacío
+        actualizarReloj();
+        
+        // Hacer que se ejecute cada 1 segundo (1000 milisegundos)
+        setInterval(actualizarReloj, 1000);
+    </script>
+
+</body>
+</html>
