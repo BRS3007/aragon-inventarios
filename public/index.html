@@ -27,10 +27,8 @@
 <header class="bg-white p-4 border-b border-gray-200">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:flex md:flex-row md:justify-between md:items-center gap-4 md:gap-0">
             
-            <div class="flex justify-center md:justify-start">
-                <a href="/">
-                    <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-20 md:h-24 transition-all duration-300">
-                </a>
+            <div class="flex flex-col items-center md:items-start">
+                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
             </div>
 
             <div id="live-clock" class="text-gray-600 text-sm text-center font-medium bg-gray-50 px-4 py-2 rounded-lg shadow-sm border border-gray-100 max-w-max mx-auto md:mx-0">
@@ -93,29 +91,32 @@
             </div> </div> </main>
 
             <script>
-        function actualizarReloj() {
-            const ahora = new Date();
-            const opciones = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric', 
-                hour: '2-digit', 
-                minute: '2-digit', 
-                second: '2-digit', 
-                hour12: false 
-            };
-            
-            const textoFinal = ahora.toLocaleDateString('es-ES', opciones).replace(',', '');
-            document.getElementById('live-clock').innerText = textoFinal;
-        }
-
-        // 🔥 LA CLAVE: Primero ejecutamos la función para que cargue al instante
-        actualizarReloj();
+    function actualizarReloj() {
+        const ahora = new Date();
         
-        // Y luego la dejamos corriendo cada segundo
-        setInterval(actualizarReloj, 1000);
-    </script>
+        // Opciones solo para la fecha
+        const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const fechaTexto = ahora.toLocaleDateString('es-ES', opcionesFecha).replace(',', '');
+        
+        // Formato para la hora (HH:MM:SS)
+        const horas = String(ahora.getHours()).padStart(2, '0');
+        const minutos = String(ahora.getMinutes()).padStart(2, '0');
+        const segundos = String(ahora.getSeconds()).padStart(2, '0');
+        const horaTexto = `${horas}:${minutos}:${segundos}`;
+        
+        // Inyectamos el HTML dividiendo fecha y hora para que no parpadee
+        document.getElementById('live-clock').innerHTML = `
+            <span class="text-gray-500">${fechaTexto}</span> 
+            <span class="font-bold text-gray-800 ml-2">${horaTexto}</span>
+        `;
+    }
+
+    // Carga instantánea
+    actualizarReloj();
+    
+    // Se actualiza cada segundo de manera fluida
+    setInterval(actualizarReloj, 1000);
+</script>
     
 <script type="importmap">
 {
