@@ -1162,8 +1162,8 @@ app.get('/api/ingresos-hoy', async (req, res) => {
 });
 // Rutas de navegación faltantes
 app.get('/averias', (req, res) => {
-    if (req.session.loggedIn) res.sendFile(path.join(__dirname, 'public', 'averias.html'));
-    else res.redirect('/');
+    // Busca el archivo 'averias.ejs' dentro de la carpeta 'views'
+    res.render('averias'); 
 });
 
 app.post('/api/guardar-averia', async (req, res) => {
