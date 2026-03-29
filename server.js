@@ -28,6 +28,9 @@ import chokidar from 'chokidar';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.set('view engine', 'ejs');
+app.set('views', path.resolve(__dirname, 'views'));
+
 // Configuración del Pool
 const db = mysql.createPool({
     host: process.env.DB_HOST,
@@ -191,8 +194,7 @@ const __filename = fileURLToPath(import.meta.url);
 
 const { hash, compare } = bcrypt;
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+
 
 // 1. Definir la carpeta que vamos a vigilar
 const watchFolder = path.resolve(__filename, '../auto_procesar'); // Ruta absoluta
@@ -1166,8 +1168,10 @@ app.get('/api/ingresos-hoy', async (req, res) => {
 });
 // Rutas de navegación faltantes
 app.get('/averias', (req, res) => {
-    // Busca el archivo 'averias.ejs' dentro de la carpeta 'views'
-    res.render('averias'); 
+    // Si esto funciona, el problema está en que no encuentra la carpeta 'views'
+    res.send("¡Hola Jose! Si ves esto, el servidor funciona y solo falta enlazar la vista.");
+    
+    // Cuando confirmes que esto funciona, volvemos a poner: res.render('averias');
 });
 
 app.post('/api/guardar-averia', async (req, res) => {
