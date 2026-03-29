@@ -4,141 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reportar Avería - ARAGON</title>
-    
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
-    <link rel="manifest" href="/favicons/site.webmanifest">
-    <link rel="icon" href="/favicons/android-chrome-192x192.png" type="image/x-icon">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="/css/styles.css">
-    <link href="/dist/output.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
+<body class="bg-gray-50 font-sans">
 
-<body class="background-login bg-gray-50 font-sans">
+    <header class="bg-white p-4 flex flex-col items-center border-b border-gray-200">
+        
+        <div class="mb-2">
+            <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-12 mx-auto">
+        </div>
 
-    <%- include('partials/header') %>
+        <div class="text-gray-600 text-sm mb-3 text-center">
+            domingo, 29 de marzo de 2026, 17:29:11
+        </div>
 
-    <div class="user-info-bar bg-white border-b shadow-sm p-3 flex flex-col md:flex-row justify-between items-center gap-3">
-        <nav class="header-nav">
-            <ul class="flex gap-6 text-sm font-medium text-gray-600">
+        <div class="mb-4">
+            <a href="/logout" class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-700 transition">
+                Cerrar Sesión
+            </a>
+        </div>
+
+        <nav class="w-full max-w-4xl">
+            <ul class="flex flex-col md:flex-row justify-center items-center space-y-3 md:space-y-0 md:space-x-6 text-sm font-medium text-gray-700">
                 <li>
-                    <a href="/ingreso-productos" class="flex items-center gap-1 hover:text-red-600">
-                        <span>📥</span> <span data-i18n="common:product_entry_link">Ingreso</span>
+                    <a href="/ingreso" class="flex items-center hover:text-red-600">
+                        <span class="mr-1">📥</span> Ingreso de Productos
                     </a>
                 </li>
                 <li>
-                    <a href="/averias" class="flex items-center gap-1 text-red-600 font-bold">
-                        <span>⚠️</span> <span data-i18n="common:report_damage_link">Averías</span>
+                    <a href="/averias" class="flex items-center text-red-600 font-bold border-b-2 border-red-600 pb-1">
+                        <span class="mr-1">⚠️</span> Reportar Avería
                     </a>
                 </li>
-                <li class="admin-only">
-                    <a href="/registros" class="flex items-center gap-1 hover:text-red-600">
-                        <span>📋</span> <span data-i18n="common:recorded_entries_link">Registros</span>
+                <li>
+                    <a href="/registros" class="flex items-center hover:text-red-600">
+                        <span class="mr-1">📋</span> Ingresos Realizados
                     </a>
                 </li>
-                <li class="admin-only">
-                    <a href="/subir" class="flex items-center gap-1 hover:text-red-600">
-                        <span>🚀</span> <span data-i18n="common:import_link">Importar</span>
+                <li>
+                    <a href="/importar" class="flex items-center hover:text-red-600">
+                        <span class="mr-1">🚀</span> Importar
                     </a>
                 </li>
             </ul>
         </nav>
-        
-        <div class="user-tag flex items-center gap-2 text-sm bg-gray-100 px-3 py-1 rounded-full">
-            <span class="w-2 h-2 bg-red-500 rounded-full"></span>
-            <span id="nombre-usuario-display" class="font-semibold text-gray-700">Cargando...</span>
+
+        <div class="mt-4 bg-gray-100 px-4 py-1 rounded-full text-xs font-semibold text-gray-600">
+            🔴 Hola: claudia
         </div>
-    </div>
-
-    <main class="container mx-auto max-w-5xl p-4 mt-6">
-        
-        <div class="header-with-langs mb-6 text-center md:text-left">
-            <h1 class="text-3xl font-bold text-gray-800" data-i18n="averias:page_title">Reportar Avería de Producto</h1>
-        </div>
-
-        <form id="form-reportar-averia" class="bg-white p-6 rounded-lg shadow-md space-y-6">
-            
-            <div class="flex flex-col md:flex-row gap-4">
-                <div class="flex-1">
-                    <label for="codigo_de_barras_averia" class="block text-sm font-semibold text-gray-700 mb-1" data-i18n="averias:barcode_label">Código de Barras:</label>
-                    <input type="text" id="codigo_de_barras_averia" name="codigo_de_barras" class="w-full border p-2 rounded focus:ring-2 focus:ring-red-500 focus:outline-none" required>
-                    <small class="text-xs text-gray-500 block mt-1">Introduce el código de barras del producto.</small>
-                </div>
-
-                <div class="flex-1">
-                    <label for="cantidad_averia" class="block text-sm font-semibold text-gray-700 mb-1" data-i18n="averias:quantity_label">Cantidad:</label>
-                    <input type="number" id="cantidad_averia" name="cantidad" min="1" value="1" class="w-full border p-2 rounded focus:ring-2 focus:ring-red-500 focus:outline-none" required>
-                    <small class="text-xs text-gray-500 block mt-1">Indica la cantidad que se descontará del stock.</small>
-                </div>
-
-                <div class="flex-1">
-                    <label for="descripcion_producto_averia" class="block text-sm font-semibold text-gray-700 mb-1" data-i18n="averias:product_description_label">Descripción:</label>
-                    <input type="text" id="descripcion_producto_averia" name="descripcion_producto" class="w-full border p-2 rounded bg-gray-50 text-gray-500" readonly>
-                    <small class="text-xs text-gray-500 block mt-1">Se autocompletará automáticamente.</small>
-                </div>
-            </div>
-
-            <div class="flex flex-col md:flex-row gap-4">
-                <div class="flex-1">
-                    <label for="descripcion_averia" class="block text-sm font-semibold text-gray-700 mb-1" data-i18n="averias:damage_description_label">Motivo de Avería:</label>
-                    <input type="text" id="descripcion_averia" name="descripcion_averia" class="w-full border p-2 rounded focus:ring-2 focus:ring-red-500 focus:outline-none" required>
-                    <small class="text-xs text-gray-500 block mt-1">Detalla el daño (ej: empaque roto).</small>
-                </div>
-
-                <div class="flex-1">
-                    <label for="fecha_averia" class="block text-sm font-semibold text-gray-700 mb-1" data-i18n="averias:damage_date_label">Fecha:</label>
-                    <input type="date" id="fecha_averia" name="fecha_averia" class="w-full border p-2 rounded focus:ring-2 focus:ring-red-500 focus:outline-none" required>
-                    <small class="text-xs text-gray-500 block mt-1">Selecciona la fecha del reporte.</small>
-                </div>
-
-                <div class="flex-1">
-                    <label for="estado_averia" class="block text-sm font-semibold text-gray-700 mb-1" data-i18n="averias:status_label">Estado:</label>
-                    <select id="estado_averia" name="estado" class="w-full border p-2 rounded focus:ring-2 focus:ring-red-500 focus:outline-none" required>
-                        <option value="Pendiente" data-i18n="averias:status_pending">Pendiente</option>
-                        <option value="En Revisión" data-i18n="averias:status_in_review">En Revisión</option>
-                        <option value="Descartado" data-i18n="averias:status_discarded">Descartado</option>
-                    </select>
-                    <small class="text-xs text-gray-500 block mt-1">Estado actual del proceso.</small>
-                </div>
-            </div>
-
-            <div class="flex flex-col sm:flex-row justify-end gap-3 mt-4">
-                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded transition-all w-full sm:w-auto">
-                    Reportar Avería
-                </button>
-                <button type="button" id="btn-limpiar-averia" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded transition-all w-full sm:w-auto flex items-center justify-center gap-1">
-                    <span>🗑️</span> Limpiar Formulario
-                </button>
-            </div>
-        </form>
-    </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const rol = localStorage.getItem('userRole');
-            if (rol !== 'admin') {
-                document.querySelectorAll('.admin-only').forEach(el => el.remove());
-            }
-        });
-    </script>
-
-    <script type="importmap">
-    {
-      "imports": {
-        "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/+esm",
-        "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/+esm",
-        "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/+esm",
-        "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
-      }
-    }
-    </script>
-    <script src="/js/i18n.js" type="module"></script>
-    <script src="/js/averias.js" type="module"></script>
-    <script src="/js/common.js" type="module"></script>  
-</body>
-</html>
+    </header>
