@@ -49,12 +49,12 @@
                     </select>
                 </div>
             </div>
-
         </div>
     </header>
-<main id="app-container" class="main-content">
-    </main>
-    <div class="contenedor__todo">
+<main id="app-container" class="main-content" style="margin-top: 5px; padding-top: 0;">
+        
+        <div class="contenedor__todo" style="margin-top: 0;">
+            
             <div class="caja__trasera">
                 <div class="caja__trasera-login">
                     <h3 data-i18n="login:already_registered_title">¿Ya estas Registrado?</h3>
@@ -67,7 +67,9 @@
                     <button id="btn__registrarse" data-i18n="login.register_link">Registrarse</button>
                 </div>
             </div>
+
             <div class="contenedor__login-register">
+                
                 <form id="login-form" action="/login" method="POST" class="formulario__login">
                     <h2 data-i18n="login:login_title">Iniciar Sesion</h2>
                     <input type="text" placeholder="ID Personal" name="id_personal" required data-i18n="[placeholder]login.username_label"> 
@@ -77,45 +79,20 @@
                 <div id="mensaje-login" style="text-align: center; margin-top: 10px; font-weight: bold;"></div>
                 
                 <form id="register-form" class="formulario__register" action="/api/registrar-nuevo" method="POST">
-    <h2 data-i18n="login:register_link">Registrar Nuevo Empleado</h2>
-    
-    <input type="text" 
-           placeholder="Nombre Completo" 
-           name="nombre_real" 
-           required 
-           data-i18n="[placeholder]login.name_label_placeholder"> 
-
-    <input type="email" 
-           placeholder="Correo Electrónico" 
-           name="email_usuario" 
-           required> 
-
-    <input type="text" 
-           placeholder="Nombre de la Empresa" 
-           name="nombre_empresa" 
-           required> 
-    
-    <input type="text" 
-           placeholder="ID Personal" 
-           name="nombre_usuario" 
-           required 
-           data-i18n="[placeholder]login.username_label"> 
-    
-    <input type="password" 
-           placeholder="Contraseña" 
-           name="contrasena" 
-           required 
-           data-i18n="[placeholder]login.password_label">
-    
-    <button type="submit" data-i18n="login:register_button">Registrarse</button>
-</form>
-            </div>
-        </div>
-    </main>
+                    <h2 data-i18n="login:register_link">Registrar Nuevo Empleado</h2>
+                    
+                    <input type="text" placeholder="Nombre Completo" name="nombre_real" required data-i18n="[placeholder]login.name_label_placeholder"> 
+                    <input type="email" placeholder="Correo Electrónico" name="email_usuario" required> 
+                    <input type="text" placeholder="Nombre de la Empresa" name="nombre_empresa" required> 
+                    <input type="text" placeholder="ID Personal" name="nombre_usuario" required data-i18n="[placeholder]login.username_label"> 
+                    <input type="password" placeholder="Contraseña" name="contrasena" required data-i18n="[placeholder]login.password_label">
+                    
+                    <button type="submit" data-i18n="login:register_button">Registrarse</button>
+                </form>
+                
                 <div id="mensaje-registro" style="text-align: center; margin-top: 10px; color: orange;"></div>
-            </div>
-        </div>
-    </main>
+
+            </div> </div> </main>
     
 <script type="importmap">
 {
