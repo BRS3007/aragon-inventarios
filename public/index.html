@@ -26,26 +26,32 @@
 <link href="/dist/output.css" rel="stylesheet">
 </head>
 <body class="background-login"> <!-- ¡CLAVE! Añadir esta clase -->
-    <header class="main-header">
-    <div class="header-left">
-        <a href="/">
-            <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
-        </a>
-    </div>
+    <header class="bg-white p-4 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between md:items-center space-y-3 md:space-y-0">
+            
+            <div class="flex justify-center md:justify-start">
+                <a href="/">
+                    <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-16">
+                </a>
+            </div>
 
-    <div id="live-clock" class="centered-clock"></div>
+            <div id="live-clock" class="text-gray-600 text-sm text-center font-medium">
+                Cargando hora...
+            </div>
 
-    <div class="header-right">
-        <div class="language-switcher">
-            <select id="language-switcher">
-                <option value="en">English</option>
-                <option value="es" selected>Español</option>
-                <option value="pap">Papiamento</option>
-                <option value="zh">中文</option>
-            </select>
+            <div class="flex justify-center md:justify-end">
+                <div class="language-switcher">
+                    <select id="language-switcher" class="p-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none">
+                        <option value="en">English</option>
+                        <option value="es" selected>Español</option>
+                        <option value="pap">Papiamento</option>
+                        <option value="zh">中文</option>
+                    </select>
+                </div>
+            </div>
+
         </div>
-    </div>
-</header>
+    </header>
 <main id="app-container" class="main-content">
     </main>
     <div class="contenedor__todo">
