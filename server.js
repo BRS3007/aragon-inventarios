@@ -4,40 +4,41 @@ const { readFile, utils } = pkg;
 import fs from 'fs';
 import path from 'path';
 
-
-
-import 'dotenv/config';
 import 'dotenv/config';
 import express from 'express';
 import session from 'express-session';
 import mysql from 'mysql2/promise';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';         
-import axios from 'axios';       
-import bcrypt from 'bcryptjs';     // <--- ¡Asegúrate de tener esta!
-import crypto from 'crypto';     // <--- Esta es la que arregla el error de la línea 550
-import ExcelJS from 'exceljs';   
-import cors from 'cors';         
+import axios from 'axios';       
+import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
+import ExcelJS from 'exceljs';   
+import cors from 'cors';         
 import multer from 'multer';
 import nodemailer from 'nodemailer';
 import chokidar from 'chokidar';
 
-
-
+// 1. OBTENER RUTAS EN MÓDULOS ES (Hacer esto ANTES de usar __dirname)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// 2. CONFIGURAR MOTOR DE PLANTILLAS EJS
 app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, 'views'));
 
-// Configuración del Pool
+// 3. DESESTRUCTURAR BCRYPT (Opcional pero ayuda a limpiar el código)
+const { hash, compare } = bcrypt;
+
+// Configuración del Pool de la Base de Datos
 const db = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD, // <--- CAMBIA 'DB_PASS' POR 'DB_PASSWORD'
+    password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    port: process.env.DB_PORT || 3306, // <--- Añade esto
+    port: process.env.DB_PORT || 3306,
     charset: 'utf8mb4_unicode_ci',
     waitForConnections: true,
     connectionLimit: 20,
@@ -186,14 +187,6 @@ const faltantes = variablesRequeridas.filter(v => !process.env[v]);
     {
     console.log("✅ Configuración .env validada correctamente.");
 }
-// También necesitarás estos para manejar rutas en modo "module"
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-// Configuración para recuperar __dirname en Módulos ES
-const __filename = fileURLToPath(import.meta.url);
-
-const { hash, compare } = bcrypt;
-
 
 
 // 1. Definir la carpeta que vamos a vigilar
