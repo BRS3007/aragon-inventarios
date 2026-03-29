@@ -22,6 +22,9 @@ import multer from 'multer';
 import nodemailer from 'nodemailer';
 import chokidar from 'chokidar';
 
+
+
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -188,7 +191,8 @@ const __filename = fileURLToPath(import.meta.url);
 
 const { hash, compare } = bcrypt;
 
-
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // 1. Definir la carpeta que vamos a vigilar
 const watchFolder = path.resolve(__filename, '../auto_procesar'); // Ruta absoluta
