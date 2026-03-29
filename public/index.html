@@ -24,21 +24,26 @@
   
 <link rel="stylesheet" href="css/estilo.css">
 <link href="/dist/output.css" rel="stylesheet">
-<header class="bg-white p-4 border-b border-gray-200">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:flex md:flex-row md:justify-between md:items-center gap-4 md:gap-0">
+</head>
+<body class="background-login">
+
+    <header class="bg-white p-4 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between md:items-center space-y-3 md:space-y-0 text-center md:text-left">
             
             <div class="flex flex-col items-center md:items-start">
                 <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
             </div>
 
-            <div class="text-gray-600 text-sm text-center font-medium bg-gray-50 px-4 py-2 rounded-lg shadow-sm border border-gray-100 max-w-max mx-auto md:mx-0 flex items-center">
-    <span id="reloj-fecha" class="text-gray-500"></span> 
-    <span id="reloj-hora" class="font-bold text-gray-800 ml-2"></span>
-</div>
+            <div class="flex justify-center items-center">
+                <div class="text-gray-600 text-xs md:text-sm font-medium bg-gray-50 px-4 py-2 rounded-lg shadow-sm border border-gray-100 max-w-max">
+                    <span id="reloj-fecha" class="text-gray-500">domingo, 29 de marzo de 2026</span> 
+                    <span id="reloj-hora" class="font-bold text-gray-800 ml-1.5">19:12:28</span>
+                </div>
+            </div>
 
             <div class="flex justify-center md:justify-end">
                 <div class="language-switcher">
-                    <select id="language-switcher" class="p-2.5 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none shadow-sm cursor-pointer">
+                    <select id="language-switcher" class="p-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none shadow-sm cursor-pointer">
                         <option value="en">English</option>
                         <option value="es" selected>Español</option>
                         <option value="pap">Papiamento</option>
