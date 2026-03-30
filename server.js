@@ -357,9 +357,9 @@ app.get('/', (req, res) => {
     else res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Así se llama a un archivo .ejs
 app.get('/ingreso-productos', (req, res) => {
-    if (req.session.loggedIn) res.sendFile(path.join(__dirname, 'public', 'ingreso-productos.html'));
-    else res.redirect('/');
+    res.render('ingreso-productos'); // Express busca automáticamente 'views/ingreso-productos.ejs'
 });
 
 // Ruta exacta que pide tu frontend
@@ -414,10 +414,9 @@ app.get('/api/historial/:codigoDeBarras', async (req, res) => {
     }
 });
 
+// Así se llama a un archivo .ejs
 app.get('/registros', (req, res) => {
-    if (req.session.loggedIn && req.session.role === 'admin') {
-        res.sendFile(path.join(__dirname, 'public', 'registros.html'));
-    } else res.redirect('/');
+    res.render('registros'); // Express busca automáticamente 'views/registros.ejs'
 });
 
 app.get('/api/ver-todos-los-ingresos', (req, res) => {
@@ -1213,9 +1212,9 @@ app.post('/api/guardar-averia', async (req, res) => {
         res.status(500).json({ success: false, message: "Error interno: " + e.message });
     }
 });
+// Así se llama a un archivo .ejs
 app.get('/subir', (req, res) => {
-    if (req.session.loggedIn) res.sendFile(path.join(__dirname, 'public', 'subir.html'));
-    else res.redirect('/');
+    res.render('subir'); // Express busca automáticamente 'views/registros.ejs'
 });
 
 app.post('/api/subir-excel', upload.single('excelFile'), (req, res) => {
