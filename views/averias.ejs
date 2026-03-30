@@ -8,6 +8,48 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
+        /* ==========================================
+           1. ESTILOS PARA PC (POR DEFECTO)
+           ========================================== */
+        
+        /* Estilos del Header para que se vea horizontal en PC */
+        .main-header {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            padding: 10px 20px !important;
+            background-color: #ffffff !important;
+            border-bottom: 1px solid #e5e7eb !important;
+            height: 90px !important;
+        }
+
+        .logo-img {
+            height: 75px !important;
+            width: auto !important;
+        }
+
+        .centered-clock {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background-color: #f9fafb !important;
+            padding: 10px 20px !important;
+            border-radius: 8px !important;
+            border: 1px solid #e5e7eb !important;
+        }
+
+        .logout-btn {
+            display: inline-block !important;
+            background-color: #dc2626 !important;
+            color: #ffffff !important;
+            padding: 10px 20px !important;
+            border-radius: 6px !important;
+            font-weight: bold !important;
+            text-decoration: none !important;
+        }
+
+        /* Tus estilos originales del formulario en PC */
         .form-row {
             display: flex;
             flex-direction: row;
@@ -42,8 +84,31 @@
             margin-top: 20px;
         }
 
-        /* 📱 Cuando se abra en un Celular se ponen en vertical */
+        /* ==========================================
+           2. ESTILOS PARA CELULAR (MENOS DE 768px)
+           ========================================== */
         @media (max-width: 768px) {
+            /* El Header se apila en vertical y se centra */
+            .main-header {
+                flex-direction: column !important;
+                height: auto !important;
+                gap: 15px !important;
+                padding: 15px !important;
+                text-align: center !important;
+            }
+
+            .logo-img {
+                height: 60px !important;
+                margin: 0 auto !important;
+            }
+
+            .centered-clock {
+                width: 90% !important;
+                max-width: 280px !important;
+                margin: 0 auto !important;
+            }
+
+            /* Tus estilos originales del formulario en Celular */
             .form-row {
                 flex-direction: column;
                 gap: 15px;
