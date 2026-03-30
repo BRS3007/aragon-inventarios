@@ -1898,9 +1898,22 @@ table {
     align-items: center !important;
     justify-content: center !important;
     background-color: #f9fafb !important;
-    padding: 10px 20px !important;
-    border-radius: 8px !important;
+    padding: 4px 12px !important; /* 🔥 Reducimos el relleno para que no se estire */
+    border-radius: 6px !important;
     border: 1px solid #e5e7eb !important;
+    max-height: 65px !important; /* 🔥 Le ponemos un tope de altura */
+}
+
+/* Achicamos los textos de adentro */
+#reloj-fecha {
+    font-size: 12px !important;
+    color: #4b5563 !important;
+}
+
+#reloj-hora {
+    font-size: 14px !important;
+    font-weight: bold !important;
+    color: #dc2626 !important;
 }
 
 .logout-btn {
@@ -1923,9 +1936,31 @@ table {
     }
 
     .centered-clock {
+        display: flex !important;
+        flex-direction: column !important; /* Fecha arriba, hora abajo */
+        align-items: center !important;
+        justify-content: center !important;
         width: 90% !important;
-        max-width: 280px !important;
-        margin: 0 auto !important;
+        max-width: 260px !important; /* Un poco más angosto para que no use tanto espacio */
+        margin: 0 auto !important; /* Centrado perfecto en la pantalla */
+        background-color: #f9fafb !important;
+        padding: 6px 10px !important; /* Relleno pequeño para que no se vea gigante */
+        border: 1px solid #e5e7eb !important;
+        border-radius: 8px !important;
+        max-height: 60px !important; /* Evita que la caja se estire hacia abajo */
+    }
+
+    /* Ajustamos el tamaño de las letras solo para el celular */
+    #reloj-fecha {
+        font-size: 11px !important;
+        color: #4b5563 !important;
+        margin-bottom: 2px !important;
+    }
+
+    #reloj-hora {
+        font-size: 13px !important;
+        font-weight: bold !important;
+        color: #dc2626 !important;
     }
 
     .header-right {
