@@ -1897,29 +1897,33 @@ table {
 
     /* 2. Arreglo del Reloj: le damos aire y evitamos que se monte */
     .centered-clock {
-        position: static !important;
+        /* Eliminamos cualquier posicionamiento absoluto o cajas fijas antiguas */
+        position: static !important; 
         display: flex !important;
         flex-direction: column !important; /* Fecha arriba, hora abajo */
-        align-items: center !important;    /* Centra el contenido horizontalmente */
-        justify-content: center !important;   /* Centra el contenido verticalmente */
+        align-items: center !important;    /* Centra horizontalmente */
+        justify-content: center !important;   /* Centra verticalmente */
         text-align: center !important;
         
+        /* Estilo de la caja (Sin cortes raros) */
         background-color: #f9fafb !important;
-        padding: 8px 15px !important;
+        padding: 10px 20px !important;
         border-radius: 8px !important;
         border: 1px solid #e5e7eb !important;
-        font-size: 13px !important;
+        font-size: 14px !important;
+        color: #374151 !important;
         
-        /* 🔥 Forzamos a que ocupe todo el ancho y se auto-ajuste al centro */
+        /* 🔥 Forzamos el centrado en el ancho de la pantalla */
         width: 90% !important; 
-        max-width: 280px !important;
-        margin: 10px auto !important; 
+        max-width: 300px !important;
+        margin: 10px auto !important; /* Margen auto centrará la caja entera */
     }
     
     #reloj-hora {
+        font-weight: bold !important;
         font-size: 16px !important;
-        color: #dc2626 !important; /* Hora en rojo para que resalte */
-        margin-top: 2px !important;
+        color: #dc2626 !important; /* Hora en rojo */
+        margin-top: 4px !important;
     }
 
     /* 3. Arreglo del Botón Cerrar Sesión: lo bajamos para que no tape nada */

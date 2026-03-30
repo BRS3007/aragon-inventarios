@@ -21,22 +21,22 @@
     <link rel="stylesheet" href="css/styles.css">
     <link href="/dist/output.css" rel="stylesheet">
 </head>
-<body class="background-login">
-
-    <header class="main-header">
+<header class="main-header">
+        
         <div class="flex flex-col items-center md:items-start">
                 <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
             </div>
+        
 
-        <div id="live-clock" class="centered-clock" style="display: flex; gap: 5px; align-items: center;">
-            <span id="reloj-fecha"></span>
-            <span id="reloj-hora" style="font-weight: bold;"></span>
+        <div id="live-clock" class="centered-clock">
+            <span id="reloj-fecha">Cargando fecha...</span>
+            <span id="reloj-hora"></span>
         </div>
 
         <nav class="header-right">
             <ul class="nav-list">
                 <li>
-                    <a href="/logout" class="nav-link" style="background-color: #dc2626; color: white; padding: 8px 15px; border-radius: 8px; font-weight: bold;">Cerrar Sesión</a>
+                    <a href="/logout" class="nav-link logout-btn">Cerrar Sesión</a>
                 </li>
             </ul>
         </nav>
@@ -91,7 +91,7 @@
     </main>
     <main class="container">
         
-        <h1 class="page-title" data-i18n="ingreso_productos:page_title">Ingreso de Nuevos Productos</h1>
+        <h1 class="page-title" data-i18n="ingreso_productos:page_title">Ingreso de Productos</h1>
 
         <form id="form-ingreso-productos" class="form-container">
             <div class="form-group">
