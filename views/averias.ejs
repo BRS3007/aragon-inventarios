@@ -57,23 +57,50 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 font-sans">
-
-    <header class="bg-white p-4 border-b border-gray-200">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
-            
-            <div class="flex flex-col items-center md:items-start">
+<header class="bg-white p-4 border-b border-gray-200">
+        <div style="display: flex; justify-content: center; margin-bottom: 10px;">
+            <a href="/ingreso-productos">
                 <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
             </div>
 
-            <div class="flex flex-col items-center space-y-2">
-                <div id="reloj-vivo" class="text-gray-600 text-sm text-center font-medium">
-                    Cargando hora...
-                </div>
-                <a href="/logout" class="bg-red-600 text-white px-5 py-1.5 rounded-lg font-bold hover:bg-red-700 transition text-sm">
-                    Cerrar Sesión
-                </a>
-            </div>
+        <div id="live-clock" style="
+            position: relative !important; 
+            display: flex !important;
+            flex-direction: column !important; 
+            align-items: center !important; 
+            justify-content: center !important; 
+            text-align: center !important;
+            background-color: #f9fafb !important;
+            padding: 10px 15px !important;
+            border-radius: 8px !important;
+            border: 1px solid #e5e7eb !important;
+            font-size: 14px !important;
+            width: 260px !important; 
+            margin: 15px auto !important;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+        ">
+            <span id="reloj-fecha" style="color: #6b7280 !important;">Cargando fecha...</span>
+            <span id="reloj-hora" style="font-weight: bold !important; color: #dc2626 !important; font-size: 16px !important; margin-top: 2px !important;"></span>
+        </div>
+
+        <div style="display: flex; justify-content: center; margin-top: 10px;">
+            <a href="/logout" style="
+                display: inline-block !important;
+                background-color: #dc2626 !important; 
+                color: #ffffff !important; 
+                padding: 10px 20px !important;
+                border-radius: 6px !important;
+                font-weight: bold !important;
+                text-decoration: none !important;
+                font-size: 14px !important;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+                text-align: center !important;
+                min-width: 120px !important;
+            ">
+                <span style="color: #ffffff !important;">Cerrar Sesión</span>
+            </a>
+        </div>
+    </header>
 
             <div class="flex flex-col items-center md:items-end space-y-3">
                 <nav class="w-full">

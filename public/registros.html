@@ -30,19 +30,37 @@
             </a>
         </div>
 
-    <div id="live-clock" class="centered-clock"></div>
+    <div id="live-clock" style="
+            position: relative !important; 
+            display: flex !important;
+            flex-direction: column !important; 
+            align-items: center !important; 
+            justify-content: center !important; 
+            text-align: center !important;
+            background-color: #f9fafb !important;
+            padding: 10px 15px !important;
+            border-radius: 8px !important;
+            border: 1px solid #e5e7eb !important;
+            font-size: 14px !important;
+            width: 260px !important; 
+            margin: 15px auto !important;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+        ">
+            <span id="reloj-fecha" style="color: #6b7280 !important;">Cargando fecha...</span>
+            <span id="reloj-hora" style="font-weight: bold !important; color: #dc2626 !important; font-size: 16px !important; margin-top: 2px !important;"></span>
+        </div>
 
             <ul class="nav-list">
-                <!--<li><a href="/ingreso-productos" class="nav-link" data-i18n="common.home_link">Inicio</a></li>-->
+                <li><a href="/ingreso-productos" class="nav-link" data-i18n="common.home_link">Inicio</a></li>
                 <li class="dropdown">
-                    <!--<a href="#" class="nav-link dropdown-toggle" data-i18n="common.actions_dropdown">Acciones <span class="arrow-down"></span></a>
+                    <a href="#" class="nav-link dropdown-toggle" data-i18n="common.actions_dropdown">Acciones <span class="arrow-down"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/ingreso-productos" class="dropdown-item" data-i18n="common.product_entry_link">Ingreso Productos</a></li>
                         <li><a href="/registros" class="dropdown-item" data-i18n="common.recorded_entries_link">Ingresos Realizados</a></li>
                         <li><a href="/averias" class="dropdown-item" data-i18n="common.report_damage_link">Reportar Avería</a></li>
                         <li><a href="/subir" class="dropdown-item" data-i18n="common.import_link">Importar Productos</a></li>
                     </ul>
-                </li>-->
+                </li>
                 
                 <li>
     <a href="javascript:void(0)" class="nav-link" id="logout-btn-nav" data-i18n="common.logout_button">Cerrar Sesión</a>
