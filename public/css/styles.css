@@ -1876,21 +1876,79 @@ table {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
-/* Esto solo se activará en pantallas pequeñas como celulares */
+/* Esto solo se activará en pantallas pequeñas como celulares css ingreso productos*/
+/* --- AJUSTES EXCLUSIVOS PARA CELULARES --- */
 @media (max-width: 768px) {
+    /* 1. Forzamos a que el header mande todo hacia abajo en fila */
     .main-header {
         flex-direction: column !important;
-        text-align: center;
-        gap: 10px;
-        padding: 15px;
+        height: auto !important;
+        padding: 15px 10px !important;
+        gap: 15px !important;
+        text-align: center !important;
     }
+
+    /* Centramos el logo */
+    .header-left {
+        display: flex !important;
+        justify-content: center !important;
+        width: 100% !important;
+    }
+
+    /* 2. Arreglo del Reloj: le damos aire y evitamos que se monte */
+    .centered-clock {
+        position: static !important; /* Quita cualquier posición fija que use en PC */
+        display: flex !important;
+        flex-direction: column !important; /* Fecha arriba, hora abajo */
+        align-items: center !important;
+        justify-content: center !important;
+        background-color: #f9fafb !important;
+        padding: 8px 15px !important;
+        border-radius: 8px !important;
+        border: 1px solid #e5e7eb !important;
+        font-size: 13px !important;
+        max-width: max-content !important;
+        margin: 0 auto !important;
+    }
+    
+    #reloj-hora {
+        font-size: 16px !important;
+        color: #dc2626 !important; /* Hora en rojo para que resalte */
+        margin-top: 2px !important;
+    }
+
+    /* 3. Arreglo del Botón Cerrar Sesión: lo bajamos para que no tape nada */
+    .header-right {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        position: static !important; /* Evita que flote sobre los iconos */
+    }
+
+    .nav-list {
+        display: flex !important;
+        justify-content: center !important;
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    /* 4. Arreglo de la barra de usuario e iconos */
     .user-info-bar {
         flex-direction: column !important;
-        gap: 10px;
         height: auto !important;
-        padding: 10px;
+        padding: 15px 10px !important;
+        gap: 12px !important;
     }
+
     .nav-main-horizontal {
-        justify-content: center;
+        justify-content: center !important;
+        flex-wrap: wrap !important; /* Si no caben los iconos, se bajan solitos */
+        gap: 15px !important;
+    }
+
+    .user-tag, .sesion-contador {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
     }
 }
