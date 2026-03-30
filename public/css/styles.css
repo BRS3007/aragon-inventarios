@@ -1876,3 +1876,21 @@ table {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
+/* Esto solo se activará en pantallas pequeñas como celulares */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column !important;
+        text-align: center;
+        gap: 10px;
+        padding: 15px;
+    }
+    .user-info-bar {
+        flex-direction: column !important;
+        gap: 10px;
+        height: auto !important;
+        padding: 10px;
+    }
+    .nav-main-horizontal {
+        justify-content: center;
+    }
+}
