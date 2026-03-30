@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="importar:form_title">Importar - ARAGON</title>
+    <title>Importar - ARAGON</title>
 
     <link rel="icon" type="image/png" href="favicons/apple-touch-icon.png"> 
-    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="manifest" href="favicons/site.webmanifest"> 
     <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="icon" href="favicons/android-chrome-192x192.png" type="image/x-icon"> 
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -23,11 +17,7 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
 
-        /* ==========================================
-           1. ESTILOS BASE Y PARA PC (Header y Widgets)
-           ========================================== */
-        
-        /* Header Horizontal */
+        /* HEADER ESTILIZADO */
         .main-header {
             display: flex !important;
             justify-content: space-between !important;
@@ -37,13 +27,9 @@
             border-bottom: 1px solid #e5e7eb !important;
             height: 90px !important;
         }
-
-        .logo-img {
-            height: 75px !important;
-            width: auto !important;
-        }
-
-        /* Reloj Pequeño que NO estira la barra */
+        .logo-img { height: 75px !important; width: auto !important; }
+        
+        /* RELOJ BLINDADO */
         .centered-clock {
             display: flex !important;
             flex-direction: column !important;
@@ -55,17 +41,10 @@
             border: 1px solid #e5e7eb !important;
             height: 65px !important; 
         }
-        #reloj-fecha { 
-            font-size: 13px !important; 
-            color: #4b5563 !important; 
-        }
-        #reloj-hora { 
-            font-size: 14px !important; 
-            font-weight: bold !important; 
-            color: #dc2626 !important; 
-        }
+        #reloj-fecha { font-size: 13px !important; color: #4b5563 !important; }
+        #reloj-hora { font-size: 14px !important; font-weight: bold !important; color: #dc2626 !important; }
 
-        /* Botón Cerrar Sesión Rojo */
+        /* BOTÓN SALIR */
         .logout-btn {
             display: inline-block !important;
             background-color: #dc2626 !important;
@@ -74,74 +53,29 @@
             border-radius: 6px !important;
             font-weight: bold !important;
             text-decoration: none !important;
-            transition: background-color 0.2s;
-        }
-        .logout-btn:hover {
-            background-color: #b91c1c !important;
         }
 
-        /* Barra de navegación (Widgets) simulación PC */
+        /* WIDGETS DE NAVEGACIÓN PC */
         .nav-main-horizontal {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            padding: 10px 20px;
-            border-bottom: 1px solid #e5e7eb;
-            background-color: #ffffff;
+            display: flex; gap: 20px; list-style: none; padding: 10px 20px;
+            border-bottom: 1px solid #e5e7eb; background-color: #ffffff;
         }
         .nav-item {
-            text-decoration: none;
-            color: #374151;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            padding: 8px 12px;
-            border-radius: 6px;
+            text-decoration: none; color: #374151; display: flex;
+            align-items: center; gap: 8px; font-size: 14px; padding: 8px 12px; border-radius: 6px;
         }
-        .nav-item:hover {
-            background-color: #f3f4f6;
-        }
+        .nav-item:hover { background-color: #f3f4f6; }
         .nav-item.active {
-            color: #dc2626;
-            font-weight: bold;
-            border-bottom: 3px solid #dc2626;
-            border-radius: 6px 6px 0 0;
+            color: #dc2626; font-weight: bold; border-bottom: 3px solid #dc2626; border-radius: 6px 6px 0 0;
         }
 
-        /* ==========================================
-           2. ESTILOS PARA CELULAR (MENOS DE 768px)
-           ========================================== */
+        /* DISEÑO MÓVIL */
         @media (max-width: 768px) {
-            .main-header {
-                flex-direction: column !important;
-                height: auto !important;
-                gap: 12px !important;
-                padding: 15px !important;
-                text-align: center !important;
-            }
-
-            .centered-clock {
-                width: 90% !important;
-                max-width: 250px !important;
-                margin: 0 auto !important;
-            }
-
-            /* Los Widgets se vuelven una cuadrícula de 2x2 en celular */
-            .nav-main-horizontal {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-                padding: 10px;
-            }
-            .nav-item {
-                justify-content: center;
-                background-color: #f9fafb;
-                border: 1px solid #e5e7eb;
-            }
-            .nav-item.active {
-                border: 1px solid #dc2626;
-            }
+            .main-header { flex-direction: column !important; height: auto !important; gap: 12px !important; padding: 15px !important; text-align: center !important; }
+            .centered-clock { width: 90% !important; max-width: 250px !important; margin: 0 auto !important; }
+            .nav-main-horizontal { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; }
+            .nav-item { justify-content: center; background-color: #f9fafb; border: 1px solid #e5e7eb; }
+            .nav-item.active { border: 1px solid #dc2626; }
         }
     </style>
 </head>
@@ -153,43 +87,24 @@
                 <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
             </a>
         </div>
-
         <div class="centered-clock">
             <span id="reloj-fecha">Cargando fecha...</span>
             <span id="reloj-hora"></span>
         </div>
-
         <nav class="header-right">
-            <a href="/logout" class="logout-btn" data-i18n="importar:logout_button">Cerrar Sesión</a>
+            <a href="/logout" class="logout-btn">Cerrar Sesión</a>
         </nav>
     </header>
 
     <div class="user-info-bar">
         <nav class="header-nav">
             <ul class="nav-main-horizontal">
-                <li>
-                    <a href="/ingreso-productos" class="nav-item">
-                        <span>📥</span> Ingreso
-                    </a>
-                </li>
-                <li>
-                    <a href="/averias" class="nav-item">
-                        <span>⚠️</span> Averías
-                    </a>
-                </li>
-                <li>
-                    <a href="/registros" class="nav-item">
-                        <span>📋</span> Registros
-                    </a>
-                </li>
-                <li>
-                    <a href="/subir" class="nav-item active">
-                        <span>🚀</span> Importar
-                    </a>
-                </li>
+                <li><a href="/ingreso-productos" class="nav-item"><span>📥</span> Ingreso</a></li>
+                <li><a href="/averias" class="nav-item"><span>⚠️</span> Averías</a></li>
+                <li><a href="/registros" class="nav-item"><span>📋</span> Registros</a></li>
+                <li><a href="/subir" class="nav-item active"><span>🚀</span> Importar</a></li>
             </ul>
         </nav>
-
         <div class="px-5 py-2 text-sm text-gray-600 flex items-center gap-2">
             <i class="fa-solid fa-circle-user text-red-600"></i>
             <span>Hola: <strong>claudia</strong></span>
@@ -197,66 +112,41 @@
     </div>
 
     <main class="max-w-4xl mx-auto px-4 py-12 flex justify-center">
-        <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl relative border border-gray-100">
-
-            <h1 class="text-3xl font-bold text-center text-gray-800 mb-6" data-i18n="importar:form_title">Subir Productos</h1>
-
+        <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-100">
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Subir Productos</h1>
             <form id="upload-form" class="space-y-6">
                 <div>
-                    <label for="excel-file" class="block text-sm font-medium text-gray-700" data-i18n="importar:label_file_input">Selecciona tu archivo Excel (.xlsx):</label>
+                    <label for="excel-file" class="block text-sm font-medium text-gray-700">Selecciona tu archivo Excel (.xlsx):</label>
                     <input type="file" id="excel-file" accept=".xlsx, .xls" required class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 cursor-pointer">
                 </div>
-
-                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out font-bold" data-i18n="importar:button_process_upload">
+                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 font-bold">
                     Procesar y Subir
                 </button>
             </form>
-
             <div class="mt-6 border-t pt-4">
-                <h2 class="text-xl font-bold text-gray-800" data-i18n="importar:section_result_title">Resultado:</h2>
+                <h2 class="text-xl font-bold text-gray-800">Resultado:</h2>
                 <div id="status-message" class="text-center font-bold mt-2 text-gray-600"></div>
             </div>
         </div>
     </main>
-
-    <div id="modal-progreso" class="modal-carga" style="display:none;">
-        <div class="modal-contenido">
-            <div class="loader-icon">🚀</div>
-            <h3 data-i18n="importar:modal_title">Procesando Inventario Masivo</h3>
-            <p id="texto-progreso">Iniciando lectura de registros...</p>
-            
-            <div class="barra-contenedor">
-                <div id="barra-llenado" class="barra-llenado"></div>
-            </div>
-            
-            <div class="flex-status">
-                <span id="porcentaje-texto">0%</span>
-                <span id="detalles-conteo">0 / 0</span>
-            </div>
-        </div>
-    </div>
 
     <script>
         function actualizarReloj() {
             const ahora = new Date();
             const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const fechaTexto = ahora.toLocaleDateString('es-ES', opcionesFecha).replace(',', '');
-            
             const horas = String(ahora.getHours()).padStart(2, '0');
             const minutos = String(ahora.getMinutes()).padStart(2, '0');
             const segundos = String(ahora.getSeconds()).padStart(2, '0');
             const horaTexto = `${horas}:${minutos}:${segundos}`;
-            
             document.getElementById('reloj-fecha').textContent = fechaTexto;
             document.getElementById('reloj-hora').textContent = horaTexto;
         }
         actualizarReloj();
         setInterval(actualizarReloj, 1000);
     </script>
-
     <script src="js/i18n.js" type="module"></script>
     <script src="js/subir.js" type="module"></script>
     <script src="js/common.js" type="module"></script>
-    
 </body>
 </html>
