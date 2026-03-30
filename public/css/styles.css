@@ -1897,7 +1897,7 @@ table {
 
     /* 2. Arreglo del Reloj: le damos aire y evitamos que se monte */
     .centered-clock {
-        position: static !important; /* Quita cualquier posición fija que use en PC */
+        position: static !important;
         display: flex !important;
         flex-direction: column !important; /* Fecha arriba, hora abajo */
         align-items: center !important;
@@ -1907,8 +1907,10 @@ table {
         border-radius: 8px !important;
         border: 1px solid #e5e7eb !important;
         font-size: 13px !important;
+        
+        /* 🔥 Estas dos líneas hacen la magia del centrado */
         max-width: max-content !important;
-        margin: 0 auto !important;
+        margin: 10px auto !important; 
     }
     
     #reloj-hora {
