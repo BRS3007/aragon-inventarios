@@ -57,70 +57,26 @@
         }
     </style>
 </head>
-<header class="bg-white p-4 border-b border-gray-200">
-        <div style="display: flex; justify-content: center; margin-bottom: 10px;">
+<header class="main-header">
+        
+        <div class="header-left">
             <a href="/ingreso-productos">
                 <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
-            </div>
-
-        <div id="live-clock" style="
-            position: relative !important; 
-            display: flex !important;
-            flex-direction: column !important; 
-            align-items: center !important; 
-            justify-content: center !important; 
-            text-align: center !important;
-            background-color: #f9fafb !important;
-            padding: 10px 15px !important;
-            border-radius: 8px !important;
-            border: 1px solid #e5e7eb !important;
-            font-size: 14px !important;
-            width: 260px !important; 
-            margin: 15px auto !important;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
-        ">
-            <span id="reloj-fecha" style="color: #6b7280 !important;">Cargando fecha...</span>
-            <span id="reloj-hora" style="font-weight: bold !important; color: #dc2626 !important; font-size: 16px !important; margin-top: 2px !important;"></span>
-        </div>
-
-        <div style="display: flex; justify-content: center; margin-top: 10px;">
-            <a href="/logout" style="
-                display: inline-block !important;
-                background-color: #dc2626 !important; 
-                color: #ffffff !important; 
-                padding: 10px 20px !important;
-                border-radius: 6px !important;
-                font-weight: bold !important;
-                text-decoration: none !important;
-                font-size: 14px !important;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
-                text-align: center !important;
-                min-width: 120px !important;
-            ">
-                <span style="color: #ffffff !important;">Cerrar Sesión</span>
             </a>
         </div>
-    </header>
 
-            <div class="flex flex-col items-center md:items-end space-y-3">
-    <nav class="w-full">
-        <ul class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 text-sm font-medium text-gray-700">
-            <li><a href="/ingreso-productos" class="flex items-center hover:text-red-600"><span class="mr-1">📥</span> Ingreso</a></li>
-            
-            <li><a href="/averias" class="flex items-center text-red-600 font-bold border-b-2 border-red-600 pb-1"><span class="mr-1">⚠️</span> Averías</a></li>
-            
-            <li><a href="/registros" class="flex items-center hover:text-red-600"><span class="mr-1">📋</span> Registros</a></li>
-            
-            <li><a href="/subir" class="flex items-center hover:text-red-600"><span class="mr-1">🚀</span> Importar</a></li>
-        </ul>
-    </nav>
-</div>
-                <div class="bg-gray-100 px-3 py-1 rounded-full text-xs font-semibold text-gray-600 flex items-center">
-                    <span class="w-2 h-2 bg-red-500 rounded-full mr-1.5"></span> Hola: claudia
-                </div>
-            </div>
-
+        <div id="live-clock" class="centered-clock">
+            <span id="reloj-fecha">Cargando fecha...</span>
+            <span id="reloj-hora"></span>
         </div>
+
+        <nav class="header-right">
+            <ul class="nav-list">
+                <li>
+                    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+                </li>
+            </ul>
+        </nav>
     </header>
 
     <main class="max-w-6xl mx-auto px-4 py-8">

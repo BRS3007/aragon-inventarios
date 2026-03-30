@@ -1876,88 +1876,61 @@ table {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
-/* Esto solo se activará en pantallas pequeñas como celulares css ingreso productos*/
-/* --- AJUSTES EXCLUSIVOS PARA CELULARES --- */
+/* --- ESTILOS ORIGINALES PARA PC DE LOS WIDGET --- */
+.main-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 10px 20px !important;
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    height: 90px !important;
+}
+
+.logo-img {
+    height: 75px !important;
+    width: auto !important;
+}
+
+.centered-clock {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #f9fafb !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+.logout-btn {
+    display: inline-block !important;
+    background-color: #dc2626 !important;
+    color: #ffffff !important;
+    padding: 10px 20px !important;
+    border-radius: 6px !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+}
+/* --- ESTILOS EXCLUSIVOS PARA CELULARES --- */
 @media (max-width: 768px) {
-    /* 1. Forzamos a que el header mande todo hacia abajo en fila */
     .main-header {
         flex-direction: column !important;
         height: auto !important;
-        padding: 15px 10px !important;
         gap: 15px !important;
+        padding: 15px !important;
         text-align: center !important;
     }
 
-    /* Centramos el logo */
-    .header-left {
-        display: flex !important;
-        justify-content: center !important;
-        width: 100% !important;
-    }
-
-    /* 2. Arreglo del Reloj: le damos aire y evitamos que se monte */
     .centered-clock {
-        /* Eliminamos cualquier posicionamiento absoluto o cajas fijas antiguas */
-        position: static !important; 
-        display: flex !important;
-        flex-direction: column !important; /* Fecha arriba, hora abajo */
-        align-items: center !important;    /* Centra horizontalmente */
-        justify-content: center !important;   /* Centra verticalmente */
-        text-align: center !important;
-        
-        /* Estilo de la caja (Sin cortes raros) */
-        background-color: #f9fafb !important;
-        padding: 10px 20px !important;
-        border-radius: 8px !important;
-        border: 1px solid #e5e7eb !important;
-        font-size: 14px !important;
-        color: #374151 !important;
-        
-        /* 🔥 Forzamos el centrado en el ancho de la pantalla */
-        width: 90% !important; 
-        max-width: 300px !important;
-        margin: 10px auto !important; /* Margen auto centrará la caja entera */
-    }
-    
-    #reloj-hora {
-        font-weight: bold !important;
-        font-size: 16px !important;
-        color: #dc2626 !important; /* Hora en rojo */
-        margin-top: 4px !important;
+        width: 90% !important;
+        max-width: 280px !important;
+        margin: 0 auto !important;
     }
 
-    /* 3. Arreglo del Botón Cerrar Sesión: lo bajamos para que no tape nada */
     .header-right {
         width: 100% !important;
         display: flex !important;
         justify-content: center !important;
-        position: static !important; /* Evita que flote sobre los iconos */
-    }
-
-    .nav-list {
-        display: flex !important;
-        justify-content: center !important;
-        width: 100% !important;
-        padding: 0 !important;
-    }
-
-    /* 4. Arreglo de la barra de usuario e iconos */
-    .user-info-bar {
-        flex-direction: column !important;
-        height: auto !important;
-        padding: 15px 10px !important;
-        gap: 12px !important;
-    }
-
-    .nav-main-horizontal {
-        justify-content: center !important;
-        flex-wrap: wrap !important; /* Si no caben los iconos, se bajan solitos */
-        gap: 15px !important;
-    }
-
-    .user-tag, .sesion-contador {
-        width: 100% !important;
-        justify-content: center !important;
-        text-align: center !important;
     }
 }

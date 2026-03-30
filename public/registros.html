@@ -24,31 +24,24 @@
 </head>
 <body class="background-login">
     <header class="main-header">
+        
         <div class="header-left">
             <a href="/ingreso-productos">
-                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
+                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
             </a>
         </div>
 
-    <div id="live-clock" style="
-            position: relative !important; 
-            display: flex !important;
-            flex-direction: column !important; 
-            align-items: center !important; 
-            justify-content: center !important; 
-            text-align: center !important;
-            background-color: #f9fafb !important;
-            padding: 10px 15px !important;
-            border-radius: 8px !important;
-            border: 1px solid #e5e7eb !important;
-            font-size: 14px !important;
-            width: 260px !important; 
-            margin: 15px auto !important;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
-        ">
-            <span id="reloj-fecha" style="color: #6b7280 !important;">Cargando fecha...</span>
-            <span id="reloj-hora" style="font-weight: bold !important; color: #dc2626 !important; font-size: 16px !important; margin-top: 2px !important;"></span>
+        <div id="live-clock" class="centered-clock">
+            <span id="reloj-fecha">Cargando fecha...</span>
+            <span id="reloj-hora"></span>
         </div>
+
+        <nav class="header-right">
+            <ul class="nav-list">
+                <li>
+                    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+                </li>
+            </ul>
 
             <ul class="nav-list">
                 <!--<li><a href="/ingreso-productos" class="nav-link" data-i18n="common.home_link">Inicio</a></li>-->
