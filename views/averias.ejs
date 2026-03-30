@@ -9,10 +9,10 @@
 
     <style>
         /* ==========================================
-           1. ESTILOS PARA PC (POR DEFECTO)
+           1. ESTILOS BASE Y PARA PC
            ========================================== */
         
-        /* Estilos del Header para que se vea horizontal en PC */
+        /* Header Horizontal */
         .main-header {
             display: flex !important;
             justify-content: space-between !important;
@@ -28,17 +28,29 @@
             width: auto !important;
         }
 
+        /* Reloj Pequeño que NO estira la barra */
         .centered-clock {
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
             justify-content: center !important;
             background-color: #f9fafb !important;
-            padding: 10px 20px !important;
-            border-radius: 8px !important;
+            padding: 5px 15px !important;
+            border-radius: 6px !important;
             border: 1px solid #e5e7eb !important;
+            height: 65px !important; /* Altura fija */
+        }
+        #reloj-fecha { 
+            font-size: 13px !important; 
+            color: #4b5563 !important; 
+        }
+        #reloj-hora { 
+            font-size: 14px !important; 
+            font-weight: bold !important; 
+            color: #dc2626 !important; 
         }
 
+        /* Botón Cerrar Sesión Rojo */
         .logout-btn {
             display: inline-block !important;
             background-color: #dc2626 !important;
@@ -47,9 +59,42 @@
             border-radius: 6px !important;
             font-weight: bold !important;
             text-decoration: none !important;
+            transition: background-color 0.2s;
+        }
+        .logout-btn:hover {
+            background-color: #b91c1c !important;
         }
 
-        /* Tus estilos originales del formulario en PC */
+        /* Barra de navegación (Widgets) simulación PC */
+        .nav-main-horizontal {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            padding: 10px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            background-color: #ffffff;
+        }
+        .nav-item {
+            text-decoration: none;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        .nav-item:hover {
+            background-color: #f3f4f6;
+        }
+        .nav-item.active {
+            color: #dc2626;
+            font-weight: bold;
+            border-bottom: 3px solid #dc2626;
+            border-radius: 6px 6px 0 0;
+        }
+
+        /* Tus estilos originales del formulario */
         .form-row {
             display: flex;
             flex-direction: row;
@@ -88,27 +133,38 @@
            2. ESTILOS PARA CELULAR (MENOS DE 768px)
            ========================================== */
         @media (max-width: 768px) {
-            /* El Header se apila en vertical y se centra */
+            /* El Header se apila en vertical */
             .main-header {
                 flex-direction: column !important;
                 height: auto !important;
-                gap: 15px !important;
+                gap: 12px !important;
                 padding: 15px !important;
                 text-align: center !important;
             }
 
-            .logo-img {
-                height: 60px !important;
-                margin: 0 auto !important;
-            }
-
             .centered-clock {
                 width: 90% !important;
-                max-width: 280px !important;
+                max-width: 250px !important;
                 margin: 0 auto !important;
             }
 
-            /* Tus estilos originales del formulario en Celular */
+            /* Los Widgets se vuelven una cuadrícula de 2x2 en celular */
+            .nav-main-horizontal {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                padding: 10px;
+            }
+            .nav-item {
+                justify-content: center;
+                background-color: #f9fafb;
+                border: 1px solid #e5e7eb;
+            }
+            .nav-item.active {
+                border: 1px solid #dc2626;
+            }
+
+            /* El formulario se pone en vertical */
             .form-row {
                 flex-direction: column;
                 gap: 15px;
@@ -122,62 +178,56 @@
         }
     </style>
 </head>
-<header class="main-header">
-        
+<body class="bg-gray-50">
+
+    <header class="main-header">
         <div class="header-left">
             <a href="/ingreso-productos">
-                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
+                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
             </a>
         </div>
 
-        <div id="live-clock" class="centered-clock">
+        <div class="centered-clock">
             <span id="reloj-fecha">Cargando fecha...</span>
             <span id="reloj-hora"></span>
         </div>
 
         <nav class="header-right">
-            <ul class="nav-list">
-                <li>
-                    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
-                </li>
-            </ul>
+            <a href="/logout" class="logout-btn">Cerrar Sesión</a>
         </nav>
     </header>
 
-    <div class="user-info-bar" style="margin-top: 20px;">
-    <nav class="header-nav">
-        <ul class="nav-main-horizontal">
-            <li>
-                <a href="/ingreso-productos" class="nav-item">
-                    <span class="nav-icon">📥</span>
-                    <span class="nav-text">Ingreso de Productos</span>
-                </a>
-            </li>
-            <li>
-                <a href="/averias" class="nav-item active" style="border-bottom: 3px solid #dc2626; font-weight: bold; color: #dc2626;">
-                    <span class="nav-icon">⚠️</span>
-                    <span class="nav-text">Reportar Avería</span>
-                </a>
-            </li>
-            <li>
-                <a href="/registros" class="nav-item">
-                    <span class="nav-icon">📋</span>
-                    <span class="nav-text">Ingresos Realizados</span>
-                </a>
-            </li>
-            <li>
-                <a href="/subir" class="nav-item">
-                    <span class="nav-icon">🚀</span>
-                    <span class="nav-text">Importar</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <div class="user-info-bar">
+        <nav class="header-nav">
+            <ul class="nav-main-horizontal">
+                <li>
+                    <a href="/ingreso-productos" class="nav-item">
+                        <span>📥</span> Ingreso
+                    </a>
+                </li>
+                <li>
+                    <a href="/averias" class="nav-item active">
+                        <span>⚠️</span> Averías
+                    </a>
+                </li>
+                <li>
+                    <a href="/registros" class="nav-item">
+                        <span>📋</span> Registros
+                    </a>
+                </li>
+                <li>
+                    <a href="/subir" class="nav-item">
+                        <span>🚀</span> Importar
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
-    <div class="user-tag">
-            <i class="fa-solid fa-circle-user" style="color: red;"></i>
-            <span id="nombre-usuario-display">Cargando...</span>
+        <div class="px-5 py-2 text-sm text-gray-600 flex items-center gap-2">
+            <i class="fa-solid fa-circle-user text-red-600"></i>
+            <span>Hola: <strong>claudia</strong></span>
         </div>
+    </div>
 
     <main class="max-w-6xl mx-auto px-4 py-8">
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-200">
@@ -186,23 +236,23 @@
                 <h2 class="text-3xl font-bold text-gray-900">Reportar Avería de Producto</h2>
             </div>
 
-            <form id="form-reportar-averia" class="form-grid">
+            <form id="form-reportar-averia">
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="codigo_de_barras_averia" data-i18n="averias:barcode_label">Código de Barras:</label>
+                        <label for="codigo_de_barras_averia">Código de Barras:</label>
                         <input type="text" id="codigo_de_barras_averia" name="codigo_de_barras" required>
                         <small class="help-text">Introduce el código de barras del producto.</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="cantidad_averia" data-i18n="averias:quantity_label">Cantidad:</label>
+                        <label for="cantidad_averia">Cantidad:</label>
                         <input type="number" id="cantidad_averia" name="cantidad" min="1" value="1" required>
                         <small class="help-text">Indica la cantidad que se descontará del stock.</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="descripcion_producto_averia" data-i18n="averias:product_description_label">Descripción:</label>
+                        <label for="descripcion_producto_averia">Descripción:</label>
                         <input type="text" id="descripcion_producto_averia" name="descripcion_producto" class="bg-gray-100" readonly>
                         <small class="help-text">Se autocompletará automáticamente.</small>
                     </div>
@@ -210,23 +260,23 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="descripcion_averia" data-i18n="averias:damage_description_label">Motivo de Avería:</label>
+                        <label for="descripcion_averia">Motivo de Avería:</label>
                         <input type="text" id="descripcion_averia" name="descripcion_averia" required>
                         <small class="help-text">Detalla el daño (ej: empaque roto).</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="fecha_averia" data-i18n="averias:damage_date_label">Fecha:</label>
+                        <label for="fecha_averia">Fecha:</label>
                         <input type="date" id="fecha_averia" name="fecha_averia" required>
                         <small class="help-text">Selecciona la fecha del reporte.</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="estado_averia" data-i18n="averias:status_label">Estado:</label>
+                        <label for="estado_averia">Estado:</label>
                         <select id="estado_averia" name="estado" required>
-                            <option value="Pendiente" data-i18n="averias:status_pending">Pendiente</option>
-                            <option value="En Revisión" data-i18n="averias:status_in_review">En Revisión</option>
-                            <option value="Descartado" data-i18n="averias:status_discarded">Descartado</option>
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="En Revisión">En Revisión</option>
+                            <option value="Descartado">Descartado</option>
                         </select>
                         <small class="help-text">Estado actual del proceso.</small>
                     </div>
@@ -247,9 +297,20 @@
     <script>
         function actualizarReloj() {
             const ahora = new Date();
-            const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            const textoFinal = ahora.toLocaleDateString('es-ES', opciones).replace(',', '');
-            document.getElementById('reloj-vivo').innerText = textoFinal;
+            
+            // Opciones para la fecha
+            const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const fechaTexto = ahora.toLocaleDateString('es-ES', opcionesFecha).replace(',', '');
+            
+            // Opciones para la hora
+            const horas = String(ahora.getHours()).padStart(2, '0');
+            const minutos = String(ahora.getMinutes()).padStart(2, '0');
+            const segundos = String(ahora.getSeconds()).padStart(2, '0');
+            const horaTexto = `${horas}:${minutos}:${segundos}`;
+            
+            // Inyectamos el texto en las etiquetas correspondientes
+            document.getElementById('reloj-fecha').textContent = fechaTexto;
+            document.getElementById('reloj-hora').textContent = horaTexto;
         }
         actualizarReloj();
         setInterval(actualizarReloj, 1000);
