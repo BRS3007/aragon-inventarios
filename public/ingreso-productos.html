@@ -23,21 +23,48 @@
 </head>
 <header class="main-header">
         
-        <div class="header-left">
-            <a href="/ingreso-productos">
+        <div class="flex flex-col items-center md:items-start">
                 <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
-            </a>
-        </div>
+            </div>
 
-        <div id="live-clock" class="centered-clock">
-            <span id="reloj-fecha">Cargando fecha...</span>
-            <span id="reloj-hora"></span>
+        <div id="live-clock" style="
+            position: relative !important; 
+            display: flex !important;
+            flex-direction: column !important; 
+            align-items: center !important; 
+            justify-content: center !important; 
+            text-align: center !important;
+            background-color: #f9fafb !important;
+            padding: 10px 15px !important;
+            border-radius: 8px !important;
+            border: 1px solid #e5e7eb !important;
+            font-size: 14px !important;
+            width: 260px !important; 
+            margin: 15px auto !important;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+        ">
+            <span id="reloj-fecha" style="color: #6b7280 !important;">Cargando fecha...</span>
+            <span id="reloj-hora" style="font-weight: bold !important; color: #dc2626 !important; font-size: 16px !important; margin-top: 2px !important;"></span>
         </div>
 
         <nav class="header-right">
-            <ul class="nav-list">
-                <li>
-                    <a href="/logout" class="nav-link logout-btn">Cerrar Sesión</a>
+            <ul class="nav-list" style="list-style: none; padding: 0; margin: 0;">
+                <li style="display: flex; justify-content: center;">
+                    <a href="/logout" style="
+                        display: inline-block !important;
+                        background-color: #dc2626 !important; /* Rojo Intenso */
+                        color: #ffffff !important; /* Letras Blancas */
+                        padding: 10px 20px !important;
+                        border-radius: 6px !important;
+                        font-weight: bold !important;
+                        text-decoration: none !important;
+                        font-size: 14px !important;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+                        text-align: center !important;
+                        min-width: 120px !important;
+                    ">
+                        🚪 <span style="color: #ffffff !important;" data-i18n="common.logout_button">Cerrar Sesión</span>
+                    </a>
                 </li>
             </ul>
         </nav>
