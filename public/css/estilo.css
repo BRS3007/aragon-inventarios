@@ -375,6 +375,11 @@ main{
 /* ===================================================
    1. ESTILOS BASE Y CONTENEDOR (GLOBALES)
    =================================================== */
+:root {
+    --rojo-aragon: #ff1908;
+    --rojo-oscuro: #d11405;
+}
+
 body.background-ingreso-productos {
     background-image: url('../assets/images/herramientas.png'); 
     background-size: cover;
@@ -384,6 +389,7 @@ body.background-ingreso-productos {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    color: #333;
 }
 
 main.container {
@@ -392,28 +398,25 @@ main.container {
     margin: 0;
     padding: 30px;
     box-sizing: border-box; 
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
 }
 
 .page-title {
     margin-bottom: 20px;
     font-weight: bold;
-    color: #333;
 }
 
-/* Forzamos el uso de Flexbox por defecto */
-.main-header, .user-info-bar, .nav-main-horizontal, .header-content {
+/* Forzamos Flexbox */
+.main-header, .header-content, .header-center, .user-controls-top {
     display: flex;
     align-items: center;
 }
 
 
 /* ===================================================
-   2. REGLAS ESPECÍFICAS PARA ESCRITORIO (PC - Pantallas > 768px)
+   2. REGLAS PARA ESCRITORIO (PC - Pantallas > 768px)
    =================================================== */
 @media screen and (min-width: 768px) {
     
@@ -422,143 +425,216 @@ main.container {
         width: 100%;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 10px 20px;
+        padding: 15px 20px; /* Más padding para PC */
         box-sizing: border-box;
     }
 
     .main-header {
         background-color: white;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         width: 100%;
         position: sticky; 
         top: 0;
         z-index: 100; 
     }
 
+    /* LOGO MÁS GRANDE EN PC */
     .app-logo {
-        height: 60px;
+        height: 80px; /* Agrandado de 60px a 80px */
         width: auto;
-    }
-
-    /* Efecto Holograma en el Logo (Cambiado a Rojo Neón) */
-    .header-left img {
         transition: all 0.5s ease;
-        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2));
     }
 
-    .header-left img:hover, 
-    .header-left img:active {
-        transform: scale(1.1) translateZ(30px);
-        filter: brightness(1.2) contrast(1.1) drop-shadow(0 0 10px rgba(255, 25, 8, 0.7));
-        cursor: pointer;
+    /* Efecto Holograma en el Logo */
+    .header-left img:hover {
+        transform: scale(1.05) translateZ(10px);
+        filter: brightness(1.1) drop-shadow(0 0 10px rgba(255, 25, 8, 0.5));
+    }
+
+    .header-center {
+        flex-direction: column; /* Apilamos reloj y usuario en PC */
+        gap: 5px;
     }
 
     .centered-clock {
-        text-align: center;
-        flex-grow: 1;
         font-size: 1.1em;
     }
     
     #reloj-hora {
-        color: #ff1908;
+        color: var(--rojo-aragon);
         font-weight: bold;
         margin-left: 10px;
+    }
+
+    .user-controls-top {
+        gap: 15px;
+        font-size: 0.9em;
+        font-weight: bold;
+    }
+
+    .user-tag i, .notificacion-contenedor i {
+        color: var(--rojo-aragon);
     }
 
     .nav-list {
         list-style: none;
         margin: 0;
         padding: 0;
-        display: flex;
     }
 
     .logout-btn {
-        color: #ff1908;
+        color: var(--rojo-aragon);
         text-decoration: none;
         padding: 10px 15px;
         font-weight: bold;
-        transition: all 0.3s ease;
         border-radius: 4px;
-        border: 1px solid #ff1908;
-    }
-
-    .logout-btn:hover {
-        background-color: #ff1908;
-        color: white;
-    }
-
-    /* Barra gris secundaria de usuario */
-    .user-info-bar {
-        background-color: #ffffff;
-        border-bottom: 1px solid #eaeaea;
-        padding: 10px 20px;
-        justify-content: space-between;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .nav-main-horizontal {
-        gap: 20px;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .nav-item {
-        text-decoration: none;
-        color: #555;
-        font-weight: bold;
+        border: 1px solid var(--rojo-aragon);
         display: flex;
         align-items: center;
         gap: 8px;
-        transition: color 0.3s;
     }
 
-    .nav-item:hover, .nav-item.active {
-        color: #ff1908;
-    }
-
-    .user-controls {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .sesion-contador {
-        font-weight: bold;
-        color: #555;
-    }
-
-    .user-tag {
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .notificacion-contenedor {
-        position: relative;
-        cursor: pointer;
-        font-size: 1.3em;
-        color: #ff1908;
-    }
-    
-    .badge {
-        position: absolute;
-        top: -8px;
-        right: -8px;
-        background-color: #000;
+    .logout-btn:hover {
+        background-color: var(--rojo-aragon);
         color: white;
-        font-size: 10px;
-        padding: 2px 6px;
-        border-radius: 50%;
+    }
+
+    /* Ocultamos la barra inferior en PC */
+    .user-info-bar {
+        display: none !important;
     }
 }
 
 
 /* ===================================================
-   3. FORMULARIO DE INGRESO DE PRODUCTOS
+   3. REGLAS EXCLUSIVAS PARA CELULAR VERTICAL (< 768px)
+   =================================================== */
+@media screen and (max-width: 768px) {
+    
+    body {
+        padding-bottom: 80px !important; /* Espacio para el menú inferior */
+    }
+
+    .main-header {
+        background-color: white;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .header-content {
+        justify-content: space-between;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* LOGO MÁS GRANDE EN MÓVIL */
+    .app-logo {
+        height: 55px; /* Agrandado de 45px a 55px */
+        width: auto;
+    }
+
+    /* Mostramos Reloj y Usuario arriba en el header */
+    .header-center {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        font-size: 12px;
+    }
+
+    #reloj-fecha {
+        display: none; /* Ocultamos la fecha larga */
+    }
+
+    #reloj-hora {
+        color: var(--rojo-aragon);
+        font-weight: bold;
+    }
+
+    .user-controls-top {
+        display: flex !important;
+        gap: 8px;
+        font-weight: bold;
+    }
+
+    .user-tag i {
+        color: var(--rojo-aragon);
+    }
+
+    /* Botón cerrar sesión compacto */
+    .logout-btn {
+        color: var(--rojo-aragon);
+        text-decoration: none;
+        font-size: 18px; /* Solo icono grande */
+    }
+
+    .text-logout {
+        display: none; /* Ocultamos el texto */
+    }
+
+    /* BARRA INFERIOR CORREGIDA (No se corta) */
+    .user-info-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        background-color: #ffffff;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: center; /* Centramos el contenido */
+        padding: 10px 0;
+    }
+
+    .header-nav {
+        width: 100%;
+        max-width: 400px; /* Limitamos ancho para que no se estiren los iconos */
+    }
+
+    .nav-main-horizontal {
+        display: flex;
+        justify-content: space-around; /* Repetimos espacio uniforme */
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .nav-item {
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+        text-decoration: none;
+        color: #555;
+        /* CORRECCIÓN: Evitamos que el texto se corte o empuje */
+        flex: 1; 
+        min-width: 0; 
+        text-align: center;
+    }
+
+    .nav-item.active {
+        color: var(--rojo-aragon);
+    }
+
+    .nav-icon {
+        font-size: 22px !important; /* Iconos un poco más grandes */
+        margin-bottom: 4px;
+    }
+
+    .nav-text {
+        font-size: 10px; /* Texto pequeño y controlado */
+        white-space: nowrap; /* Evita que salte de línea */
+        overflow: hidden; /* Corta si es muy largo (no debería con estos textos) */
+        text-overflow: ellipsis; 
+        width: 100%;
+    }
+}
+
+
+/* ===================================================
+   4. ESTILOS DEL FORMULARIO (Se mantienen igual)
    =================================================== */
 #form-ingreso-productos {
     display: flex; 
@@ -571,7 +647,7 @@ main.container {
     background-color: rgba(255, 255, 255, 0.96); 
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     box-sizing: border-box;
 }
 
@@ -580,23 +656,17 @@ main.container {
     flex-direction: column; 
     margin-bottom: 5px; 
     box-sizing: border-box;
-    flex: 1 1 100%; /* Por defecto en móviles: 1 columna */
+    flex: 1 1 100%;
 }
 
-/*Inputs*/
-.form-group input[type="text"],
-.form-group input[type="number"],
-.form-group input[type="date"],
-.form-group textarea,
-.form-group select { 
+.form-group input, .form-group textarea, .form-group select { 
     width: 100%; 
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 6px; 
     font-size: 1em;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
     box-sizing: border-box; 
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition: all 0.3s;
 }
 
 .form-group label {
@@ -607,33 +677,12 @@ main.container {
     text-align: left;
 }
 
-.form-group textarea {
-    height: 44px; 
-    min-height: 44px; 
-    max-height: 100px; 
-    resize: vertical; 
-}
-
-/* Focus en color Rojo */
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus { 
-    border-color: #ff1908; 
-    box-shadow: 0 0 8px rgba(255, 25, 8, 0.25);
+.form-group input:focus { 
+    border-color: var(--rojo-aragon); 
+    box-shadow: 0 0 8px rgba(255, 25, 8, 0.2);
     outline: none;
 }
 
-.help-text {
-    font-size: 11px;
-    color: #6c757d;
-    margin-top: 4px;
-    text-align: left;
-}
-
-
-/* ===================================================
-   4. ESTILOS PARA LOS BOTONES
-   =================================================== */
 #form-ingreso-productos button {
     cursor: pointer;
     font-size: 1em;
@@ -642,167 +691,30 @@ main.container {
     border: none;
     border-radius: 6px;
     transition: all 0.3s ease;
-    box-sizing: border-box;
-    flex: 1 1 100%; /* Ancho completo en móviles */
+    flex: 1 1 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
 }
 
-/* Botón Guardar (Rojo) */
-#form-ingreso-productos button[type="submit"] {
-    background-color: #ff1908;
+button[type="submit"] {
+    background-color: var(--rojo-aragon);
     color: white;
 }
 
-#form-ingreso-productos button[type="submit"]:hover {
-    background-color: #d11405;
-    box-shadow: 0 4px 10px rgba(255, 25, 8, 0.3);
+button[type="submit"]:hover {
+    background-color: var(--rojo-oscuro);
 }
 
-/* Botón Limpiar */
-#form-ingreso-productos .btn-limpiar {
+.btn-limpiar {
     background-color: #f8f9fa;
     color: #495057;
     border: 1px solid #ced4da;
 }
 
-#form-ingreso-productos .btn-limpiar:hover {
-    background-color: #e2e6ea;
-    color: #212529;
-}
-
-/* Ajuste de columnas para PC */
 @media screen and (min-width: 768px) {
-    .form-group {
-        flex: 1 1 calc(33.33% - 13.33px); 
-        min-width: 200px; 
-    }
-    
-    #form-ingreso-productos button {
-        flex: 0 1 auto;
-        min-width: 180px;
-    }
-    
-    #form-ingreso-productos {
-        justify-content: flex-end; 
-    }
-}
-
-
-/* ===================================================
-   5. REGLAS EXCLUSIVAS PARA CELULAR VERTICAL (< 768px)
-   =================================================== */
-@media screen and (max-width: 768px) {
-    
-    body {
-        padding-bottom: 80px !important; /* Espacio para el menú inferior */
-    }
-
-    .header-content {
-        justify-content: space-between;
-        padding: 10px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .app-logo {
-        height: 45px;
-    }
-
-    #live-clock {
-        display: none !important;
-    }
-
-    .logout-btn {
-        color: #ff1908;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 14px;
-    }
-
-    /* Barra inferior estilo App */
-    .user-info-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        z-index: 999;
-        background-color: #ffffff;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        padding: 10px 0;
-    }
-
-    .header-nav {
-        width: 100%;
-    }
-
-    .nav-main-horizontal {
-        justify-content: space-around;
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-    }
-
-    .nav-item {
-        display: flex;
-        flex-direction: column; 
-        align-items: center;
-        font-size: 11px;
-        text-decoration: none;
-        color: #555;
-    }
-
-    .nav-item.active {
-        color: #ff1908;
-    }
-
-    .nav-icon {
-        font-size: 20px !important;
-        margin-bottom: 3px;
-    }
-
-    /* Mantenemos visibles el usuario y la campana flotando */
-    .user-controls {
-        display: none !important; /* Escondidos para optimizar espacio */
-    }
-}
-
-
-/* ===================================================
-   6. SOLUCIÓN PARA CELULAR HORIZONTAL (Pantallas bajas)
-   =================================================== */
-@media screen and (max-height: 500px) and (max-width: 900px) {
-    
-    .user-info-bar {
-        display: none !important;
-    }
-
-    .main-header {
-        position: static; 
-    }
-
-    .header-content {
-        display: flex;
-        justify-content: space-between;
-        padding: 5px 10px;
-    }
-
-    .app-logo {
-        height: 35px;
-    }
-
-    #live-clock {
-        display: block !important;
-        font-size: 0.9em;
-    }
-
-    #reloj-fecha {
-        display: none; 
-    }
+    .form-group { flex: 1 1 calc(33.33% - 13.33px); min-width: 200px; }
+    #form-ingreso-productos button { flex: 0 1 auto; min-width: 180px; }
+    #form-ingreso-productos { justify-content: flex-end; }
 }
