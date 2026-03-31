@@ -373,76 +373,309 @@ main{
     white-space: nowrap;
 }
 /* ===================================================
-   ESTILOS EXCLUSIVOS PARA MÓVILES (PANTALLAS PEQUEÑAS) PANTALLA INGRESO
+   1. ESTILOS GENERALES Y CONTENEDOR PRINCIPAL
    =================================================== */
+body.background-ingreso-productos {
+    background-image: url('../assets/images/herramientas.png'); /* Ruta corregida asumiendo que css/ está al mismo nivel que assets/ */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 30px;
+    border-radius: 0;
+    box-shadow: none;
+    box-sizing: border-box; 
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Espacio extra al fondo en móviles para que la barra no tape el formulario */
 @media screen and (max-width: 768px) {
-  
-  /* 1. Ocultar el reloj en celulares para que no choque con el logo */
-  #live-clock {
-    display: none !important;
-  }
+    body {
+        padding-bottom: 80px !important;
+    }
+}
 
-  /* 2. Reducir un poco el tamaño gigante del logo para que quepa bien en el header */
-  .header-left img {
-    height: 50px !important; 
-    width: auto;
-  }
 
-  /* 3. Hacer que el header distribuya bien el logo y el botón de cerrar sesión */
-  .main-header {
+/* ===================================================
+   2. HEADER Y NAVEGACIÓN (CON EFECTO HOLOGRAMA)
+   =================================================== */
+.main-header {
+    background-color: white;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    width: 100%;
+    position: sticky; 
+    top: 0;
+    z-index: 100; 
+}
+
+.main-nav, .header-left, .header-right {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-  }
-
-  /* 4. Convertir la barra de usuario en un menú inferior cómodo para el pulgar */
-  .user-info-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
     width: 100%;
-    z-index: 999;
-    background-color: #ffffff;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 8px 0;
-  }
+}
 
-  /* Forzamos a que los links se vean verticales: icono arriba y texto abajo */
-  .nav-main-horizontal {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    padding: 0;
+/* Reducción controlada del logo en PC */
+.app-logo {
+    height: 60px;
+    width: auto;
+}
+
+/* Efecto Holograma en el Logo */
+.logo-container {
+    display: inline-block;
+    perspective: 1000px;
+}
+
+.logo-container img {
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2));
+}
+
+.logo-container img:hover, 
+.logo-container img:active {
+    transform: scale(1.1) translateZ(30px);
+    filter: brightness(1.2) contrast(1.1) drop-shadow(0 0 10px rgba(0, 123, 255, 0.6));
+    cursor: pointer;
+}
+
+/* Lista de navegación superior */
+.nav-list {
+    list-style: none;
     margin: 0;
-  }
-
-  .nav-item {
+    padding: 0;
     display: flex;
-    flex-direction: column; /* Apilados verticalmente */
     align-items: center;
-    font-size: 11px; /* Letra pequeña para que quepa */
+}
+
+.nav-list li {
+    margin-left: 20px;
+}
+
+.logout-btn {
+    color: #ff1908;
     text-decoration: none;
-    color: #555;
-  }
+    padding: 10px 15px;
+    display: block;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
 
-  /* Hacemos que los iconos de navegación se vean más grandes y cómodos para tocar */
-  .nav-icon {
-    font-size: 20px !important;
-    margin-bottom: 3px;
-  }
+.logout-btn:hover {
+    background-color: #f8f9fa;
+    color: #d11405;
+}
 
-  /* 5. Ocultamos detalles secundarios de la barra para no saturar la pantalla del móvil */
-  .sesion-contador, 
-  .user-tag {
-    display: none !important;
-  }
 
-  /* 6. Espacio en blanco al final de la app para que el menú fijo no tape el formulario */
-  body {
-    padding-bottom: 70px !important;
-  }
+/* ===================================================
+   3. FORMULARIO DE INGRESO DE PRODUCTOS
+   =================================================== */
+#form-ingreso-productos {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+    gap: 20px; 
+    width: 100%; 
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: rgba(255, 255, 255, 0.96); /* Fondo semi-transparente para leer bien sobre la imagen */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column; 
+    margin-bottom: 5px; 
+    box-sizing: border-box;
+    flex: 1 1 100%; /* Por defecto en móviles: 1 columna al 100% */
+}
+
+/* Inputs y Selects */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group select { 
+    width: 100%; 
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px; 
+    font-size: 1em;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    box-sizing: border-box; 
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+    font-size: 0.95em;
+}
+
+.form-group textarea {
+    height: 44px; 
+    min-height: 44px; 
+    max-height: 100px; 
+    resize: vertical; 
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus { 
+    border-color: #007bff; 
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.help-text {
+    font-size: 11px;
+    color: #6c757d;
+    margin-top: 4px;
+}
+
+
+/* ===================================================
+   4. ESTILOS PARA LOS BOTONES
+   =================================================== */
+#form-ingreso-productos button {
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    flex: 1 1 100%; /* Ancho completo en móviles */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Botón Guardar */
+#form-ingreso-productos button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+}
+
+#form-ingreso-productos button[type="submit"]:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* Botón Limpiar */
+#form-ingreso-productos .btn-limpiar {
+    background-color: #f8f9fa;
+    color: #495057;
+    border: 1px solid #ced4da;
+}
+
+#form-ingreso-productos .btn-limpiar:hover {
+    background-color: #e2e6ea;
+    color: #212529;
+}
+
+
+/* ===================================================
+   5. REGLAS EXCLUSIVAS PARA PC (PANTALLAS GRANDES)
+   =================================================== */
+@media screen and (min-width: 768px) {
+    
+    /* El formulario vuelve a sus 3 columnas originales */
+    .form-group {
+        flex: 1 1 calc(33.33% - 13.33px); 
+        min-width: 200px; 
+    }
+    
+    /* Los botones dejan de ser gigantes y se alinean a la derecha */
+    #form-ingreso-productos button {
+        flex: 0 1 auto;
+        min-width: 180px;
+    }
+    
+    #form-ingreso-productos {
+        justify-content: flex-end; /* Empuja botones a la derecha */
+    }
+}
+
+
+/* ===================================================
+   6. REGLAS EXCLUSIVAS PARA MÓVILES (BARRA INFERIOR)
+   =================================================== */
+@media screen and (max-width: 768px) {
+    
+    /* Ocultar el reloj en móviles para dar espacio */
+    #live-clock {
+        display: none !important;
+    }
+    
+    /* Reducir logo en celular */
+    .app-logo {
+        height: 45px;
+    }
+
+    /* Convertir la barra gris en un menú inferior cómodo */
+    .user-info-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        background-color: #ffffff;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 8px 0;
+    }
+
+    .nav-main-horizontal {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-item {
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+        font-size: 11px;
+        text-decoration: none;
+        color: #555;
+    }
+
+    .nav-icon {
+        font-size: 20px !important;
+        margin-bottom: 3px;
+    }
+
+    /* Ocultamos detalles secundarios de la barra para no saturar */
+    .sesion-contador, 
+    .user-tag {
+        display: none !important;
+    }
 }
