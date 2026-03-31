@@ -23,6 +23,7 @@
 
     <header class="main-header">
         <div class="header-content">
+            
             <div class="header-left">
                 <a href="/ingreso-productos">
                     <img src="favicons/android-chrome-192x192.png" alt="Logo" class="app-logo">
@@ -31,36 +32,33 @@
 
             <div class="header-center">
                 <div id="live-clock" class="centered-clock">
-                    <span id="reloj-fecha">Cargando fecha...</span>
-                    <span id="reloj-hora"></span>
+                    <span id="reloj-fecha">Lunes, 30 de marzo de 2026</span>
+                    <span id="reloj-hora">11:20:38 p. m.</span>
                 </div>
                 
-                <div class="user-controls-top">
+                <div class="user-status-bar">
                     <div class="user-tag">
                         <i class="fa-solid fa-circle-user"></i>
                         <span id="nombre-usuario-display">Cargando...</span>
                     </div>
                     <div class="notificacion-contenedor admin-only" onclick="abrirModalAprobaciones()">
                         <i class="fa-solid fa-bell"></i>
-                        <span id="contador-badge" class="badge" style="display: none;">0</span>
+                        <span id="contador-badge" class="badge">0</span>
                     </div>
                 </div>
             </div>
 
             <div class="header-right">
-                <ul class="nav-list">
-                    <li>
-                        <a href="/logout" class="logout-btn">
-                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                            <span class="text-logout">Cerrar Sesión</span>
-                        </a>
-                    </li>
-                </ul>
+                <a href="/logout" class="logout-btn">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span class="text-logout">Cerrar Sesión</span>
+                </a>
             </div>
+            
         </div>
     </header>
 
-    <div class="user-info-bar">
+    <div class="mobile-nav-bar">
         <nav class="header-nav">
             <ul class="nav-main-horizontal">
                 <li>
