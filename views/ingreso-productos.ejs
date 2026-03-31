@@ -16,78 +16,91 @@
     <link rel="icon" href="favicons/android-chrome-192x192.png" type="image/x-icon"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/header.css">
     <link href="/dist/output.css" rel="stylesheet">
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="header-content">
-            
-            <div class="header-left">
-                <a href="/ingreso-productos">
-                    <img src="favicons/android-chrome-192x192.png" alt="Logo" class="app-logo">
-                </a>
-            </div>
-
-            <div class="header-center">
-                <div id="live-clock" class="centered-clock">
-                    <span id="reloj-fecha">Lunes, 30 de marzo de 2026</span>
-                    <span id="reloj-hora">11:20:38 p. m.</span>
-                </div>
-                
-                <div class="user-status-bar">
-                    <div class="user-tag">
-                        <i class="fa-solid fa-circle-user"></i>
-                        <span id="nombre-usuario-display">Cargando...</span>
-                    </div>
-                    <div class="notificacion-contenedor admin-only" onclick="abrirModalAprobaciones()">
-                        <i class="fa-solid fa-bell"></i>
-                        <span id="contador-badge" class="badge">0</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="header-right">
-                <a href="/logout" class="logout-btn">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                    <span class="text-logout">Cerrar Sesión</span>
-                </a>
-            </div>
-            
+    <header class="hdr-corporativo">
+    <div class="hdr-contenedor">
+        
+        <div class="hdr-logo">
+            <a href="/ingreso-productos">
+                <img src="favicons/android-chrome-192x192.png" alt="Logo">
+            </a>
         </div>
-    </header>
 
-    <div class="mobile-nav-bar">
-        <nav class="header-nav">
-            <ul class="nav-main-horizontal">
+        <nav class="hdr-nav pc-only">
+            <ul class="hdr-menu">
                 <li>
-                    <a href="/ingreso-productos" class="nav-item active">
-                        <i class="fa-solid fa-arrow-down-long nav-icon"></i>
-                        <span class="nav-text">Ingreso</span>
+                    <a href="/ingreso-productos" class="menu-item active">
+                        <i class="fa-solid fa-arrow-down-long"></i> Ingreso
                     </a>
                 </li>
                 <li>
-                    <a href="/averias" class="nav-item">
-                        <i class="fa-solid fa-triangle-exclamation nav-icon"></i>
-                        <span class="nav-text">Averías</span>
+                    <a href="/averias" class="menu-item">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Averías
                     </a>
                 </li>
                 <li class="admin-only">
-                    <a href="/registros" class="nav-item">
-                        <i class="fa-solid fa-clipboard-list nav-icon"></i>
-                        <span class="nav-text">Registros</span>
+                    <a href="/registros" class="menu-item">
+                        <i class="fa-solid fa-clipboard-list"></i> Registros
                     </a>
                 </li>
                 <li class="admin-only">
-                    <a href="/subir" class="nav-item">
-                        <i class="fa-solid fa-rocket nav-icon"></i>
-                        <span class="nav-text">Importar</span>
+                    <a href="/subir" class="menu-item">
+                        <i class="fa-solid fa-rocket"></i> Importar
                     </a>
                 </li>
             </ul>
         </nav>
+
+        <div class="hdr-derecha">
+            
+            <div class="hdr-reloj pc-only">
+                <span id="reloj-fecha">Lunes, 30 de marzo de 2026</span>
+                <span id="reloj-hora">11:40:35 p. m.</span>
+            </div>
+
+            <div class="hdr-usuario">
+                <div class="usr-tag">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span id="nombre-usuario-display">Hola: claudia</span>
+                </div>
+                <div class="notif-campana admin-only" onclick="abrirModalAprobaciones()">
+                    <i class="fa-solid fa-bell"></i>
+                    <span id="contador-badge" class="badge-rojo">0</span>
+                </div>
+            </div>
+
+            <a href="/logout" class="btn-salir">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span class="btn-texto">Cerrar Sesión</span>
+            </a>
+        </div>
+        
     </div>
+</header>
+
+<div class="mobile-bottom-nav">
+    <a href="/ingreso-productos" class="mob-item active">
+        <i class="fa-solid fa-arrow-down-long"></i>
+        <span>Ingreso</span>
+    </a>
+    <a href="/averias" class="mob-item">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>Averías</span>
+    </a>
+    <a href="/registros" class="mob-item admin-only">
+        <i class="fa-solid fa-clipboard-list"></i>
+        <span>Registros</span>
+    </a>
+    <a href="/subir" class="mob-item admin-only">
+        <i class="fa-solid fa-rocket"></i>
+        <span>Importar</span>
+    </a>
+</div>
 
         <div class="user-controls">
             <div class="sesion-contador">
