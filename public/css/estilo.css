@@ -373,25 +373,24 @@ main{
     white-space: nowrap;
 }
 /* ===================================================
-   1. ESTILOS GENERALES Y CONTENEDOR PRINCIPAL
+   1. ESTILOS BASE Y CONTENEDOR (GLOBALES)
    =================================================== */
 body.background-ingreso-productos {
-    background-image: url('../assets/images/herramientas.png'); /* Ruta corregida asumiendo que css/ está al mismo nivel que assets/ */
+    background-image: url('../assets/images/herramientas.png'); 
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
 }
 
-main {
+main.container {
     width: 100%;
     max-width: none;
     margin: 0;
     padding: 30px;
-    border-radius: 0;
-    box-shadow: none;
     box-sizing: border-box; 
     flex-grow: 1;
     display: flex;
@@ -400,88 +399,161 @@ main {
     justify-content: flex-start;
 }
 
-/* Espacio extra al fondo en móviles para que la barra no tape el formulario */
-@media screen and (max-width: 768px) {
-    body {
-        padding-bottom: 80px !important;
-    }
+.page-title {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Forzamos el uso de Flexbox por defecto */
+.main-header, .user-info-bar, .nav-main-horizontal, .header-content {
+    display: flex;
+    align-items: center;
 }
 
 
 /* ===================================================
-   2. HEADER Y NAVEGACIÓN (CON EFECTO HOLOGRAMA)
+   2. REGLAS ESPECÍFICAS PARA ESCRITORIO (PC - Pantallas > 768px)
    =================================================== */
-.main-header {
-    background-color: white;
-    padding: 10px 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    width: 100%;
-    position: sticky; 
-    top: 0;
-    z-index: 100; 
-}
+@media screen and (min-width: 768px) {
+    
+    .header-content {
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 10px 20px;
+        box-sizing: border-box;
+    }
 
-.main-nav, .header-left, .header-right {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    box-sizing: border-box;
-    width: 100%;
-}
+    .main-header {
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        width: 100%;
+        position: sticky; 
+        top: 0;
+        z-index: 100; 
+    }
 
-/* Reducción controlada del logo en PC */
-.app-logo {
-    height: 60px;
-    width: auto;
-}
+    .app-logo {
+        height: 60px;
+        width: auto;
+    }
 
-/* Efecto Holograma en el Logo */
-.logo-container {
-    display: inline-block;
-    perspective: 1000px;
-}
+    /* Efecto Holograma en el Logo (Cambiado a Rojo Neón) */
+    .header-left img {
+        transition: all 0.5s ease;
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2));
+    }
 
-.logo-container img {
-    transition: all 0.5s ease;
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2));
-}
+    .header-left img:hover, 
+    .header-left img:active {
+        transform: scale(1.1) translateZ(30px);
+        filter: brightness(1.2) contrast(1.1) drop-shadow(0 0 10px rgba(255, 25, 8, 0.7));
+        cursor: pointer;
+    }
 
-.logo-container img:hover, 
-.logo-container img:active {
-    transform: scale(1.1) translateZ(30px);
-    filter: brightness(1.2) contrast(1.1) drop-shadow(0 0 10px rgba(0, 123, 255, 0.6));
-    cursor: pointer;
-}
+    .centered-clock {
+        text-align: center;
+        flex-grow: 1;
+        font-size: 1.1em;
+    }
+    
+    #reloj-hora {
+        color: #ff1908;
+        font-weight: bold;
+        margin-left: 10px;
+    }
 
-/* Lista de navegación superior */
-.nav-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-}
+    .nav-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
 
-.nav-list li {
-    margin-left: 20px;
-}
+    .logout-btn {
+        color: #ff1908;
+        text-decoration: none;
+        padding: 10px 15px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        border-radius: 4px;
+        border: 1px solid #ff1908;
+    }
 
-.logout-btn {
-    color: #ff1908;
-    text-decoration: none;
-    padding: 10px 15px;
-    display: block;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    border-radius: 4px;
-}
+    .logout-btn:hover {
+        background-color: #ff1908;
+        color: white;
+    }
 
-.logout-btn:hover {
-    background-color: #f8f9fa;
-    color: #d11405;
+    /* Barra gris secundaria de usuario */
+    .user-info-bar {
+        background-color: #ffffff;
+        border-bottom: 1px solid #eaeaea;
+        padding: 10px 20px;
+        justify-content: space-between;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .nav-main-horizontal {
+        gap: 20px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-item {
+        text-decoration: none;
+        color: #555;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: color 0.3s;
+    }
+
+    .nav-item:hover, .nav-item.active {
+        color: #ff1908;
+    }
+
+    .user-controls {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .sesion-contador {
+        font-weight: bold;
+        color: #555;
+    }
+
+    .user-tag {
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .notificacion-contenedor {
+        position: relative;
+        cursor: pointer;
+        font-size: 1.3em;
+        color: #ff1908;
+    }
+    
+    .badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: #000;
+        color: white;
+        font-size: 10px;
+        padding: 2px 6px;
+        border-radius: 50%;
+    }
 }
 
 
@@ -496,10 +568,11 @@ main {
     width: 100%; 
     max-width: 900px;
     margin: 20px auto;
-    background-color: rgba(255, 255, 255, 0.96); /* Fondo semi-transparente para leer bien sobre la imagen */
+    background-color: rgba(255, 255, 255, 0.96); 
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    box-sizing: border-box;
 }
 
 .form-group {
@@ -507,10 +580,10 @@ main {
     flex-direction: column; 
     margin-bottom: 5px; 
     box-sizing: border-box;
-    flex: 1 1 100%; /* Por defecto en móviles: 1 columna al 100% */
+    flex: 1 1 100%; /* Por defecto en móviles: 1 columna */
 }
 
-/* Inputs y Selects */
+/*Inputs*/
 .form-group input[type="text"],
 .form-group input[type="number"],
 .form-group input[type="date"],
@@ -531,6 +604,7 @@ main {
     font-weight: bold;
     color: #333;
     font-size: 0.95em;
+    text-align: left;
 }
 
 .form-group textarea {
@@ -540,11 +614,12 @@ main {
     resize: vertical; 
 }
 
+/* Focus en color Rojo */
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus { 
-    border-color: #007bff; 
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+    border-color: #ff1908; 
+    box-shadow: 0 0 8px rgba(255, 25, 8, 0.25);
     outline: none;
 }
 
@@ -552,6 +627,7 @@ main {
     font-size: 11px;
     color: #6c757d;
     margin-top: 4px;
+    text-align: left;
 }
 
 
@@ -574,15 +650,15 @@ main {
     gap: 8px;
 }
 
-/* Botón Guardar */
+/* Botón Guardar (Rojo) */
 #form-ingreso-productos button[type="submit"] {
-    background-color: #007bff;
+    background-color: #ff1908;
     color: white;
 }
 
 #form-ingreso-productos button[type="submit"]:hover {
-    background-color: #0056b3;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    background-color: #d11405;
+    box-shadow: 0 4px 10px rgba(255, 25, 8, 0.3);
 }
 
 /* Botón Limpiar */
@@ -597,46 +673,56 @@ main {
     color: #212529;
 }
 
-
-/* ===================================================
-   5. REGLAS EXCLUSIVAS PARA PC (PANTALLAS GRANDES)
-   =================================================== */
+/* Ajuste de columnas para PC */
 @media screen and (min-width: 768px) {
-    
-    /* El formulario vuelve a sus 3 columnas originales */
     .form-group {
         flex: 1 1 calc(33.33% - 13.33px); 
         min-width: 200px; 
     }
     
-    /* Los botones dejan de ser gigantes y se alinean a la derecha */
     #form-ingreso-productos button {
         flex: 0 1 auto;
         min-width: 180px;
     }
     
     #form-ingreso-productos {
-        justify-content: flex-end; /* Empuja botones a la derecha */
+        justify-content: flex-end; 
     }
 }
 
 
 /* ===================================================
-   6. REGLAS EXCLUSIVAS PARA MÓVILES (BARRA INFERIOR)
+   5. REGLAS EXCLUSIVAS PARA CELULAR VERTICAL (< 768px)
    =================================================== */
 @media screen and (max-width: 768px) {
     
-    /* Ocultar el reloj en móviles para dar espacio */
-    #live-clock {
-        display: none !important;
+    body {
+        padding-bottom: 80px !important; /* Espacio para el menú inferior */
     }
-    
-    /* Reducir logo en celular */
+
+    .header-content {
+        justify-content: space-between;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
     .app-logo {
         height: 45px;
     }
 
-    /* Convertir la barra gris en un menú inferior cómodo */
+    #live-clock {
+        display: none !important;
+    }
+
+    .logout-btn {
+        color: #ff1908;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    /* Barra inferior estilo App */
     .user-info-bar {
         position: fixed;
         bottom: 0;
@@ -648,15 +734,19 @@ main {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        padding: 8px 0;
+        padding: 10px 0;
+    }
+
+    .header-nav {
+        width: 100%;
     }
 
     .nav-main-horizontal {
-        display: flex;
         justify-content: space-around;
         width: 100%;
         padding: 0;
         margin: 0;
+        list-style: none;
     }
 
     .nav-item {
@@ -668,14 +758,51 @@ main {
         color: #555;
     }
 
+    .nav-item.active {
+        color: #ff1908;
+    }
+
     .nav-icon {
         font-size: 20px !important;
         margin-bottom: 3px;
     }
 
-    /* Ocultamos detalles secundarios de la barra para no saturar */
-    .sesion-contador, 
-    .user-tag {
+    /* Mantenemos visibles el usuario y la campana flotando */
+    .user-controls {
+        display: none !important; /* Escondidos para optimizar espacio */
+    }
+}
+
+
+/* ===================================================
+   6. SOLUCIÓN PARA CELULAR HORIZONTAL (Pantallas bajas)
+   =================================================== */
+@media screen and (max-height: 500px) and (max-width: 900px) {
+    
+    .user-info-bar {
         display: none !important;
+    }
+
+    .main-header {
+        position: static; 
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 10px;
+    }
+
+    .app-logo {
+        height: 35px;
+    }
+
+    #live-clock {
+        display: block !important;
+        font-size: 0.9em;
+    }
+
+    #reloj-fecha {
+        display: none; 
     }
 }
