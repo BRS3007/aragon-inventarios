@@ -3,27 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingreso de Productos - ARAGON</title>
+    <title data-i18n="titulo.ingreso">Ingreso de Productos - ARAGON</title>
 
     <link rel="icon" type="image/png" href="favicons/android-chrome-192x192.png"> 
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-    <link rel="manifest" href="favicons/site.webmanifest"> 
-    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="icon" href="favicons/android-chrome-192x192.png" type="image/x-icon"> 
+    
     <link rel="stylesheet" href="css/styles.css">
-    <link href="/dist/output.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
 
     <style>
-        /* ==========================================
-           1. ESTILOS BASE Y PARA PC (Header y Widgets)
-           ========================================== */
-        
-        /* Header Horizontal Indestructible */
+        /* CSS BLINDADO PARA COINCIDIR CON LAS OTRAS PANTALLAS */
         .main-header {
             display: flex !important;
             justify-content: space-between !important;
@@ -33,13 +24,8 @@
             border-bottom: 1px solid #e5e7eb !important;
             height: 90px !important;
         }
-
-        .logo-img {
-            height: 75px !important;
-            width: auto !important;
-        }
-
-        /* Reloj Pequeño que NO estira la barra */
+        .logo-img { height: 75px !important; width: auto !important; }
+        
         .centered-clock {
             display: flex !important;
             flex-direction: column !important;
@@ -51,17 +37,9 @@
             border: 1px solid #e5e7eb !important;
             height: 65px !important; 
         }
-        #reloj-fecha { 
-            font-size: 13px !important; 
-            color: #4b5563 !important; 
-        }
-        #reloj-hora { 
-            font-size: 14px !important; 
-            font-weight: bold !important; 
-            color: #dc2626 !important; 
-        }
+        #reloj-fecha { font-size: 13px !important; color: #4b5563 !important; }
+        #reloj-hora { font-size: 14px !important; font-weight: bold !important; color: #dc2626 !important; }
 
-        /* Botón Cerrar Sesión Rojo */
         .logout-btn {
             display: inline-block !important;
             background-color: #dc2626 !important;
@@ -70,131 +48,67 @@
             border-radius: 6px !important;
             font-weight: bold !important;
             text-decoration: none !important;
-            transition: background-color 0.2s;
-        }
-        .logout-btn:hover {
-            background-color: #b91c1c !important;
+            font-size: 14px !important;
         }
 
-        /* Barra de navegación (Widgets) simulación PC */
+        .user-info-bar {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            background-color: #f9fafb !important;
+            border-bottom: 1px solid #e5e7eb !important;
+            padding: 0 20px !important;
+            height: 50px !important;
+        }
         .nav-main-horizontal {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            padding: 10px 20px;
-            border-bottom: 1px solid #e5e7eb;
-            background-color: #ffffff;
+            display: flex !important;
+            gap: 20px !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
         .nav-item {
-            text-decoration: none;
-            color: #374151;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            padding: 8px 12px;
-            border-radius: 6px;
-        }
-        .nav-item:hover {
-            background-color: #f3f4f6;
+            text-decoration: none !important;
+            color: #374151 !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            font-size: 14px !important;
+            padding: 8px 12px !important;
         }
         .nav-item.active {
-            color: #dc2626;
-            font-weight: bold;
-            border-bottom: 3px solid #dc2626;
-            border-radius: 6px 6px 0 0;
+            color: #dc2626 !important;
+            font-weight: bold !important;
+            border-bottom: 3px solid #dc2626 !important;
         }
-
-        /* Barra de Info inferior (Alineación corregida) */
-        .user-info-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f9fafb;
-            border-bottom: 1px solid #e5e7eb;
-            padding: 0 10px;
+        .nav-icon {
+            font-size: 16px !important;
         }
-
         .info-derecha-widgets {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding-right: 20px;
+            display: flex !important;
+            align-items: center !important;
+            gap: 20px !important;
         }
-
-        /* Campana de Notificaciones */
-        .notificacion-contenedor {
-            position: relative;
-            cursor: pointer;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
+        .user-tag {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            font-size: 14px !important;
+            font-weight: bold !important;
         }
-        .badge {
-            position: absolute;
-            top: -5px;
-            right: -10px;
-            background-color: #dc2626;
-            color: white;
-            font-size: 11px;
-            font-weight: bold;
-            border-radius: 50%;
-            padding: 2px 6px;
-        }
-
-        /* ==========================================
-           2. ESTILOS PARA CELULAR (MENOS DE 768px)
-           ========================================== */
-        @media (max-width: 768px) {
-            .main-header {
-                flex-direction: column !important;
-                height: auto !important;
-                gap: 12px !important;
-                padding: 15px !important;
-                text-align: center !important;
-            }
-
-            .centered-clock {
-                width: 90% !important;
-                max-width: 250px !important;
-                margin: 0 auto !important;
-            }
-
-            /* Los Widgets se vuelven una cuadrícula en celular */
-            .nav-main-horizontal {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-                padding: 10px;
-            }
-            .nav-item {
-                justify-content: center;
-                background-color: #f3f4f6;
-                border: 1px solid #e5e7eb;
-            }
-            .nav-item.active {
-                border: 1px solid #dc2626;
-                background-color: #fff;
-            }
-
-            .user-info-bar {
-                flex-direction: column;
-                gap: 10px;
-                padding: 10px;
-                align-items: stretch;
-            }
-            .info-derecha-widgets {
-                justify-content: space-between;
-                padding-right: 0;
-                background: #fff;
-                padding: 10px;
-                border-radius: 6px;
-                border: 1px solid #e5e7eb;
-            }
+        .widget-ingresos {
+            display: flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            background-color: #e5e7eb !important;
+            padding: 6px 12px !important;
+            border-radius: 15px !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
         }
     </style>
 </head>
-<body class="background-login">
+<body>
 
     <header class="main-header">
         <div class="header-left">
@@ -202,14 +116,12 @@
                 <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
             </a>
         </div>
-
         <div class="centered-clock">
             <span id="reloj-fecha">Cargando fecha...</span>
             <span id="reloj-hora"></span>
         </div>
-
         <nav class="header-right">
-            <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+            <a href="/logout" class="logout-btn" data-i18n="btn.cerrar_sesion">Cerrar Sesión</a>
         </nav>
     </header>
 
@@ -218,155 +130,81 @@
             <ul class="nav-main-horizontal">
                 <li>
                     <a href="/ingreso-productos" class="nav-item active">
-                        <span class="nav-icon">📥</span>
-                        <span class="nav-text" data-i18n="common:product_entry_link">Ingreso</span>
+                        <i class="fa-solid fa-arrow-down-left-from-square nav-icon"></i>
+                        <span data-i18n="nav.ingreso">Ingreso</span>
                     </a>
                 </li>
                 <li>
                     <a href="/averias" class="nav-item">
-                        <span class="nav-icon">⚠️</span>
-                        <span class="nav-text" data-i18n="common:report_damage_link">Averías</span>
+                        <i class="fa-solid fa-triangle-exclamation nav-icon"></i>
+                        <span data-i18n="nav.averias">Averías</span>
                     </a>
                 </li>
-                <li class="admin-only">
+                <li>
                     <a href="/registros" class="nav-item">
-                        <span class="nav-icon">📋</span>
-                        <span class="nav-text" data-i18n="common:recorded_entries_link">Registros</span>
+                        <i class="fa-solid fa-clipboard-list nav-icon"></i>
+                        <span data-i18n="nav.registros">Registros</span>
                     </a>
                 </li>
-                <li class="admin-only">
+                <li>
                     <a href="/subir" class="nav-item">
-                        <span class="nav-icon">🚀</span>
-                        <span class="nav-text" data-i18n="common:import_link">Importar</span>
+                        <i class="fa-solid fa-file-import nav-icon"></i>
+                        <span data-i18n="nav.importar">Importar</span>
                     </a>
                 </li>
             </ul>
         </nav>
 
         <div class="info-derecha-widgets">
-            <div class="sesion-contador text-sm text-gray-700 font-medium">
-                📦 Ingresos hoy: <span id="contador-ingresos" class="font-bold text-red-600">0</span>
+            <div class="widget-ingresos">
+                <i class="fa-solid fa-boxes-stacked" style="color: #4b5563;"></i>
+                <span data-i18n="label.ingresos_hoy">Ingresos hoy:</span>
+                <span id="contador-ingresos" style="font-weight: bold; color: #dc2626;">0</span>
             </div>
 
-            <div class="notificacion-contenedor admin-only" onclick="abrirModalAprobaciones()">
-                <span class="icono-usuarios">👥</span>
-                <span id="contador-badge" class="badge" style="display: none;">0</span>
-            </div>
-            
-            <div class="user-tag text-sm flex items-center gap-2">
+            <div class="user-tag">
                 <i class="fa-solid fa-circle-user" style="color: red;"></i>
-                <span id="nombre-usuario-display" class="font-medium">Cargando...</span>
+                <span data-i18n="label.hola">Hola:</span> <span id="nombre-usuario-display">claudia</span>
             </div>
         </div>
     </div>
 
     <main class="container">
-        
-        <h1 class="page-title mt-6" data-i18n="ingreso_productos:page_title">Ingreso de Productos</h1>
-
-        <form id="form-ingreso-productos" class="form-container">
-            <div class="form-group">
-                <label for="codigo_de_barras" data-i18n="ingreso_productos:product_barcode_label">Código de Barras</label>
-                <input type="text" id="codigo_de_barras" name="codigo_de_barras" required>
-                <small class="help-text" data-i18n="ingreso_productos:help_text_barcode">Ingresa el código de barras del producto.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="codigo" data-i18n="ingreso_productos:product_code_label">Código:</label>
-                <input type="text" id="codigo" name="codigo" required>
-                <small class="help-text" data-i18n="ingreso_productos:help_text_code">Ingresa el código interno del producto.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="descripcion" data-i18n="ingreso_productos:product_description_label">Descripción:</label>
-                <input type="text" id="descripcion" name="descripcion" list="sugerencias-descripcion" required>
-                <datalist id="sugerencias-descripcion"></datalist>
-                <small class="help-text" data-i18n="ingreso_productos:help_text_description">Ingresa la descripción del producto. Aparecerán sugerencias.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="cantidad" data-i18n="ingreso_productos:product_quantity_label">Cantidad:</label>
-                <input type="number" id="cantidad" name="cantidad" required min="1">
-                <small class="help-text" data-i18n="ingreso_productos:help_text_quantity">Ingresa la cantidad del producto.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="fecha" data-i18n="ingreso_productos:product_date_label">Fecha:</label>
-                <input type="date" id="fecha" name="fecha" required>
-                <small class="help-text" data-i18n="ingreso_productos:help_text_date">Selecciona la fecha de ingreso.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="precio" data-i18n="ingreso_productos:product_price_label">Precio:</label>
-                <input type="number" id="precio" name="precio" required step="0.01" min="0">
-                <small class="help-text" data-i18n="ingreso_productos:help_text_price">Ingresa el precio del producto.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="pasillo" data-i18n="ingreso_productos:product_aisle_label">Pasillo:</label>
-                <input type="text" id="pasillo" name="pasillo" required>
-                <small class="help-text" data-i18n="ingreso_productos:help_text_aisle">Ingresa la ubicación del pasillo del producto.</small>
-            </div>
-
-            <button type="submit" data-i18n="ingreso_productos:save_product_button">Guardar Producto</button>
+        <div class="form-section">
+            <h2 data-i18n="formulario.titulo">Formulario de Ingreso</h2>
             
-            <button type="button" id="btn-limpiar" class="btn-limpiar mt-2">
-                <i class="fas fa-eraser"></i> Limpiar Formulario
-            </button>
-        </form>
-    </main>
-    
-    <div id="modal-aprobaciones" class="modal-overlay" style="display: none;">
-        <div class="modal-box">
-            <div class="modal-header">
-                <h3>Aprobaciones Pendientes</h3>
-                <button onclick="cerrarModal()" class="btn-cerrar">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div style="overflow-x: auto;">
-                    <table class="tabla-aprobaciones" style="min-width: 400px;">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Cédula/ID</th>
-                                <th>Acción</th>
-                            </tr>
-                        </thead>
-                        <tbody id="lista-pendientes-modal">
-                        </tbody>
-                    </table>
+            <form id="form-ingreso">
+                <div class="form-group">
+                    <label for="codigo-barras" data-i18n="formulario.codigo">Código de Barras:</label>
+                    <input type="text" id="codigo-barras" required placeholder="Escanee o escriba el código">
                 </div>
-            </div>
+
+                <div class="form-group">
+                    <label for="nombre-producto" data-i18n="formulario.producto">Producto:</label>
+                    <input type="text" id="nombre-producto" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cantidad" data-i18n="formulario.cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" required min="1">
+                </div>
+
+                <button type="submit" class="btn-submit" data-i18n="formulario.guardar">Guardar Ingreso</button>
+            </form>
         </div>
-    </div>
- 
+    </main>
+
     <script>
         function actualizarReloj() {
             const ahora = new Date();
             const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const fechaTexto = ahora.toLocaleDateString('es-ES', opcionesFecha).replace(',', '');
-            const horas = String(ahora.getHours()).padStart(2, '0');
-            const minutos = String(ahora.getMinutes()).padStart(2, '0');
-            const segundos = String(ahora.getSeconds()).padStart(2, '0');
-            const horaTexto = `${horas}:${minutos}:${segundos}`;
-            
-            document.getElementById('reloj-fecha').textContent = fechaTexto;
-            document.getElementById('reloj-hora').textContent = horaTexto;
+            document.getElementById('reloj-fecha').textContent = ahora.toLocaleDateString('es-ES', opcionesFecha);
+            document.getElementById('reloj-hora').textContent = ahora.toLocaleTimeString('es-ES');
         }
-        actualizarReloj();
         setInterval(actualizarReloj, 1000);
+        actualizarReloj();
     </script>
 
-    <script type="importmap">
-    {
-      "imports": {
-        "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/+esm",
-        "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/+esm",
-        "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/+esm",
-        "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
-      }
-    }
-    </script>
     <script src="js/i18n.js?v=1.1" type="module"></script>
     <script src="js/ingreso-productos.js?v=1.1" type="module"></script>
     <script src="js/common.js?v=1.1" type="module"></script>

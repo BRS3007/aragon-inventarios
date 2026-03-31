@@ -3,26 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registros - ARAGON</title>
-    
-    <link rel="icon" type="image/png" href="favicons/android-chrome-512x512.png"> 
+    <title data-i18n="titulo.registros">Registros - ARAGON</title>
+
+    <link rel="icon" type="image/png" href="favicons/android-chrome-192x192.png"> 
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-    <link rel="manifest" href="favicons/site.webmanifest"> 
-    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="icon" href="favicons/android-chrome-192x192.png" type="image/x-icon"> 
+    
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
 
     <style>
-        /* ==========================================
-           1. ESTILOS BASE Y PARA PC (Header y Widgets)
-           ========================================== */
-        
-        /* Header Horizontal Indestructible */
+        /* CSS BLINDADO ADAPTADO A MÓVILES */
         .main-header {
             display: flex !important;
             justify-content: space-between !important;
@@ -32,13 +24,8 @@
             border-bottom: 1px solid #e5e7eb !important;
             height: 90px !important;
         }
-
-        .logo-img {
-            height: 75px !important;
-            width: auto !important;
-        }
-
-        /* Reloj Pequeño que NO estira la barra */
+        .logo-img { height: 75px !important; width: auto !important; }
+        
         .centered-clock {
             display: flex !important;
             flex-direction: column !important;
@@ -50,17 +37,9 @@
             border: 1px solid #e5e7eb !important;
             height: 65px !important; 
         }
-        #reloj-fecha { 
-            font-size: 13px !important; 
-            color: #4b5563 !important; 
-        }
-        #reloj-hora { 
-            font-size: 14px !important; 
-            font-weight: bold !important; 
-            color: #dc2626 !important; 
-        }
+        #reloj-fecha { font-size: 13px !important; color: #4b5563 !important; }
+        #reloj-hora { font-size: 14px !important; font-weight: bold !important; color: #dc2626 !important; }
 
-        /* Botón Cerrar Sesión Rojo */
         .logout-btn {
             display: inline-block !important;
             background-color: #dc2626 !important;
@@ -69,118 +48,144 @@
             border-radius: 6px !important;
             font-weight: bold !important;
             text-decoration: none !important;
-            transition: background-color 0.2s;
-        }
-        .logout-btn:hover {
-            background-color: #b91c1c !important;
+            font-size: 14px !important;
         }
 
-        /* Barra de navegación (Widgets) simulación PC */
+        .user-info-bar {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            background-color: #f9fafb !important;
+            border-bottom: 1px solid #e5e7eb !important;
+            padding: 0 20px !important;
+            height: 50px !important;
+        }
         .nav-main-horizontal {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            padding: 10px 20px;
-            border-bottom: 1px solid #e5e7eb;
-            background-color: #ffffff;
+            display: flex !important;
+            gap: 20px !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
         .nav-item {
-            text-decoration: none;
-            color: #374151;
+            text-decoration: none !important;
+            color: #374151 !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            font-size: 14px !important;
+            padding: 8px 12px !important;
+        }
+        .nav-item.active {
+            color: #dc2626 !important;
+            font-weight: bold !important;
+            border-bottom: 3px solid #dc2626 !important;
+        }
+        .info-derecha-widgets {
+            display: flex !important;
+            align-items: center !important;
+            gap: 20px !important;
+        }
+        .user-tag {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            font-size: 14px !important;
+            font-weight: bold !important;
+        }
+        
+        /* CONTENEDOR GRANDE ADAPTABLE */
+        .table-container {
+            margin: 20px auto;
+            max-width: 1200px; /* Evita que se estire infinito en pantallas gigantes */
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        /* Barra de herramientas (Buscador + Historial) */
+        .toolbar-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap; /* En el cel se bajan solas */
+        }
+        
+        .search-wrapper {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            min-width: 250px; /* Para que no se aplaste en cel */
+        }
+        
+        .search-wrapper input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .btn-action {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 14px;
-            padding: 8px 12px;
+            padding: 12px 20px;
+            background-color: #3b82f6;
+            color: #ffffff;
+            border: none;
             border-radius: 6px;
-        }
-        .nav-item:hover {
-            background-color: #f3f4f6;
-        }
-        .nav-item.active {
-            color: #dc2626;
             font-weight: bold;
-            border-bottom: 3px solid #dc2626;
-            border-radius: 6px 6px 0 0;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-action:hover { background-color: #2563eb; }
+        .btn-historial { background-color: #10b981; }
+        .btn-historial:hover { background-color: #059669; }
+
+        /* TABLA DESLIZABLE EN CELULAR */
+        .responsive-table {
+            width: 100%;
+            overflow-x: auto; /* Truco mágico para el cel */
+            -webkit-overflow-scrolling: touch;
         }
 
-        /* ==================================================
-           TABLAS INDESTRUCTIBLES CON SCROLL EN CELULAR
-           ================================================== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px; /* Fuerza el scroll lateral en cel para no deformar texto */
+        }
         
-        /* Scroll para la tabla principal */
-        .table-container {
-            width: 100% !important;
-            overflow-x: auto !important;
-            -webkit-overflow-scrolling: touch;
-            margin-top: 15px;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
+        th, td {
+            text-align: left;
+            padding: 14px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
         }
-        #productos-table {
-            min-width: 900px !important; /* Mantiene el tamaño para que no se apriete */
-        }
-
-        /* Scroll para la tabla del modal (Historial) */
-        .table-container-modal {
-            width: 100% !important;
-            overflow-x: auto !important;
-            -webkit-overflow-scrolling: touch;
-            border: 1px solid #e5e7eb;
-            border-radius: 6px;
-        }
-        .table-container-modal table {
-            min-width: 650px !important; /* Asegura que la tabla modal no se apachurre */
+        
+        th {
+            background-color: #f9fafb;
+            font-weight: bold;
+            color: #4b5563;
         }
 
-        /* ==========================================
-           2. ESTILOS PARA CELULAR (MENOS DE 768px)
-           ========================================== */
+        /* MEDIA QUERIES PARA ADAPTAR EN EL CELULAR */
         @media (max-width: 768px) {
-            .main-header {
-                flex-direction: column !important;
-                height: auto !important;
-                gap: 12px !important;
-                padding: 15px !important;
-                text-align: center !important;
-            }
-
-            .centered-clock {
-                width: 90% !important;
-                max-width: 250px !important;
-                margin: 0 auto !important;
-            }
-
-            /* Los Widgets se vuelven una cuadrícula de 2x2 en celular */
-            .nav-main-horizontal {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-                padding: 10px;
-            }
-            .nav-item {
-                justify-content: center;
-                background-color: #f9fafb;
-                border: 1px solid #e5e7eb;
-            }
-            .nav-item.active {
-                border: 1px solid #dc2626;
-            }
-
-            /* Los filtros se amontonaban, esto los ordena en columna */
-            .toolbar-container {
-                display: flex;
-                flex-direction: column;
-                gap: 15px;
-            }
-            .filter-group {
-                flex-direction: column;
-                align-items: stretch;
-            }
+            .main-header { height: auto !important; flex-direction: column !important; gap: 10px !important; text-align: center !important; }
+            .user-info-bar { height: auto !important; flex-direction: column !important; padding: 10px !important; }
+            .nav-main-horizontal { flex-wrap: wrap !important; justify-content: center !important; }
+            .info-derecha-widgets { margin-top: 10px !important; }
+            .toolbar-grid { flex-direction: column !important; align-items: stretch !important; }
+            .search-wrapper { width: 100% !important; }
+            .btn-action { width: 100% !important; justify-content: center !important; }
         }
     </style>
 </head>
-<body class="background-login">
+<body>
 
     <header class="main-header">
         <div class="header-left">
@@ -188,175 +193,83 @@
                 <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
             </a>
         </div>
-
         <div class="centered-clock">
             <span id="reloj-fecha">Cargando fecha...</span>
             <span id="reloj-hora"></span>
         </div>
-
         <nav class="header-right">
-            <a href="/logout" class="logout-btn" data-i18n="common.logout_button">Cerrar Sesión</a>
+            <a href="/logout" class="logout-btn" data-i18n="btn.cerrar_sesion">Cerrar Sesión</a>
         </nav>
     </header>
 
     <div class="user-info-bar">
         <nav class="header-nav">
             <ul class="nav-main-horizontal">
-                <li>
-                    <a href="/ingreso-productos" class="nav-item">
-                        <span>📥</span> Ingreso
-                    </a>
-                </li>
-                <li>
-                    <a href="/averias" class="nav-item">
-                        <span>⚠️</span> Averías
-                    </a>
-                </li>
-                <li>
-                    <a href="/registros" class="nav-item active">
-                        <span>📋</span> Registros
-                    </a>
-                </li>
-                <li>
-                    <a href="/subir" class="nav-item">
-                        <span>🚀</span> Importar
-                    </a>
-                </li>
+                <li><a href="/ingreso-productos" class="nav-item"><i class="fa-solid fa-arrow-down-left-from-square"></i> <span data-i18n="nav.ingreso">Ingreso</span></a></li>
+                <li><a href="/averias" class="nav-item"><i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="nav.averias">Averías</span></a></li>
+                <li><a href="/registros" class="nav-item active"><i class="fa-solid fa-clipboard-list"></i> <span data-i18n="nav.registros">Registros</span></a></li>
+                <li><a href="/subir" class="nav-item"><i class="fa-solid fa-file-import"></i> <span data-i18n="nav.importar">Importar</span></a></li>
             </ul>
         </nav>
-        
-        <div class="px-5 py-2 text-sm text-gray-600 flex items-center gap-2">
-            <i class="fa-solid fa-circle-user" style="color: red;"></i>
-            <span id="nombre-usuario-display">Cargando...</span>
+
+        <div class="info-derecha-widgets">
+            <div class="user-tag">
+                <i class="fa-solid fa-circle-user" style="color: red;"></i>
+                <span data-i18n="label.hola">Hola:</span> <span id="nombre-usuario-display">claudia</span>
+            </div>
         </div>
     </div>
 
     <main class="container">
-        <h1 class="page-title" data-i18n="registros:page_title">Ingresos de Productos Realizados</h1>
-
-        <div class="toolbar-container">
-            <div class="search-group">
-                <div class="input-with-icon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="search-input" placeholder="Buscar por código o descripción..." class="search-input">
-                </div>
-                <button id="clear-search-btn" class="common:btn-text">Limpiar</button>
-            </div>
-
-            <div class="filter-group">
-                <div class="date-input">
-                    <label for="fecha-inicio" data-i18n="common:date_start_label">Inicio</label>
-                    <input type="date" id="fecha-inicio">
-                </div>
-                <div class="date-input">
-                    <label for="fecha-fin" data-i18n="common:date_end_label">Fin</label>
-                    <input type="date" id="fecha-fin">
-                </div>
-                <div class="filter-actions">
-                    <button id="filter-btn" class="btn-action" data-tooltip="Aplicar filtro de fecha" onclick="cargarProductosFiltrados()">
-                        <i class="fa-solid fa-filter"></i>
-                    </button>
-
-                    <button id="clear-filter-btn" class="btn-action btn-clear" title="Borrar filtros y ver todo">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
-
-                    <a id="export-excel-btn" class="btn-excel" href="#" title="Descargar reporte en Excel">
-                        <i class="fa-solid fa-file-excel"></i>
-                        <span>Exportar</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="pagination-container" style="display: flex; justify-content: center; align-items: center; gap: 10px; margin: 10px 0;">
-                <button onclick="paginaAnterior()" class="btn-paging"> <i class="fas fa-chevron-left"></i> Anterior</button>
-                <span id="n-pagina" style="font-weight: bold; background: #eee; padding: 5px 12px; border-radius: 4px;">1</span>
-                <button onclick="paginaSiguiente()" class="btn-paging">Siguiente <i class="fas fa-chevron-right"></i></button>
-            </div>
-
-            <div class="table-container">
-                <table id="productos-table">
-                    <thead>
-                        <tr>
-                            <th>Código de Barras</th>
-                            <th>Código</th>
-                            <th>Descripción</th>
-                            <th>Cantidad</th>
-                            <th>Fecha</th>
-                            <th>Precio</th>
-                            <th>Pasillo</th>
-                            <th>Acciones</th> 
-                        </tr>
-                    </thead>
-                    <tbody id="cuerpo-tabla-principal">
-                    </tbody>
-                </table>
-                <p id="no-products-message" style="display:none; text-align: center; color: #888; margin-top: 20px;">No se encontraron productos.</p>
-            </div>
-    </main>
-
-    <div id="modal-historial" class="custom-modal" style="display: none;">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3><i class="fa-solid fa-clock-rotate-left"></i> Historial de Registros</h3>
-            </div>
+        <div class="table-container">
+            <h2 data-i18n="registros.titulo" style="margin-bottom: 15px;">Listado de Registros</h2>
             
-            <div class="modal-content">
-                <div class="table-container-modal">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Tipo</th>
-                                <th>Cant.</th>
-                                <th>Precio</th>
-                                <th>Ubicación</th>
-                                <th>Usuario</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cuerpo-historial">
-                        </tbody>
-                    </table>
+            <div class="toolbar-grid">
+                <div class="search-wrapper">
+                    <input type="text" id="input-busqueda" placeholder="Buscar productos...">
+                    <button class="btn-action" data-i18n="registros.btn_buscar">
+                        <i class="fa-solid fa-magnifying-glass"></i> <span data-i18n="registros.btn_buscar">Buscar</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button onclick="cerrarModal()" class="btn-close">Cerrar</button>
-                <button onclick="descargarHistorialPDF()" class="btn-pdf-elegante shadow-sm">
-                    <i class="fas fa-file-pdf"></i> Descargar Reporte PDF
+                
+                <button class="btn-action btn-historial" id="btn-abrir-historial">
+                    <i class="fa-solid fa-clock-rotate-left"></i> <span data-i18n="registros.btn_historial">Ver Historial</span>
                 </button>
             </div>
+
+            <div class="responsive-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-i18n="registros.col_id">ID</th>
+                            <th data-i18n="registros.col_codigo">Código</th>
+                            <th data-i18n="registros.col_producto">Producto</th>
+                            <th data-i18n="registros.col_cantidad">Cantidad</th>
+                            <th data-i18n="registros.col_usuario">Usuario</th>
+                            <th data-i18n="registros.col_fecha">Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-registros-body">
+                        <tr>
+                            <td colspan="6" style="text-align: center;" data-i18n="registros.cargando">Cargando registros...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+    </main>
 
     <script>
         function actualizarReloj() {
             const ahora = new Date();
             const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const fechaTexto = ahora.toLocaleDateString('es-ES', opcionesFecha).replace(',', '');
-            const horas = String(ahora.getHours()).padStart(2, '0');
-            const minutos = String(ahora.getMinutes()).padStart(2, '0');
-            const segundos = String(ahora.getSeconds()).padStart(2, '0');
-            const horaTexto = `${horas}:${minutos}:${segundos}`;
-            
-            document.getElementById('reloj-fecha').textContent = fechaTexto;
-            document.getElementById('reloj-hora').textContent = horaTexto;
+            document.getElementById('reloj-fecha').textContent = ahora.toLocaleDateString('es-ES', opcionesFecha);
+            document.getElementById('reloj-hora').textContent = ahora.toLocaleTimeString('es-ES');
         }
-        actualizarReloj();
         setInterval(actualizarReloj, 1000);
+        actualizarReloj();
     </script>
 
-    <script type="importmap">
-    {
-      "imports": {
-        "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/+esm",
-        "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/+esm",
-        "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/+esm",
-        "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
-      }
-    }
-    </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="js/i18n.js?v=1.1" type="module"></script>
     <script src="js/registros.js?v=1.1" type="module"></script>
     <script src="js/common.js?v=1.1" type="module"></script>

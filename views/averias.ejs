@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportar Avería - ARAGON</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title data-i18n="titulo.averias">Averías - ARAGON</title>
+
+    <link rel="icon" type="image/png" href="favicons/android-chrome-192x192.png"> 
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
 
     <style>
-        /* ==========================================
-           1. ESTILOS BASE Y PARA PC
-           ========================================== */
-        
-        /* Header Horizontal */
+        /* CSS BLINDADO PARA COINCIDIR CON LAS OTRAS PANTALLAS */
         .main-header {
             display: flex !important;
             justify-content: space-between !important;
@@ -22,13 +24,8 @@
             border-bottom: 1px solid #e5e7eb !important;
             height: 90px !important;
         }
-
-        .logo-img {
-            height: 75px !important;
-            width: auto !important;
-        }
-
-        /* Reloj Pequeño que NO estira la barra */
+        .logo-img { height: 75px !important; width: auto !important; }
+        
         .centered-clock {
             display: flex !important;
             flex-direction: column !important;
@@ -38,19 +35,11 @@
             padding: 5px 15px !important;
             border-radius: 6px !important;
             border: 1px solid #e5e7eb !important;
-            height: 65px !important; /* Altura fija */
+            height: 65px !important; 
         }
-        #reloj-fecha { 
-            font-size: 13px !important; 
-            color: #4b5563 !important; 
-        }
-        #reloj-hora { 
-            font-size: 14px !important; 
-            font-weight: bold !important; 
-            color: #dc2626 !important; 
-        }
+        #reloj-fecha { font-size: 13px !important; color: #4b5563 !important; }
+        #reloj-hora { font-size: 14px !important; font-weight: bold !important; color: #dc2626 !important; }
 
-        /* Botón Cerrar Sesión Rojo */
         .logout-btn {
             display: inline-block !important;
             background-color: #dc2626 !important;
@@ -59,149 +48,57 @@
             border-radius: 6px !important;
             font-weight: bold !important;
             text-decoration: none !important;
-            transition: background-color 0.2s;
-        }
-        .logout-btn:hover {
-            background-color: #b91c1c !important;
+            font-size: 14px !important;
         }
 
-        /* Barra de navegación (Widgets) simulación PC */
-        .nav-main-horizontal {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            padding: 10px 20px;
-            border-bottom: 1px solid #e5e7eb;
-            background-color: #ffffff;
-        }
-        .nav-item {
-            text-decoration: none;
-            color: #374151;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            padding: 8px 12px;
-            border-radius: 6px;
-        }
-        .nav-item:hover {
-            background-color: #f3f4f6;
-        }
-        .nav-item.active {
-            color: #dc2626;
-            font-weight: bold;
-            border-bottom: 3px solid #dc2626;
-            border-radius: 6px 6px 0 0;
-        }
-
-        /* Tus estilos originales del formulario */
-        .form-row {
-            display: flex;
-            flex-direction: row;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .form-group label {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: #374151;
-            margin-bottom: 4px;
-        }
-        .form-group input, .form-group select {
-            padding: 12px;
-            border: 1px solid #D1D5DB;
-            border-radius: 8px;
-        }
-        .help-text {
-            font-size: 0.75rem;
-            color: #6B7280;
-            margin-top: 4px;
-        }
-        .form-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        /* ==========================================
-           2. ESTILOS PARA CELULAR (MENOS DE 768px)
-           ========================================== */
-        @media (max-width: 768px) {
-            /* El Header se apila en vertical */
-            .main-header {
-                flex-direction: column !important;
-                height: auto !important;
-                gap: 12px !important;
-                padding: 15px !important;
-                text-align: center !important;
-            }
-
-            .centered-clock {
-                width: 90% !important;
-                max-width: 250px !important;
-                margin: 0 auto !important;
-            }
-
-            /* Los Widgets se vuelven una cuadrícula de 2x2 en celular */
-            .nav-main-horizontal {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-                padding: 10px;
-            }
-            .nav-item {
-                justify-content: center;
-                background-color: #f9fafb;
-                border: 1px solid #e5e7eb;
-            }
-            .nav-item.active {
-                border: 1px solid #dc2626;
-            }
-
-            /* El formulario se pone en vertical */
-            .form-row {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .form-actions {
-                flex-direction: column;
-            }
-            .form-actions button {
-                width: 100%;
-            }
-            /* Barra de Info inferior (Gris Clara) */
         .user-info-bar {
             display: flex !important;
             justify-content: space-between !important;
             align-items: center !important;
             background-color: #f9fafb !important;
             border-bottom: 1px solid #e5e7eb !important;
-            padding: 5px 20px !important;
+            padding: 0 20px !important;
+            height: 50px !important;
         }
-
         .nav-main-horizontal {
             display: flex !important;
             gap: 20px !important;
             list-style: none !important;
-            padding: 10px 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
-
-        /* Contenedor derecho que agrupa el Usuario */
+        .nav-item {
+            text-decoration: none !important;
+            color: #374151 !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            font-size: 14px !important;
+            padding: 8px 12px !important;
+        }
+        .nav-item.active {
+            color: #dc2626 !important;
+            font-weight: bold !important;
+            border-bottom: 3px solid #dc2626 !important;
+        }
+        .nav-icon {
+            font-size: 16px !important;
+        }
         .info-derecha-widgets {
             display: flex !important;
             align-items: center !important;
             gap: 20px !important;
         }
+        .user-tag {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            font-size: 14px !important;
+            font-weight: bold !important;
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body>
 
     <header class="main-header">
         <div class="header-left">
@@ -209,14 +106,12 @@
                 <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
             </a>
         </div>
-
         <div class="centered-clock">
             <span id="reloj-fecha">Cargando fecha...</span>
             <span id="reloj-hora"></span>
         </div>
-
         <nav class="header-right">
-            <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+            <a href="/logout" class="logout-btn" data-i18n="btn.cerrar_sesion">Cerrar Sesión</a>
         </nav>
     </header>
 
@@ -225,22 +120,26 @@
             <ul class="nav-main-horizontal">
                 <li>
                     <a href="/ingreso-productos" class="nav-item">
-                        <span>📥</span> Ingreso
+                        <i class="fa-solid fa-arrow-down-left-from-square nav-icon"></i>
+                        <span data-i18n="nav.ingreso">Ingreso</span>
                     </a>
                 </li>
                 <li>
                     <a href="/averias" class="nav-item active">
-                        <span>⚠️</span> Averías
+                        <i class="fa-solid fa-triangle-exclamation nav-icon"></i>
+                        <span data-i18n="nav.averias">Averías</span>
                     </a>
                 </li>
                 <li>
                     <a href="/registros" class="nav-item">
-                        <span>📋</span> Registros
+                        <i class="fa-solid fa-clipboard-list nav-icon"></i>
+                        <span data-i18n="nav.registros">Registros</span>
                     </a>
                 </li>
                 <li>
                     <a href="/subir" class="nav-item">
-                        <span>🚀</span> Importar
+                        <i class="fa-solid fa-file-import nav-icon"></i>
+                        <span data-i18n="nav.importar">Importar</span>
                     </a>
                 </li>
             </ul>
@@ -249,78 +148,32 @@
         <div class="info-derecha-widgets">
             <div class="user-tag">
                 <i class="fa-solid fa-circle-user" style="color: red;"></i>
-                <span id="nombre-usuario-display">Hola: claudia</span>
+                <span data-i18n="label.hola">Hola:</span> <span id="nombre-usuario-display">claudia</span>
             </div>
         </div>
     </div>
-    
-        <div class="px-5 py-2 text-sm text-gray-600 flex items-center gap-2">
-            <i class="fa-solid fa-circle-user text-red-600"></i>
-            <span>Hola: <strong>claudia</strong></span>
-        </div>
-    </div>
 
-    <main class="max-w-6xl mx-auto px-4 py-8">
-        <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-200">
+    <main class="container">
+        <div class="form-section">
+            <h2 data-i18n="averias.titulo">Reportar Avería</h2>
             
-            <div class="text-center md:text-left mb-6">
-                <h2 class="text-3xl font-bold text-gray-900">Reportar Avería de Producto</h2>
-            </div>
-
-            <form id="form-reportar-averia">
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="codigo_de_barras_averia">Código de Barras:</label>
-                        <input type="text" id="codigo_de_barras_averia" name="codigo_de_barras" required>
-                        <small class="help-text">Introduce el código de barras del producto.</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="cantidad_averia">Cantidad:</label>
-                        <input type="number" id="cantidad_averia" name="cantidad" min="1" value="1" required>
-                        <small class="help-text">Indica la cantidad que se descontará del stock.</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="descripcion_producto_averia">Descripción:</label>
-                        <input type="text" id="descripcion_producto_averia" name="descripcion_producto" class="bg-gray-100" readonly>
-                        <small class="help-text">Se autocompletará automáticamente.</small>
-                    </div>
+            <form id="form-averias">
+                <div class="form-group">
+                    <label for="codigo-barras" data-i18n="formulario.codigo">Código de Barras:</label>
+                    <input type="text" id="codigo-barras" required placeholder="Escanee o escriba el código">
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="descripcion_averia">Motivo de Avería:</label>
-                        <input type="text" id="descripcion_averia" name="descripcion_averia" required>
-                        <small class="help-text">Detalla el daño (ej: empaque roto).</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fecha_averia">Fecha:</label>
-                        <input type="date" id="fecha_averia" name="fecha_averia" required>
-                        <small class="help-text">Selecciona la fecha del reporte.</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="estado_averia">Estado:</label>
-                        <select id="estado_averia" name="estado" required>
-                            <option value="Pendiente">Pendiente</option>
-                            <option value="En Revisión">En Revisión</option>
-                            <option value="Descartado">Descartado</option>
-                        </select>
-                        <small class="help-text">Estado actual del proceso.</small>
-                    </div>
+                <div class="form-group">
+                    <label for="motivo" data-i18n="averias.motivo">Motivo de la Avería:</label>
+                    <input type="text" id="motivo" required>
                 </div>
 
-                <div class="form-actions">
-                    <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition" id="btn-limpiar-averia">
-                        <i class="fas fa-trash mr-2"></i> Limpiar Formulario
-                    </button>
-                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg transition">
-                        Reportar Avería
-                    </button>
+                <div class="form-group">
+                    <label for="cantidad" data-i18n="formulario.cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" required min="1">
                 </div>
+
+                <button type="submit" class="btn-submit" data-i18n="averias.guardar">Reportar</button>
             </form>
         </div>
     </main>
@@ -328,24 +181,16 @@
     <script>
         function actualizarReloj() {
             const ahora = new Date();
-            
-            // Opciones para la fecha
             const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const fechaTexto = ahora.toLocaleDateString('es-ES', opcionesFecha).replace(',', '');
-            
-            // Opciones para la hora
-            const horas = String(ahora.getHours()).padStart(2, '0');
-            const minutos = String(ahora.getMinutes()).padStart(2, '0');
-            const segundos = String(ahora.getSeconds()).padStart(2, '0');
-            const horaTexto = `${horas}:${minutos}:${segundos}`;
-            
-            // Inyectamos el texto en las etiquetas correspondientes
-            document.getElementById('reloj-fecha').textContent = fechaTexto;
-            document.getElementById('reloj-hora').textContent = horaTexto;
+            document.getElementById('reloj-fecha').textContent = ahora.toLocaleDateString('es-ES', opcionesFecha);
+            document.getElementById('reloj-hora').textContent = ahora.toLocaleTimeString('es-ES');
         }
-        actualizarReloj();
         setInterval(actualizarReloj, 1000);
+        actualizarReloj();
     </script>
 
+    <script src="js/i18n.js?v=1.1" type="module"></script>
+    <script src="js/averias.js?v=1.1" type="module"></script>
+    <script src="js/common.js?v=1.1" type="module"></script>
 </body>
 </html>
