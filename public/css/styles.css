@@ -1876,7 +1876,10 @@ table {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
-/* --- HEADER REPARADO PARA PC (Y MÓVIL) --- */
+/* ===================================================
+   1. ESTILOS DE CABECERA (APLICA PARA PC POR DEFECTO)
+   =================================================== */
+
 .main-header {
     display: flex !important;
     justify-content: space-between !important; /* Separa izquierda, centro y derecha */
@@ -1899,7 +1902,7 @@ table {
 }
 
 .logo-img {
-    height: 65px !important; /* Un tamaño un poco más prudente para que no rompa el diseño */
+    height: 65px !important; /* Un tamaño un poco más prudente para que no rompa el diseño en PC */
     width: auto !important;
 }
 
@@ -1914,7 +1917,7 @@ table {
     padding: 8px 16px !important;
     border-radius: 6px !important;
     border: 1px solid #e5e7eb !important;
-    max-width: 250px !important; /* Evita que se estire a lo ancho */
+    max-width: 250px !important; /* Evita que se estire a lo ancho en PC */
 }
 
 #reloj-fecha {
@@ -1961,34 +1964,40 @@ table {
 .logout-btn:hover {
     background-color: #b91c1c !important;
 }
-/* --- OPTIMIZACIÓN PARA DISPOSITIVOS MÓVILES --- */
+
+
+/* ===================================================
+   2. OPTIMIZACIÓN EXCLUSIVA PARA DISPOSITIVOS MÓVILES
+   =================================================== */
 @media (max-width: 768px) {
+    
+    /* El header se apila en vertical en el celular */
     .main-header {
-        flex-direction: column !important; /* En móvil se apilan uno abajo del otro */
+        flex-direction: column !important; 
         gap: 15px !important;
         padding: 15px !important;
     }
 
+    /* Cada sección del header ocupa el 100% de ancho en el celular */
     .header-left, .centered-clock, .header-right {
         flex: none !important;
         width: 100% !important;
         justify-content: center !important; /* Todo centradito en el celular */
     }
     
-    .logout-btn {
-        width: 100% !important; /* El botón ocupa todo el ancho en el celular */
-        justify-content: center !important;
-    }
-}
-
     .logo-img {
         height: 50px !important; /* Logo más pequeño en móvil */
     }
 
     .centered-clock {
         max-height: none !important;
-        width: 100%;
-        text-align: center;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .logout-btn {
+        width: 100% !important; /* El botón ocupa todo el ancho en el celular */
+        justify-content: center !important;
     }
 
     /* La barra de navegación se vuelve scrolleable horizontalmente si no cabe */
@@ -1996,13 +2005,13 @@ table {
         flex-direction: column !important;
         height: auto !important;
         padding: 10px !important;
-        gap: 10px;
+        gap: 10px !important;
     }
 
     .nav-main-horizontal {
-        width: 100%;
+        width: 100% !important;
         justify-content: space-between !important;
-        overflow-x: auto; /* Scroll por si son muchos botones */
+        overflow-x: auto !important; /* Scroll por si son muchos botones */
     }
 
     .nav-item {
@@ -2011,26 +2020,12 @@ table {
     }
 
     .sesion-contador, .user-tag {
-        width: 100%;
-        justify-content: center;
-        text-align: center;
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
     }
 
-    /* Formularios en una sola columna en móvil */
-    .form-container, .form-container-grid {
-        grid-template-columns: 1fr !important;
-        padding: 15px !important;
-    }
-
-    /* Tablas responsivas para la página de registros */
-    .table-container {
-        overflow-x: auto;
-    }
-}
-/* --- OPTIMIZACIÓN PARA DISPOSITIVOS MÓVILES --- */
-@media (max-width: 768px) {
-    
-    /* 1. Hacemos que el contenedor use TODO el ancho del celular */
+    /* El contenedor principal de la app usa TODO el ancho en el celular */
     .container {
         width: 100% !important;
         max-width: 100% !important;
@@ -2039,17 +2034,17 @@ table {
         border-radius: 0 !important; /* Quitamos esquinas redondeadas para ganar espacio */
     }
 
-    /* 2. Para la página de Registros (Tablas) */
-    .table-container {
+    /* Formularios en una sola columna en móvil */
+    .form-container, .form-container-grid {
+        grid-template-columns: 1fr !important;
+        padding: 15px !important;
         width: 100% !important;
-        overflow-x: auto; /* Permite deslizar la tabla con el dedo si es muy ancha */
-        -webkit-overflow-scrolling: touch;
     }
 
-    /* 3. Aseguramos que los formularios ocupen todo el ancho interno */
-    .form-container {
+    /* Tablas responsivas para la página de registros */
+    .table-container {
         width: 100% !important;
-        padding: 15px !important;
-        grid-template-columns: 1fr !important; /* Todo en una sola columna hacia abajo */
+        overflow-x: auto !important; /* Permite deslizar la tabla con el dedo si es muy ancha */
+        -webkit-overflow-scrolling: touch !important;
     }
 }
