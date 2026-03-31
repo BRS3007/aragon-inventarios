@@ -372,3 +372,77 @@ main{
     font-size: 1rem;
     white-space: nowrap;
 }
+/* ===================================================
+   ESTILOS EXCLUSIVOS PARA MÓVILES (PANTALLAS PEQUEÑAS) PANTALLA INGRESO
+   =================================================== */
+@media screen and (max-width: 768px) {
+  
+  /* 1. Ocultar el reloj en celulares para que no choque con el logo */
+  #live-clock {
+    display: none !important;
+  }
+
+  /* 2. Reducir un poco el tamaño gigante del logo para que quepa bien en el header */
+  .header-left img {
+    height: 50px !important; 
+    width: auto;
+  }
+
+  /* 3. Hacer que el header distribuya bien el logo y el botón de cerrar sesión */
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+
+  /* 4. Convertir la barra de usuario en un menú inferior cómodo para el pulgar */
+  .user-info-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: #ffffff;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 0;
+  }
+
+  /* Forzamos a que los links se vean verticales: icono arriba y texto abajo */
+  .nav-main-horizontal {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column; /* Apilados verticalmente */
+    align-items: center;
+    font-size: 11px; /* Letra pequeña para que quepa */
+    text-decoration: none;
+    color: #555;
+  }
+
+  /* Hacemos que los iconos de navegación se vean más grandes y cómodos para tocar */
+  .nav-icon {
+    font-size: 20px !important;
+    margin-bottom: 3px;
+  }
+
+  /* 5. Ocultamos detalles secundarios de la barra para no saturar la pantalla del móvil */
+  .sesion-contador, 
+  .user-tag {
+    display: none !important;
+  }
+
+  /* 6. Espacio en blanco al final de la app para que el menú fijo no tape el formulario */
+  body {
+    padding-bottom: 70px !important;
+  }
+}
