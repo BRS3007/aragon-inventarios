@@ -35,10 +35,9 @@ body { font-family: 'Inter', sans-serif;
 </head>
 <body class="background-login">
     <header class="main-header">
-        
         <div class="header-left">
             <a href="/ingreso-productos">
-                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
+                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
             </a>
         </div>
 
@@ -49,58 +48,60 @@ body { font-family: 'Inter', sans-serif;
 
         <nav class="header-right">
             <ul class="nav-list">
-            
- <ul class="nav-list">
-                <!--<li><a href="/ingreso-productos" class="nav-link" data-i18n="importar:home_link">Inicio</a></li>-->
-                <li class="dropdown">
-                    <!--<a href="#" class="nav-link dropdown-toggle" data-i18n="importar:actions_dropdown">Acciones <span class="arrow-down"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/ingreso-productos" class="dropdown-item" data-i18n="importar:product_entry_link">Ingreso Productos</a></li>
-                        <li><a href="/registros" class="dropdown-item" data-i18n="importar:recorded_entries_link">Ingresos Realizados</a></li>
-                        <li><a href="/averias" class="dropdown-item" data-i18n="importar:report_damage_link">Reportar Avería</a></li>
-                        <li><a href="/subir" class="dropdown-item" data-i18n="importar:import_link">Importar Productos</a></li>
-                    </ul>
-                </li>-->
-                
-                <li><a href="/logout" class="nav-link" id="logout-btn-nav" data-i18n="importar:logout_button">Cerrar Sesión</a></li>
+                <li>
+                    <a href="/logout" class="logout-btn">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+                    </a>
+                </li>
             </ul>
- </nav>
- </header>
-<div class="user-info-bar">
-    <nav class="header-nav">
-        <ul class="nav-main-horizontal">
-            <li>
-                <a href="/ingreso-productos" class="nav-item">
-                    <span class="nav-icon">📥</span>
-                    <span class="nav-text" data-i18n="common:product_entry_link">Ingreso</span>
-                </a>
-            </li>
-            <li>
-                <a href="/averias" class="nav-item">
-                    <span class="nav-icon">⚠️</span>
-                    <span class="nav-text" data-i18n="common:report_damage_link">Averías</span>
-                </a>
-                
-            </li>
-            <li>
-                <a href="/registros" class="nav-item">
-                    <span class="nav-icon">📋</span>
-                    <span class="nav-text" data-i18n="common:recorded_entries_link">Registros</span>
-                </a>
-            </li>
-            <li>
-                <a href="/subir" class="nav-item">
-                    <span class="nav-icon">🚀</span>
-                    <span class="nav-text" data-i18n="common:import_link">Importar</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <div class="user-tag">
-        <i class="fa-solid fa-circle-user" style="color: red;"></i>
-        <span id="nombre-usuario-display">Cargando...</span>
+        </nav>
+    </header>
+
+    <div class="user-info-bar">
+        <nav class="header-nav">
+            <ul class="nav-main-horizontal">
+                <li>
+                    <a href="/ingreso-productos" class="nav-item">
+                        <span class="nav-icon"><i class="fa-solid fa-boxes-packing"></i></span>
+                        <span class="nav-text" data-i18n="common:product_entry_link">Ingreso</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/averias" class="nav-item">
+                        <span class="nav-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                        <span class="nav-text" data-i18n="common:report_damage_link">Averías</span>
+                    </a>
+                </li>
+                <li class="admin-only">
+                    <a href="/registros" class="nav-item">
+                        <span class="nav-icon"><i class="fa-solid fa-list-check"></i></span>
+                        <span class="nav-text" data-i18n="common:recorded_entries_link">Registros</span>
+                    </a>
+                </li>
+                <li class="admin-only">
+                    <a href="/subir" class="nav-item">
+                        <span class="nav-icon"><i class="fa-solid fa-file-arrow-up"></i></span>
+                        <span class="nav-text" data-i18n="common:import_link">Importar</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sesion-contador">
+            <i class="fa-solid fa-box"></i> Ingresos hoy: <span id="contador-ingresos">0</span>
+        </div>
+        
+        <div class="user-tag">
+            <i class="fa-solid fa-circle-user" style="color: red;"></i>
+            <span id="nombre-usuario-display">Cargando...</span>
+        </div>
     </div>
-</div>
+
+    <div class="notificacion-contenedor admin-only" onclick="abrirModalAprobaciones()">
+        <span class="icono-usuarios"><i class="fa-solid fa-bell"></i></span>
+        <span id="contador-badge" class="badge" style="display: none;">0</span>
+    </div>
+
 <main id="app-container">
     </main>
 <!-- Main Container para el contenido de subida -->

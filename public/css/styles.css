@@ -1876,64 +1876,110 @@ table {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
-/* --- ESTILOS ORIGINALES PARA PC DE LOS WIDGET --- */
+/* --- HEADER REPARADO PARA PC (Y MÓVIL) --- */
 .main-header {
     display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
+    justify-content: space-between !important; /* Separa izquierda, centro y derecha */
+    align-items: center !important; /* Centra todo verticalmente */
     padding: 10px 20px !important;
     background-color: #ffffff !important;
     border-bottom: 1px solid #e5e7eb !important;
-    height: 90px !important;
+    height: auto !important; /* Cambiado de 90px a auto para que no se desborde */
+    min-height: 80px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Contenedor Izquierdo (Logo) */
+.header-left {
+    flex: 1 !important; /* Toma el mismo espacio que la derecha para centrar el reloj */
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
 }
 
 .logo-img {
-    height: 75px !important;
+    height: 65px !important; /* Un tamaño un poco más prudente para que no rompa el diseño */
     width: auto !important;
 }
 
+/* Contenedor Centro (Reloj) */
 .centered-clock {
+    flex: 1 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     background-color: #f9fafb !important;
-    padding: 4px 12px !important; /* 🔥 Reducimos el relleno para que no se estire */
+    padding: 8px 16px !important;
     border-radius: 6px !important;
     border: 1px solid #e5e7eb !important;
-    max-height: 65px !important; /* 🔥 Le ponemos un tope de altura */
+    max-width: 250px !important; /* Evita que se estire a lo ancho */
 }
 
-/* Achicamos los textos de adentro */
 #reloj-fecha {
-    font-size: 12px !important;
-    color: #4b5563 !important;
+    font-size: 14px !important;
+    color: #6b7280 !important;
+    font-weight: 500 !important;
 }
 
 #reloj-hora {
-    font-size: 14px !important;
-    font-weight: bold !important;
-    color: #dc2626 !important;
+    font-size: 20px !important;
+    color: #111827 !important;
+    font-weight: 700 !important;
 }
 
+/* Contenedor Derecho (Cerrar Sesión) */
+.header-right {
+    flex: 1 !important;
+    display: flex !important;
+    justify-content: flex-end !important; /* Empuja el botón al extremo derecho */
+    align-items: center !important;
+}
+
+.nav-list {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Estilo del botón de cerrar sesión */
 .logout-btn {
-    display: inline-block !important;
-    background-color: #dc2626 !important;
-    color: #ffffff !important;
-    padding: 10px 20px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background-color: #dc2626 !important; /* Rojo profesional */
+    color: white !important;
+    padding: 10px 18px !important;
     border-radius: 6px !important;
-    font-weight: bold !important;
     text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    transition: background-color 0.2s !important;
+}
+
+.logout-btn:hover {
+    background-color: #b91c1c !important;
 }
 /* --- OPTIMIZACIÓN PARA DISPOSITIVOS MÓVILES --- */
 @media (max-width: 768px) {
-    /* El header pasa de fila a columna para que quepa todo */
     .main-header {
-        flex-direction: column !important;
-        height: auto !important;
-        padding: 10px !important;
-        gap: 10px;
+        flex-direction: column !important; /* En móvil se apilan uno abajo del otro */
+        gap: 15px !important;
+        padding: 15px !important;
     }
+
+    .header-left, .centered-clock, .header-right {
+        flex: none !important;
+        width: 100% !important;
+        justify-content: center !important; /* Todo centradito en el celular */
+    }
+    
+    .logout-btn {
+        width: 100% !important; /* El botón ocupa todo el ancho en el celular */
+        justify-content: center !important;
+    }
+}
 
     .logo-img {
         height: 50px !important; /* Logo más pequeño en móvil */
@@ -1979,5 +2025,31 @@ table {
     /* Tablas responsivas para la página de registros */
     .table-container {
         overflow-x: auto;
+    }
+}
+/* --- OPTIMIZACIÓN PARA DISPOSITIVOS MÓVILES --- */
+@media (max-width: 768px) {
+    
+    /* 1. Hacemos que el contenedor use TODO el ancho del celular */
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 10px !important; /* Un pequeño borde para que no pegue al vidrio */
+        margin: 5px 0 !important;
+        border-radius: 0 !important; /* Quitamos esquinas redondeadas para ganar espacio */
+    }
+
+    /* 2. Para la página de Registros (Tablas) */
+    .table-container {
+        width: 100% !important;
+        overflow-x: auto; /* Permite deslizar la tabla con el dedo si es muy ancha */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* 3. Aseguramos que los formularios ocupen todo el ancho interno */
+    .form-container {
+        width: 100% !important;
+        padding: 15px !important;
+        grid-template-columns: 1fr !important; /* Todo en una sola columna hacia abajo */
     }
 }
