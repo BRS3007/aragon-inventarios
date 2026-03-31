@@ -175,6 +175,29 @@
             .form-actions button {
                 width: 100%;
             }
+            /* Barra de Info inferior (Gris Clara) */
+        .user-info-bar {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            background-color: #f9fafb !important;
+            border-bottom: 1px solid #e5e7eb !important;
+            padding: 5px 20px !important;
+        }
+
+        .nav-main-horizontal {
+            display: flex !important;
+            gap: 20px !important;
+            list-style: none !important;
+            padding: 10px 0 !important;
+        }
+
+        /* Contenedor derecho que agrupa el Usuario */
+        .info-derecha-widgets {
+            display: flex !important;
+            align-items: center !important;
+            gap: 20px !important;
+        }
         }
     </style>
 </head>
@@ -223,6 +246,14 @@
             </ul>
         </nav>
 
+        <div class="info-derecha-widgets">
+            <div class="user-tag">
+                <i class="fa-solid fa-circle-user" style="color: red;"></i>
+                <span id="nombre-usuario-display">Hola: claudia</span>
+            </div>
+        </div>
+    </div>
+    
         <div class="px-5 py-2 text-sm text-gray-600 flex items-center gap-2">
             <i class="fa-solid fa-circle-user text-red-600"></i>
             <span>Hola: <strong>claudia</strong></span>
