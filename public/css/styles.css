@@ -1925,3 +1925,59 @@ table {
     font-weight: bold !important;
     text-decoration: none !important;
 }
+/* --- OPTIMIZACIÓN PARA DISPOSITIVOS MÓVILES --- */
+@media (max-width: 768px) {
+    /* El header pasa de fila a columna para que quepa todo */
+    .main-header {
+        flex-direction: column !important;
+        height: auto !important;
+        padding: 10px !important;
+        gap: 10px;
+    }
+
+    .logo-img {
+        height: 50px !important; /* Logo más pequeño en móvil */
+    }
+
+    .centered-clock {
+        max-height: none !important;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* La barra de navegación se vuelve scrolleable horizontalmente si no cabe */
+    .user-info-bar {
+        flex-direction: column !important;
+        height: auto !important;
+        padding: 10px !important;
+        gap: 10px;
+    }
+
+    .nav-main-horizontal {
+        width: 100%;
+        justify-content: space-between !important;
+        overflow-x: auto; /* Scroll por si son muchos botones */
+    }
+
+    .nav-item {
+        padding: 8px 10px !important;
+        font-size: 14px !important;
+    }
+
+    .sesion-contador, .user-tag {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* Formularios en una sola columna en móvil */
+    .form-container, .form-container-grid {
+        grid-template-columns: 1fr !important;
+        padding: 15px !important;
+    }
+
+    /* Tablas responsivas para la página de registros */
+    .table-container {
+        overflow-x: auto;
+    }
+}

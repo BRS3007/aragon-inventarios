@@ -1,241 +1,169 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="titulo.importar">Importar - ARAGON</title>
+ <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title data-i18n=>Importar</title>
 
-    <link rel="icon" type="image/png" href="favicons/android-chrome-192x192.png"> 
-    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+ <!-- INICIO: Codigo de Favicons Corregido y Optimizado -->
+<link rel="icon" type="image/png" href="favicons/apple-touch-icon.png"> 
+<!-- Asegurate que todos estos archivos esten en la carpeta 'public/favicons/' -->
+ <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+ <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+ <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+<link rel="manifest" href="favicons/site.webmanifest"> <!-- Ruta corregida para el manifest -->
+ <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+ <meta name="theme-color" content="#ffffff">
+ <link rel="icon" href="favicons/android-chrome-192x192.png" type="image/x-icon"> <!-- El favicon principal en formato .ico -->
+ <!-- FIN: Codigo de Favicons Corregido y Optimizado -->
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN para estilos -->
+<link href="/dist/output.css" rel="stylesheet">
+ <!-- Inter font from Google Fonts -->
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> <style>
+body { font-family: 'Inter', sans-serif;
+}
+ </style>
+ <!-- ! CLAVE: Enlace al CSS GENERAL de la aplicación ! -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+ <link rel="stylesheet" href="css/styles.css">
     
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
-
-    <style>
-        /* CSS BLINDADO ADAPTADO A MÓVILES */
-        .main-header {
-            display: flex !important;
-            justify-content: space-between !important;
-            align-items: center !important;
-            padding: 10px 20px !important;
-            background-color: #ffffff !important;
-            border-bottom: 1px solid #e5e7eb !important;
-            height: 90px !important;
-        }
-        .logo-img { height: 75px !important; width: auto !important; }
-        
-        .centered-clock {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-            background-color: #f9fafb !important;
-            padding: 5px 15px !important;
-            border-radius: 6px !important;
-            border: 1px solid #e5e7eb !important;
-            height: 65px !important; 
-        }
-        #reloj-fecha { font-size: 13px !important; color: #4b5563 !important; }
-        #reloj-hora { font-size: 14px !important; font-weight: bold !important; color: #dc2626 !important; }
-
-        .logout-btn {
-            display: inline-block !important;
-            background-color: #dc2626 !important;
-            color: #ffffff !important;
-            padding: 10px 20px !important;
-            border-radius: 6px !important;
-            font-weight: bold !important;
-            text-decoration: none !important;
-            font-size: 14px !important;
-        }
-
-        .user-info-bar {
-            display: flex !important;
-            justify-content: space-between !important;
-            align-items: center !important;
-            background-color: #f9fafb !important;
-            border-bottom: 1px solid #e5e7eb !important;
-            padding: 0 20px !important;
-            height: 50px !important;
-        }
-        .nav-main-horizontal {
-            display: flex !important;
-            gap: 20px !important;
-            list-style: none !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-        .nav-item {
-            text-decoration: none !important;
-            color: #374151 !important;
-            display: flex !important;
-            align-items: center !important;
-            gap: 8px !important;
-            font-size: 14px !important;
-            padding: 8px 12px !important;
-        }
-        .nav-item.active {
-            color: #dc2626 !important;
-            font-weight: bold !important;
-            border-bottom: 3px solid #dc2626 !important;
-        }
-        .info-derecha-widgets {
-            display: flex !important;
-            align-items: center !important;
-            gap: 20px !important;
-        }
-        .user-tag {
-            display: flex !important;
-            align-items: center !important;
-            gap: 8px !important;
-            font-size: 14px !important;
-            font-weight: bold !important;
-        }
-
-        /* DISEÑO DE IMPORTACIÓN */
-        .import-box {
-            margin: 20px auto;
-            max-width: 600px;
-            background: #ffffff;
-            border: 2px dashed #d1d5db; /* Estilo de caja de arrastre */
-            border-radius: 8px;
-            padding: 40px 20px;
-            text-align: center;
-            transition: border-color 0.3s;
-        }
-        .import-box:hover {
-            border-color: #3b82f6;
-        }
-
-        .upload-icon {
-            font-size: 48px;
-            color: #9ca3af;
-            margin-bottom: 15px;
-        }
-
-        .btn-upload {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background-color: #3b82f6;
-            color: #ffffff;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: background 0.2s;
-        }
-        .btn-upload:hover { background-color: #2563eb; }
-
-        /* Ocultamos el input de archivo feo por defecto */
-        #input-archivo {
-            display: none;
-        }
-
-        .custom-file-label {
-            display: block;
-            margin-top: 10px;
-            color: #4b5563;
-            font-size: 14px;
-        }
-
-        /* MEDIA QUERIES PARA ADAPTAR EN EL CELULAR */
-        @media (max-width: 768px) {
-            .main-header { height: auto !important; flex-direction: column !important; gap: 10px !important; text-align: center !important; }
-            .user-info-bar { height: auto !important; flex-direction: column !important; padding: 10px !important; }
-            .nav-main-horizontal { flex-wrap: wrap !important; justify-content: center !important; }
-            .info-derecha-widgets { margin-top: 10px !important; }
-            .import-box { padding: 20px 10px; }
-        }
-    </style>
 </head>
-<body>
-
+<body class="background-login">
     <header class="main-header">
+        
         <div class="header-left">
             <a href="/ingreso-productos">
-                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
+                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
             </a>
         </div>
-        <div class="centered-clock">
+
+        <div id="live-clock" class="centered-clock">
             <span id="reloj-fecha">Cargando fecha...</span>
             <span id="reloj-hora"></span>
         </div>
+
         <nav class="header-right">
-            <a href="/logout" class="logout-btn" data-i18n="btn.cerrar_sesion">Cerrar Sesión</a>
-        </nav>
-    </header>
-
-    <div class="user-info-bar">
-        <nav class="header-nav">
-            <ul class="nav-main-horizontal">
-                <li><a href="/ingreso-productos" class="nav-item"><i class="fa-solid fa-arrow-down-left-from-square"></i> <span data-i18n="nav.ingreso">Ingreso</span></a></li>
-                <li><a href="/averias" class="nav-item"><i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="nav.averias">Averías</span></a></li>
-                <li><a href="/registros" class="nav-item"><i class="fa-solid fa-clipboard-list"></i> <span data-i18n="nav.registros">Registros</span></a></li>
-                <li><a href="/subir" class="nav-item active"><i class="fa-solid fa-file-import"></i> <span data-i18n="nav.importar">Importar</span></a></li>
+            <ul class="nav-list">
+            
+ <ul class="nav-list">
+                <!--<li><a href="/ingreso-productos" class="nav-link" data-i18n="importar:home_link">Inicio</a></li>-->
+                <li class="dropdown">
+                    <!--<a href="#" class="nav-link dropdown-toggle" data-i18n="importar:actions_dropdown">Acciones <span class="arrow-down"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/ingreso-productos" class="dropdown-item" data-i18n="importar:product_entry_link">Ingreso Productos</a></li>
+                        <li><a href="/registros" class="dropdown-item" data-i18n="importar:recorded_entries_link">Ingresos Realizados</a></li>
+                        <li><a href="/averias" class="dropdown-item" data-i18n="importar:report_damage_link">Reportar Avería</a></li>
+                        <li><a href="/subir" class="dropdown-item" data-i18n="importar:import_link">Importar Productos</a></li>
+                    </ul>
+                </li>-->
+                
+                <li><a href="/logout" class="nav-link" id="logout-btn-nav" data-i18n="importar:logout_button">Cerrar Sesión</a></li>
             </ul>
-        </nav>
+ </nav>
+ </header>
+<div class="user-info-bar">
+    <nav class="header-nav">
+        <ul class="nav-main-horizontal">
+            <li>
+                <a href="/ingreso-productos" class="nav-item">
+                    <span class="nav-icon">📥</span>
+                    <span class="nav-text" data-i18n="common:product_entry_link">Ingreso</span>
+                </a>
+            </li>
+            <li>
+                <a href="/averias" class="nav-item">
+                    <span class="nav-icon">⚠️</span>
+                    <span class="nav-text" data-i18n="common:report_damage_link">Averías</span>
+                </a>
+                
+            </li>
+            <li>
+                <a href="/registros" class="nav-item">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text" data-i18n="common:recorded_entries_link">Registros</span>
+                </a>
+            </li>
+            <li>
+                <a href="/subir" class="nav-item">
+                    <span class="nav-icon">🚀</span>
+                    <span class="nav-text" data-i18n="common:import_link">Importar</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="user-tag">
+        <i class="fa-solid fa-circle-user" style="color: red;"></i>
+        <span id="nombre-usuario-display">Cargando...</span>
+    </div>
+</div>
+<main id="app-container">
+    </main>
+<!-- Main Container para el contenido de subida -->
+ <main>
+ <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-2xl relative">
 
-        <div class="info-derecha-widgets">
-            <div class="user-tag">
-                <i class="fa-solid fa-circle-user" style="color: red;"></i>
-                <span data-i18n="label.hola">Hola:</span> <span id="nombre-usuario-display">claudia</span>
-            </div>
+ <!-- Título principal -->
+ <h1 class="text-3xl font-bold text-center text-gray-800 mb-6" data-i18n="importar:form_title">Subir Productos</h1>
+
+ <!-- Formulario de carga de archivo -->
+ <form id="upload-form" class="space-y-6">
+<div>
+<label for="excel-file" class="block text-sm font-medium text-gray-700" data-i18n="importar:label_file_input">Selecciona tu archivo Excel (.xlsx):</label>
+<input type="file" id="excel-file" accept=".xlsx, .xls" required class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-blue-100">
+</div>
+
+<button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" data-i18n="importar:button_process_upload">
+Procesar y Subir
+ </button>
+ </form>
+
+ <!-- Contenedor para mostrar mensajes y datos procesados -->
+ <div class="mt-6">
+<h2 class="text-xl font-bold text-gray-800" data-i18n="importar:section_result_title">Resultado:</h2>
+<div id="status-message" class="text-center font-bold mt-2"></div>
+ </div>
+ </div>
+</main>
+
+<!-- Librería para leer archivos Excel en el navegador -->
+
+ <script type="importmap">
+{
+  "imports": {
+    "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/+esm",
+    "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/+esm",
+    "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/+esm",
+    "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
+  }
+}
+</script>
+ 
+<div id="modal-progreso" class="modal-carga" style="display:none;">
+    <div class="modal-contenido">
+        <div class="loader-icon">🚀</div>
+        <h3 data-i18n="importar:modal_title">Procesando Inventario Masivo</h3>
+        <p id="texto-progreso">Iniciando lectura de registros...</p>
+        
+        <div class="barra-contenedor">
+            <div id="barra-llenado" class="barra-llenado"></div>
+        </div>
+        
+        <div class="flex-status">
+            <span id="porcentaje-texto">0%</span>
+            <span id="detalles-conteo">0 / 0</span>
         </div>
     </div>
+</div>
 
-    <main class="container">
-        <div class="import-box">
-            <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
-            <h2 data-i18n="importar.titulo" style="margin-bottom: 10px;">Carga masiva de inventario</h2>
-            <p data-i18n="importar.descripcion" style="color: #6b7280; font-size: 14px;">Sube tus archivos de Excel (.xlsx) para actualizar el stock.</p>
-            
-            <form id="form-importar" enctype="multipart/form-data">
-                <label for="input-archivo" class="btn-upload">
-                    <i class="fa-solid fa-file-excel"></i> <span data-i18n="importar.btn_seleccionar">Seleccionar Archivo</span>
-                </label>
-                <input type="file" id="input-archivo" accept=".xlsx, .xls" required>
-                
-                <span id="file-name-display" class="custom-file-label" data-i18n="importar.sin_archivo">Ningún archivo seleccionado</span>
-                
-                <br><br>
-                <button type="submit" class="btn-action" style="background-color: #10b981;" data-i18n="importar.btn_procesar">
-                    <i class="fa-solid fa-play"></i> Procesar Archivo
-                </button>
-            </form>
-        </div>
-    </main>
-
-    <script>
-        function actualizarReloj() {
-            const ahora = new Date();
-            const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('reloj-fecha').textContent = ahora.toLocaleDateString('es-ES', opcionesFecha);
-            document.getElementById('reloj-hora').textContent = ahora.toLocaleTimeString('es-ES');
-        }
-        setInterval(actualizarReloj, 1000);
-        actualizarReloj();
-
-        // Pequeño script para mostrar el nombre del archivo al seleccionarlo
-        const fileInput = document.getElementById('input-archivo');
-        const fileDisplay = document.getElementById('file-name-display');
-        
-        fileInput.addEventListener('change', function() {
-            if(this.files.length > 0) {
-                fileDisplay.textContent = this.files[0].name;
-                fileDisplay.style.color = "#10b981";
-                fileDisplay.style.fontWeight = "bold";
-            }
-        });
-    </script>
-
-    <script src="js/i18n.js?v=1.1" type="module"></script>
-    <script src="js/subir.js?v=1.1" type="module"></script>
-    <script src="js/common.js?v=1.1" type="module"></script>
+<!-- Scripts JS - ¡CLAVE: Rutas relativas a la raíz del servidor! -->
+ <script src="js/i18n.js" type="module"></script>
+ <script src="js/subir.js" type="module"></script>
+ <script src="js/common.js" type="module"></script>
+ 
 </body>
 </html>
