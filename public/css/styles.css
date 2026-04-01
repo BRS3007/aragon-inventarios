@@ -2008,31 +2008,42 @@ table {
     }
 
     /* Reloj en una sola línea horizontal */
+    /* Reloj en una sola línea horizontal con texto más chico */
     .centered-clock {
         flex-direction: row !important;
-        gap: 8px !important;
-        margin-bottom: 10px !important;
+        gap: 4px !important;
+        margin-bottom: 5px !important;
     }
-    #reloj-fecha { font-size: 13px !important; }
-    #reloj-fecha::after { content: " | " !important; margin: 0 4px !important; }
-    #reloj-hora { font-size: 14px !important; }
+    #reloj-fecha { 
+        font-size: 11px !important; /* Antes estaba en 13px */
+        color: #4b5563 !important;
+    }
+    #reloj-fecha::after { 
+        content: " | " !important; 
+        margin: 0 3px !important; 
+    }
+    #reloj-hora { 
+        font-size: 12px !important; /* Antes estaba en 14px */
+        color: #111827 !important; 
+        font-weight: 700 !important; 
+    }
 
     /* Burbuja de Ingresos y Usuario */
     .sesion-contador, .user-tag {
-        font-size: 14px !important;
-        margin-bottom: 10px !important;
-        background-color: #f3f4f6 !important; /* Un gris muy suave para que se lea bien */
-        padding: 8px 15px !important;
+        font-size: 12px !important; /* Antes estaba en 14px */
+        margin-bottom: 6px !important;
+        background-color: #f3f4f6 !important;
+        padding: 6px 12px !important;
         border-radius: 20px !important;
-        width: auto !important; /* Que no ocupe toda la pantalla a lo ancho */
+        width: auto !important;
     }
 
-    /* Botón de Cerrar Sesión (¡Al final de la torre!) */
+    /* Botón de Cerrar Sesión más estilizado y compacto */
     .logout-btn {
-        width: 70% !important;
-        padding: 12px !important;
-        font-size: 14px !important;
-        border-radius: 6px !important;
+        width: 55% !important; /* Bajamos del 70% al 55% para que sea más angosto */
+        padding: 8px 12px !important; /* Menos relleno */
+        font-size: 12px !important; /* Letra más chica */
+        border-radius: 50px !important; /* Bordes más redondeados tipo pastilla */
         background-color: #dc2626 !important;
         color: white !important;
         text-decoration: none !important;
@@ -2040,7 +2051,7 @@ table {
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-        gap: 8px !important;
+        gap: 6px !important;
     }
 
     /* La campana sola */
