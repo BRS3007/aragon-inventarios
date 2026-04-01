@@ -1901,27 +1901,43 @@ table {
 }
 
 .logo-img {
-    height: 60px !important;
+    height: 80px !important;
     width: auto !important;
 }
 
+/* 🕒 RELOJ REPARADO: Ahora es pequeño y en una sola línea */
 .centered-clock {
     flex: 1 !important;
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: row !important; /* 🔥 Hace que se pongan uno al lado del otro */
     align-items: center !important;
     justify-content: center !important;
-    background-color: #f3f4f6 !important;
-    padding: 8px 15px !important;
-    border-radius: 6px !important;
-    border: 1px solid #e5e7eb !important;
-    max-width: 250px !important;
+    gap: 10px !important; /* Espacio entre la fecha y la hora */
+    background-color: transparent !important; /* 🔥 Quitamos el fondo gris */
+    padding: 0 !important; /* 🔥 Quitamos el relleno que lo hacía grande */
+    border: none !important; /* 🔥 Quitamos el borde */
+    max-width: none !important;
     height: auto !important;
 }
 
-#reloj-fecha { font-size: 13px !important; color: #6b7280 !important; font-weight: 500 !important; }
-#reloj-hora { font-size: 18px !important; color: #111827 !important; font-weight: 700 !important; }
+#reloj-fecha {
+    font-size: 14px !important;
+    color: #6b7280 !important; /* Color gris suave */
+    font-weight: 500 !important;
+}
 
+/* Añadimos un separador visual en medio por código si lo deseas */
+#reloj-fecha::after {
+    content: " | " !important; /* Una barrita separadora */
+    margin-left: 10px !important;
+    color: #d1d5db !important;
+}
+
+#reloj-hora {
+    font-size: 16px !important; /* Un tamaño prudente para que no grite */
+    color: #111827 !important; /* Color negro/gris oscuro */
+    font-weight: 700 !important;
+}
 .header-right {
     flex: 1 !important;
     display: flex !important;
@@ -1965,10 +1981,15 @@ table {
         height: 45px !important; /* Más pequeño para que no estorbe */
     }
 
+    /* En el celular también se verá en una sola línea horizontal sin ocupar espacio */
     .centered-clock {
-        height: auto !important;
-        padding: 10px !important;
+        flex-direction: row !important;
+        gap: 8px !important;
+        margin: 5px 0 !important;
     }
+
+    #reloj-fecha { font-size: 13px !important; }
+    #reloj-hora { font-size: 14px !important; }
 
     .logout-btn {
         width: 100% !important;
