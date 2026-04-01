@@ -1958,61 +1958,113 @@ table {
     font-size: 14px !important;
 }
 /* ===================================================
-   2. REGLAS EXCLUSIVAS PARA CELULARES (¡Llaves Corregidas!)
+   2. REGLAS EXCLUSIVAS PARA CELULARES (ORDEN SOLICITADO)
    =================================================== */
 @media (max-width: 768px) {
     
-    /* CABECERA EN MÓVIL: Logo e Info se quedan arriba */
+    /* CABECERA: Se convierte en una columna limpia */
     .main-header {
+        display: flex !important;
         flex-direction: column !important; 
-        gap: 12px !important;
-        padding: 15px !important;
+        align-items: center !important; /* Todo centrado */
+        gap: 15px !important;
+        padding: 20px 15px !important;
+        height: auto !important;
+        background-color: #ffffff !important;
     }
 
     .header-left, .centered-clock, .header-right {
         flex: none !important;
         width: 100% !important;
-        max-width: 100% !important;
+        display: flex !important;
         justify-content: center !important;
         text-align: center !important;
     }
 
+    /* 1. LOGO: Más grande y centrado arriba */
     .logo-img {
-        height: 45px !important; /* Más pequeño para que no estorbe */
+        height: 80px !important; /* Un tamaño imponente y visible */
+        width: auto !important;
     }
 
-    /* En el celular también se verá en una sola línea horizontal sin ocupar espacio */
+    /* 2. RELOJ: Abajo del logo en una sola línea */
     .centered-clock {
         flex-direction: row !important;
         gap: 8px !important;
-        margin: 5px 0 !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
     }
 
     #reloj-fecha { font-size: 13px !important; }
+    #reloj-fecha::after { content: " | " !important; margin: 0 5px !important; }
     #reloj-hora { font-size: 14px !important; }
 
-    .logout-btn {
-        width: 100% !important;
-        justify-content: center !important;
-    }
-
-    /* BARRA DE USUARIO: Ponemos el nombre y la campana aquí */
+    /* BARRA DE USUARIO: La convertimos también en columna para seguir el orden */
     .user-info-bar {
         display: flex !important;
-        flex-direction: row !important; /* En fila para que quepan juntos */
-        justify-content: space-between !important;
+        flex-direction: column !important;
         align-items: center !important;
-        padding: 10px 15px !important;
+        gap: 12px !important;
+        background-color: #f9fafb !important;
+        padding: 15px !important;
+        border-bottom: 1px solid #e5e7eb !important;
         height: auto !important;
     }
 
-    .sesion-contador, .user-tag {
-        width: auto !important;
-        text-align: left !important;
-        font-size: 13px !important;
+    /* 3. USUARIO */
+    .user-tag {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
     }
 
-    /* ⭐ TU IDEA: MENÚ DE ICONOS FLOTANDO ABAJO ⭐ */
+    /* 4. INGRESOS HOY */
+    .sesion-contador {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        font-size: 14px !important;
+        color: #4b5563 !important;
+    }
+
+    /* 5. CAMPANITA: Centrada y bonita */
+    .notificacion-contenedor {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: #fef2f2 !important;
+        color: #dc2626 !important;
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 50% !important;
+        position: relative !important;
+        cursor: pointer !important;
+    }
+
+    .badge {
+        position: absolute !important;
+        top: -3px !important;
+        right: -3px !important;
+        background: red !important;
+        color: white !important;
+        border-radius: 50% !important;
+        padding: 2px 6px !important;
+        font-size: 10px !important;
+    }
+
+    /* 6. CERRAR SESIÓN: Al final de la cabecera, un botón ancho y cómodo */
+    .logout-btn {
+        width: 80% !important; /* No ocupa todo el ancho para que se vea estilizado */
+        justify-content: center !important;
+        padding: 10px !important;
+        font-size: 14px !important;
+    }
+
+
+    /* ⭐ BARRA DE NAVEGACIÓN INFERIOR FLOTANTE (Menú de la app) ⭐ */
     .user-info-bar .header-nav {
         display: block !important;
         position: fixed !important;
@@ -2032,12 +2084,11 @@ table {
         padding: 10px 0 !important;
         margin: 0 !important;
         list-style: none !important;
-        width: 100% !important;
     }
 
     .nav-item {
         display: flex !important;
-        flex-direction: column !important; /* Icono arriba, texto abajo */
+        flex-direction: column !important;
         align-items: center !important;
         font-size: 11px !important;
         color: #4b5563 !important;
@@ -2045,33 +2096,15 @@ table {
         gap: 4px !important;
     }
 
-    .nav-icon {
-        font-size: 20px !important; /* Iconos grandes y cómodos */
-    }
+    .nav-icon { font-size: 18px !important; }
 
-    /* Dejamos un espacio al final del cuerpo para que la barra no tape los botones */
-    body {
-        padding-bottom: 80px !important;
-    }
+    body { padding-bottom: 80px !important; } /* Espacio para que el menú no tape nada */
 
-    /* FORMULARIOS Y CONTENEDORES AL 100% */
+    /* CONTENEDORES DE FORMULARIOS */
     .container {
         width: 100% !important;
         max-width: 100% !important;
         padding: 15px !important;
-        margin: 5px 0 !important;
         border-radius: 0 !important;
-    }
-
-    .form-container, .form-container-grid {
-        grid-template-columns: 1fr !important;
-        padding: 15px !important;
-        width: 100% !important;
-    }
-
-    .table-container {
-        width: 100% !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
     }
 } /* <--- AQUÍ ES DONDE DEBE CERRAR LA LLAVE DEL CELULAR */
