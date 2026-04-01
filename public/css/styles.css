@@ -1958,11 +1958,11 @@ table {
     font-size: 14px !important;
 }
 /* ===================================================
-   2. REGLAS EXCLUSIVAS PARA CELULARES (.EJS COMPATIBLE)
+   2. REGLAS EXCLUSIVAS PARA CELULARES (RESETEO TOTAL)
    =================================================== */
 @media (max-width: 768px) {
     
-    /* Forzamos a que el Header sea un bloque vertical estricto */
+    /* 1. Resetear el Header y forzarlo a ser una columna limpia */
     .main-header {
         display: flex !important;
         flex-direction: column !important; 
@@ -1970,80 +1970,86 @@ table {
         justify-content: flex-start !important;
         gap: 15px !important;
         padding: 20px 10px !important;
+        height: auto !important;
+        min-height: 250px !important; /* Le damos altura fija de sobra */
         background-color: #ffffff !important;
-        height: auto !important; /* Que crezca según lo que tenga adentro */
         position: relative !important;
     }
 
-    /* Rompemos cualquier posicionamiento raro que traigan los divs */
-    .header-left, .centered-clock, .header-right {
+    /* 2. Quitar el posicionamiento absoluto que amontona las cosas */
+    .header-left, 
+    .centered-clock, 
+    .header-right, 
+    .user-info-bar,
+    .nav-list,
+    .user-tag,
+    .sesion-contador,
+    .logout-btn {
         position: relative !important;
         top: auto !important;
         left: auto !important;
         right: auto !important;
+        bottom: auto !important;
+        transform: none !important; /* Quita traslados que lo centran mal */
+        margin: 0 !important;
         width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
         text-align: center !important;
-        margin: 0 !important;
     }
 
-    /* 1. LOGO: Arriba de todo y centrado */
+    /* Logo más cómodo */
     .logo-img {
         height: 65px !important;
         width: auto !important;
         margin-bottom: 5px !important;
     }
 
-    /* 2. RELOJ: En una sola fila horizontal abajo del logo */
+    /* Reloj en una sola línea horizontal */
     .centered-clock {
         flex-direction: row !important;
-        gap: 6px !important;
+        gap: 8px !important;
         margin-bottom: 10px !important;
     }
-    #reloj-fecha { font-size: 13px !important; color: #6b7280 !important; }
+    #reloj-fecha { font-size: 13px !important; }
     #reloj-fecha::after { content: " | " !important; margin: 0 4px !important; }
-    #reloj-hora { font-size: 14px !important; color: #111827 !important; font-weight: 700 !important; }
+    #reloj-hora { font-size: 14px !important; }
 
-    /* 3. BOTÓN CERRAR SESIÓN: Abajo del reloj */
-    .nav-list {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: center !important;
-        list-style: none !important;
-        padding: 0 !important;
-        margin: 0 !important;
+    /* Burbuja de Ingresos y Usuario */
+    .sesion-contador, .user-tag {
+        font-size: 14px !important;
+        margin-bottom: 10px !important;
+        background-color: #f3f4f6 !important; /* Un gris muy suave para que se lea bien */
+        padding: 8px 15px !important;
+        border-radius: 20px !important;
+        width: auto !important; /* Que no ocupe toda la pantalla a lo ancho */
     }
+
+    /* Botón de Cerrar Sesión (¡Al final de la torre!) */
     .logout-btn {
-        width: 75% !important;
-        justify-content: center !important;
-        padding: 10px !important;
+        width: 70% !important;
+        padding: 12px !important;
         font-size: 14px !important;
         border-radius: 6px !important;
-    }
-
-    /* 4. LA BARRA DE USUARIO (La que se montaba) */
-    .user-info-bar {
+        background-color: #dc2626 !important;
+        color: white !important;
+        text-decoration: none !important;
+        font-weight: bold !important;
         display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
         justify-content: center !important;
-        gap: 10px !important;
-        background-color: #f9fafb !important;
-        padding: 15px 10px !important;
-        border-top: 1px solid #e5e7eb !important;
-        border-bottom: 1px solid #e5e7eb !important;
-        width: 100% !important;
-        position: relative !important;
-        top: auto !important;
+        align-items: center !important;
+        gap: 8px !important;
     }
 
-    .user-tag { font-size: 14px !important; font-weight: 600 !important; }
-    .sesion-contador { font-size: 13px !important; color: #4b5563 !important; }
+    /* La campana sola */
+    .fa-bell {
+        font-size: 20px !important;
+        margin-top: 10px !important;
+    }
 
-    /* 5. MENÚ FLOTANTE INFERIOR (Se queda pegado abajo del cel) */
+    /* MENÚ FLOTANTE INFERIOR (No se toca, se queda abajo) */
     .header-nav {
         position: fixed !important;
         bottom: 0 !important;
@@ -2054,26 +2060,8 @@ table {
         z-index: 9999 !important;
         border-top: 1px solid #e5e7eb !important;
     }
-
-    .nav-main-horizontal {
-        display: flex !important;
-        justify-content: space-around !important;
-        padding: 10px 0 !important;
-        margin: 0 !important;
-        list-style: none !important;
-    }
-
-    .nav-item {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        font-size: 11px !important;
-        color: #4b5563 !important;
-        gap: 4px !important;
-        text-decoration: none !important;
-    }
-
-    .nav-icon { font-size: 18px !important; }
-
+    .nav-main-horizontal { display: flex !important; justify-content: space-around !important; padding: 10px 0 !important; list-style: none !important; margin: 0 !important; }
+    .nav-item { display: flex !important; flex-direction: column !important; align-items: center !important; font-size: 11px !important; text-decoration: none !important; color: #4b5563 !important; }
+    
     body { padding-bottom: 80px !important; }
 }
