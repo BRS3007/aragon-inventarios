@@ -2015,7 +2015,7 @@ table {
         margin-bottom: 5px !important;
     }
     #reloj-fecha { 
-        font-size: 5px !important; /* Antes estaba en 13px */
+        font-size: 1px !important; /* Antes estaba en 13px */
         color: #4b5563 !important;
     }
     #reloj-fecha::after { 
@@ -2023,7 +2023,7 @@ table {
         margin: 0 3px !important; 
     }
     #reloj-hora { 
-        font-size: 8px !important; /* Antes estaba en 14px */
+        font-size: 4px !important; /* Antes estaba en 14px */
         color: #111827 !important; 
         font-weight: 700 !important; 
     }
