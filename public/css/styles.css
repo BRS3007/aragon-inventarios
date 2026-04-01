@@ -1887,13 +1887,12 @@ table {
     padding: 10px 20px !important;
     background-color: #ffffff !important;
     border-bottom: 1px solid #e5e7eb !important;
-    height: auto !important; /* Quitamos los 90px fijos que rompen todo */
+    height: auto !important;
     min-height: 80px !important;
     width: 100% !important;
     box-sizing: border-box !important;
 }
 
-/* Contenedor Izquierdo (Logo) */
 .header-left {
     flex: 1 !important;
     display: flex !important;
@@ -1902,51 +1901,32 @@ table {
 }
 
 .logo-img {
-    height: 60px !important; /* Tamaño moderado para PC */
+    height: 60px !important;
     width: auto !important;
 }
 
-/* Contenedor Centro (Reloj) */
 .centered-clock {
     flex: 1 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    background-color: #f3f4f6 !important; /* Gris clarito para que resalte */
-    padding: 10px 15px !important;
+    background-color: #f3f4f6 !important;
+    padding: 8px 15px !important;
     border-radius: 6px !important;
     border: 1px solid #e5e7eb !important;
-    max-width: 250px !important; /* Evita que se estire a lo ancho */
-    height: auto !important; /* 🔥 CLAVE: Quitamos cualquier max-height previo */
+    max-width: 250px !important;
+    height: auto !important;
 }
 
-#reloj-fecha {
-    font-size: 13px !important;
-    color: #6b7280 !important;
-    font-weight: 500 !important;
-    margin-bottom: 3px !important;
-}
+#reloj-fecha { font-size: 13px !important; color: #6b7280 !important; font-weight: 500 !important; }
+#reloj-hora { font-size: 18px !important; color: #111827 !important; font-weight: 700 !important; }
 
-#reloj-hora {
-    font-size: 18px !important;
-    color: #111827 !important;
-    font-weight: 700 !important;
-}
-
-/* Contenedor Derecho (Cerrar Sesión) */
-/* Contenedor Derecho (Cerrar Sesión) */
 .header-right {
     flex: 1 !important;
     display: flex !important;
     justify-content: flex-end !important;
     align-items: center !important;
-}
-
-.nav-list {
-    list-style: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
 }
 
 .logout-btn {
@@ -1961,101 +1941,116 @@ table {
     font-weight: 600 !important;
     font-size: 14px !important;
 }
-
-.logout-btn:hover {
-    background-color: #b91c1c !important;
-}
-
-
 /* ===================================================
-   2. REGLAS EXCLUSIVAS PARA CELULARES
+   2. REGLAS EXCLUSIVAS PARA CELULARES (¡Llaves Corregidas!)
    =================================================== */
 @media (max-width: 768px) {
     
+    /* CABECERA EN MÓVIL: Logo e Info se quedan arriba */
     .main-header {
-        flex-direction: column !important; /* Los pone uno debajo del otro */
-        gap: 15px !important;
+        flex-direction: column !important; 
+        gap: 12px !important;
         padding: 15px !important;
     }
 
-    /* Cada bloque usa el 100% del ancho del celular */
     .header-left, .centered-clock, .header-right {
         flex: none !important;
         width: 100% !important;
-        max-width: 100% !important; /* 🔥 Forzamos a que ignore el max-width de PC */
+        max-width: 100% !important;
         justify-content: center !important;
         text-align: center !important;
     }
 
     .logo-img {
-        height: 50px !important; /* Logo más pequeño en celular */
+        height: 45px !important; /* Más pequeño para que no estorbe */
     }
 
     .centered-clock {
-        height: auto !important; /* 🔥 El contenedor se estira según el texto */
-        padding: 12px 10px !important;
-    }
-
-    #reloj-fecha {
-        font-size: 14px !important; /* Letra un poco más grande y legible en celular */
-    }
-
-    #reloj-hora {
-        font-size: 20px !important;
+        height: auto !important;
+        padding: 10px !important;
     }
 
     .logout-btn {
-        width: 100% !important; /* El botón abarca todo el ancho táctil */
-        justify-content: center !important;
-        padding: 12px !important;
-    }
-}
-
-    /* La barra de navegación se vuelve scrolleable horizontalmente si no cabe */
-    .user-info-bar {
-        flex-direction: column !important;
-        height: auto !important;
-        padding: 10px !important;
-        gap: 10px !important;
-    }
-
-    .nav-main-horizontal {
         width: 100% !important;
-        justify-content: space-between !important;
-        overflow-x: auto !important; /* Scroll por si son muchos botones */
+        justify-content: center !important;
     }
 
-    .nav-item {
-        padding: 8px 10px !important;
-        font-size: 14px !important;
+    /* BARRA DE USUARIO: Ponemos el nombre y la campana aquí */
+    .user-info-bar {
+        display: flex !important;
+        flex-direction: row !important; /* En fila para que quepan juntos */
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 10px 15px !important;
+        height: auto !important;
     }
 
     .sesion-contador, .user-tag {
-        width: 100% !important;
-        justify-content: center !important;
-        text-align: center !important;
+        width: auto !important;
+        text-align: left !important;
+        font-size: 13px !important;
     }
 
-    /* El contenedor principal de la app usa TODO el ancho en el celular */
+    /* ⭐ TU IDEA: MENÚ DE ICONOS FLOTANDO ABAJO ⭐ */
+    .user-info-bar .header-nav {
+        display: block !important;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        background-color: #ffffff !important;
+        box-shadow: 0 -3px 10px rgba(0,0,0,0.1) !important;
+        z-index: 9999 !important;
+        border-top: 1px solid #e5e7eb !important;
+    }
+
+    .nav-main-horizontal {
+        display: flex !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 10px 0 !important;
+        margin: 0 !important;
+        list-style: none !important;
+        width: 100% !important;
+    }
+
+    .nav-item {
+        display: flex !important;
+        flex-direction: column !important; /* Icono arriba, texto abajo */
+        align-items: center !important;
+        font-size: 11px !important;
+        color: #4b5563 !important;
+        text-decoration: none !important;
+        gap: 4px !important;
+    }
+
+    .nav-icon {
+        font-size: 20px !important; /* Iconos grandes y cómodos */
+    }
+
+    /* Dejamos un espacio al final del cuerpo para que la barra no tape los botones */
+    body {
+        padding-bottom: 80px !important;
+    }
+
+    /* FORMULARIOS Y CONTENEDORES AL 100% */
     .container {
         width: 100% !important;
         max-width: 100% !important;
-        padding: 10px !important; /* Un pequeño borde para que no pegue al vidrio */
+        padding: 15px !important;
         margin: 5px 0 !important;
-        border-radius: 0 !important; /* Quitamos esquinas redondeadas para ganar espacio */
+        border-radius: 0 !important;
     }
 
-    /* Formularios en una sola columna en móvil */
     .form-container, .form-container-grid {
         grid-template-columns: 1fr !important;
         padding: 15px !important;
         width: 100% !important;
     }
 
-    /* Tablas responsivas para la página de registros */
     .table-container {
         width: 100% !important;
-        overflow-x: auto !important; /* Permite deslizar la tabla con el dedo si es muy ancha */
+        overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important;
     }
-    
+} /* <--- AQUÍ ES DONDE DEBE CERRAR LA LLAVE DEL CELULAR */
