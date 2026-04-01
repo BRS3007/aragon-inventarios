@@ -1882,12 +1882,12 @@ table {
 
 .main-header {
     display: flex !important;
-    justify-content: space-between !important; /* Separa izquierda, centro y derecha */
-    align-items: center !important; /* Centra todo verticalmente */
+    justify-content: space-between !important;
+    align-items: center !important;
     padding: 10px 20px !important;
     background-color: #ffffff !important;
     border-bottom: 1px solid #e5e7eb !important;
-    height: auto !important; /* Cambiado de 90px a auto para que no se desborde */
+    height: auto !important; /* Quitamos los 90px fijos que rompen todo */
     min-height: 80px !important;
     width: 100% !important;
     box-sizing: border-box !important;
@@ -1895,14 +1895,14 @@ table {
 
 /* Contenedor Izquierdo (Logo) */
 .header-left {
-    flex: 1 !important; /* Toma el mismo espacio que la derecha para centrar el reloj */
+    flex: 1 !important;
     display: flex !important;
     justify-content: flex-start !important;
     align-items: center !important;
 }
 
 .logo-img {
-    height: 65px !important; /* Un tamaño un poco más prudente para que no rompa el diseño en PC */
+    height: 60px !important; /* Tamaño moderado para PC */
     width: auto !important;
 }
 
@@ -1913,30 +1913,33 @@ table {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    background-color: #f9fafb !important;
-    padding: 8px 16px !important;
+    background-color: #f3f4f6 !important; /* Gris clarito para que resalte */
+    padding: 10px 15px !important;
     border-radius: 6px !important;
     border: 1px solid #e5e7eb !important;
-    max-width: 250px !important; /* Evita que se estire a lo ancho en PC */
+    max-width: 250px !important; /* Evita que se estire a lo ancho */
+    height: auto !important; /* 🔥 CLAVE: Quitamos cualquier max-height previo */
 }
 
 #reloj-fecha {
-    font-size: 14px !important;
+    font-size: 13px !important;
     color: #6b7280 !important;
     font-weight: 500 !important;
+    margin-bottom: 3px !important;
 }
 
 #reloj-hora {
-    font-size: 20px !important;
+    font-size: 18px !important;
     color: #111827 !important;
     font-weight: 700 !important;
 }
 
 /* Contenedor Derecho (Cerrar Sesión) */
+/* Contenedor Derecho (Cerrar Sesión) */
 .header-right {
     flex: 1 !important;
     display: flex !important;
-    justify-content: flex-end !important; /* Empuja el botón al extremo derecho */
+    justify-content: flex-end !important;
     align-items: center !important;
 }
 
@@ -1946,19 +1949,17 @@ table {
     padding: 0 !important;
 }
 
-/* Estilo del botón de cerrar sesión */
 .logout-btn {
     display: inline-flex !important;
     align-items: center !important;
     gap: 8px !important;
-    background-color: #dc2626 !important; /* Rojo profesional */
+    background-color: #dc2626 !important;
     color: white !important;
-    padding: 10px 18px !important;
+    padding: 10px 16px !important;
     border-radius: 6px !important;
     text-decoration: none !important;
     font-weight: 600 !important;
     font-size: 14px !important;
-    transition: background-color 0.2s !important;
 }
 
 .logout-btn:hover {
@@ -1967,38 +1968,48 @@ table {
 
 
 /* ===================================================
-   2. OPTIMIZACIÓN EXCLUSIVA PARA DISPOSITIVOS MÓVILES
+   2. REGLAS EXCLUSIVAS PARA CELULARES
    =================================================== */
 @media (max-width: 768px) {
     
-    /* El header se apila en vertical en el celular */
     .main-header {
-        flex-direction: column !important; 
+        flex-direction: column !important; /* Los pone uno debajo del otro */
         gap: 15px !important;
         padding: 15px !important;
     }
 
-    /* Cada sección del header ocupa el 100% de ancho en el celular */
+    /* Cada bloque usa el 100% del ancho del celular */
     .header-left, .centered-clock, .header-right {
         flex: none !important;
         width: 100% !important;
-        justify-content: center !important; /* Todo centradito en el celular */
-    }
-    
-    .logo-img {
-        height: 50px !important; /* Logo más pequeño en móvil */
-    }
-
-    .centered-clock {
-        max-height: none !important;
-        width: 100% !important;
+        max-width: 100% !important; /* 🔥 Forzamos a que ignore el max-width de PC */
+        justify-content: center !important;
         text-align: center !important;
     }
 
-    .logout-btn {
-        width: 100% !important; /* El botón ocupa todo el ancho en el celular */
-        justify-content: center !important;
+    .logo-img {
+        height: 50px !important; /* Logo más pequeño en celular */
     }
+
+    .centered-clock {
+        height: auto !important; /* 🔥 El contenedor se estira según el texto */
+        padding: 12px 10px !important;
+    }
+
+    #reloj-fecha {
+        font-size: 14px !important; /* Letra un poco más grande y legible en celular */
+    }
+
+    #reloj-hora {
+        font-size: 20px !important;
+    }
+
+    .logout-btn {
+        width: 100% !important; /* El botón abarca todo el ancho táctil */
+        justify-content: center !important;
+        padding: 12px !important;
+    }
+}
 
     /* La barra de navegación se vuelve scrolleable horizontalmente si no cabe */
     .user-info-bar {
@@ -2047,4 +2058,4 @@ table {
         overflow-x: auto !important; /* Permite deslizar la tabla con el dedo si es muy ancha */
         -webkit-overflow-scrolling: touch !important;
     }
-}
+    
