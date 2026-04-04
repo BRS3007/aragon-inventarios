@@ -1,14 +1,19 @@
 {
-"page_title": "Entradanan Registrá",
-    "search_placeholder": "Buska pa kódigo di barranan, kódigo, deskripshon, pasio...",
-    "table_barcode": "Kódigo di Barranan",
-    "table_code": "Kódigo",
-    "table_description": "Deskripshon",
-    "table_quantity": "Kantidat",
-    "table_date": "Fecha",
-    "table_price": "Prijs",
-    "table_aisle": "Pasio",
-    "table_actions": "Akshonnan",
-    "export_by_date_range_title": "Eksportá Registronan pa Rango di Fecha",
-    "detailed_product_list_title": "Lista Detalyá di Produktonan"
-  }
+  "page_title": "Registronan di Produktonan",
+  "page_subtitle": "Historia di entradanan katibu",
+  "search_placeholder": "Buska pa kódigo òf deskripshon...",
+  "table_barcode": "Kódigo di Barra",
+  "table_code": "Kódigo",
+  "table_description": "Deskripshon",
+  "table_quantity": "Kantidat",
+  "table_date": "Fecha",
+  "table_price": "Prijs",
+  "table_aisle": "Pasio",
+  "table_actions": "Akshonnan",
+  "table_type": "Tipo",
+  "table_location": "Lugá",
+  "table_user": "Usuário",
+  "modal_history_title": "Historia di Registronan",
+  "export_by_date_range_title": "Eksportá Registronan pa Rango di Fecha",
+  "detailed_product_list_title": "Lista Detalyá di Produktonan"
+}

@@ -9,14 +9,16 @@ import express from 'express';
 import session from 'express-session';
 import mysql from 'mysql2/promise';
 import { fileURLToPath } from 'url';
-import axios from 'axios';       
+import axios from 'axios';       
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
-import ExcelJS from 'exceljs';   
-import cors from 'cors';         
+import ExcelJS from 'exceljs';   
+import cors from 'cors';         
 import multer from 'multer';
 import nodemailer from 'nodemailer';
 import chokidar from 'chokidar';
+import { v2 as cloudinary } from 'cloudinary';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
 
 // 1. OBTENER RUTAS EN MÓDULOS ES (Hacer esto ANTES de usar __dirname)
 const __filename = fileURLToPath(import.meta.url);
@@ -25,11 +27,10 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 2. CONFIGURAR MOTOR DE PLANTILLAS EJS
-app.set('view engine', 'ejs');
-app.set('views', path.resolve(__dirname, 'views'));
+// Archivos estáticos desde public/
+app.use(express.static(path.join(__dirname, 'public')));
 
-// 3. DESESTRUCTURAR BCRYPT (Opcional pero ayuda a limpiar el código)
+// DESESTRUCTURAR BCRYPT
 const { hash, compare } = bcrypt;
 
 // Configuración del Pool de la Base de Datos
@@ -45,10 +46,53 @@ const db = mysql.createPool({
     queueLimit: 0
 });
 
+// Configuración de Cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// Configuración de Multer con Cloudinary para imágenes de productos
+const cloudinaryStorage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'aragon_productos',
+        allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
+        transformation: [{ width: 800, height: 800, crop: 'limit', quality: 'auto' }]
+    }
+});
+const uploadToCloudinary = multer({ storage: cloudinaryStorage });
+
 console.log("--- Diagnóstico de Variables ---");
 console.log("USER:", process.env.EMAIL_USER);
 console.log("PASS cargada:", process.env.EMAIL_PASS ? "SÍ (longitud " + process.env.EMAIL_PASS.length + ")" : "NO");
+console.log("Cloudinary:", process.env.CLOUDINARY_CLOUD_NAME ? "Configurado" : "No configurado");
 console.log("--------------------------------");
+
+// Migración: Asegurar que la columna imagen_url exista en la tabla inventario
+async function runMigrations() {
+    try {
+        const [columns] = await db.query(`
+            SELECT COLUMN_NAME 
+            FROM INFORMATION_SCHEMA.COLUMNS 
+            WHERE TABLE_SCHEMA = ? AND TABLE_NAME = 'inventario' AND COLUMN_NAME = 'imagen_url'
+        `, [process.env.DB_NAME]);
+
+        if (columns.length === 0) {
+            await db.query(`
+                ALTER TABLE inventario 
+                ADD COLUMN imagen_url VARCHAR(500) DEFAULT NULL 
+                AFTER pasillo
+            `);
+            console.log("✅ Columna 'imagen_url' añadida a la tabla 'inventario'");
+        } else {
+            console.log("ℹ️ Columna 'imagen_url' ya existe en la tabla 'inventario'");
+        }
+    } catch (error) {
+        console.error("⚠️ Error en migración de imagen_url:", error.message);
+    }
+}
 
 function verificarPlan(planRequerido) {
     return (req, res, next) => {
@@ -357,9 +401,9 @@ app.get('/', (req, res) => {
     else res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Así se llama a un archivo .ejs
+// Rutas usando archivos HTML estáticos desde public/
 app.get('/ingreso-productos', (req, res) => {
-    res.render('ingreso-productos'); // Express busca automáticamente 'views/ingreso-productos.ejs'
+    res.sendFile(path.join(__dirname, 'public', 'ingreso-productos.html'));
 });
 
 // Ruta exacta que pide tu frontend
@@ -414,9 +458,20 @@ app.get('/api/historial/:codigoDeBarras', async (req, res) => {
     }
 });
 
-// Así se llama a un archivo .ejs
-app.get('/registros', (req, res) => {
-    res.render('registros'); // Express busca automáticamente 'views/registros.ejs'
+// Rutas usando archivos HTML estáticos desde public/
+// Middleware para proteger rutas de admin
+function requireAdmin(req, res, next) {
+    if (!req.session.loggedIn) {
+        return res.redirect('/');
+    }
+    if (req.session.role !== 'admin') {
+        return res.redirect('/acceso-denegado.html');
+    }
+    next();
+}
+
+app.get('/registros', requireAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'registros.html'));
 });
 
 app.get('/api/ver-todos-los-ingresos', (req, res) => {
@@ -492,11 +547,13 @@ app.get('/api/buscar', async (req, res) => {
     const empresa_id = req.session.empresa_id;
 
     try {
-        // IMPORTANTE: Seleccionar todos los campos que el JS necesita
+        // IMPORTANTE: Seleccionar todos los campos que el JS necesita, incluyendo imagen_url
         const [results] = await db.query(
-            `SELECT descripcion, codigo_de_barras, codigo, precio, pasillo 
+            `SELECT descripcion, codigo_de_barras, codigo, precio, pasillo, imagen_url, 
+                    SUM(cantidad) as cantidad
              FROM inventario 
              WHERE empresa_id = ? AND (descripcion LIKE ? OR codigo_de_barras LIKE ?) 
+             GROUP BY codigo_de_barras, codigo, descripcion, precio, pasillo, imagen_url
              LIMIT 10`, 
             [empresa_id, busqueda, busqueda]
         );
@@ -604,6 +661,55 @@ app.post('/api/guardar-producto', async (req, res) => {
     } catch (err) {
         console.error("Error detallado:", err.message);
         res.status(500).json({ success: false, message: "Error al guardar: " + err.message });
+    }
+});
+
+// Endpoint para guardar imagen de producto en Cloudinary
+app.post('/api/guardar-imagen-producto', async (req, res) => {
+    const { codigo_de_barras, imagen } = req.body;
+    const empresa_id = req.session.empresa_id;
+
+    if (!empresa_id) {
+        return res.status(401).json({ success: false, message: "Sesión no válida" });
+    }
+
+    if (!imagen || !codigo_de_barras) {
+        return res.status(400).json({ success: false, message: "Datos incompletos" });
+    }
+
+    try {
+        // Convertir base64 a buffer para subir a Cloudinary
+        const base64Data = imagen.replace(/^data:image\/\w+;base64,/, '');
+        const buffer = Buffer.from(base64Data, 'base64');
+
+        // Subir a Cloudinary
+        const result = await cloudinary.uploader.upload(
+            `data:image/jpeg;base64,${base64Data}`,
+            {
+                folder: 'aragon_productos',
+                public_id: `${empresa_id}_${codigo_de_barras}_${Date.now()}`,
+                resource_type: 'image',
+                transformation: [{ width: 800, height: 800, crop: 'limit', quality: 'auto' }]
+            }
+        );
+
+        // Actualizar la URL de la imagen en el inventario
+        const sqlUpdate = `
+            UPDATE inventario 
+            SET imagen_url = ? 
+            WHERE codigo_de_barras = ? AND empresa_id = ?`;
+
+        await db.query(sqlUpdate, [result.secure_url, codigo_de_barras, empresa_id]);
+
+        res.json({ 
+            success: true, 
+            message: "Imagen guardada en Cloudinary",
+            url: result.secure_url
+        });
+
+    } catch (error) {
+        console.error("Error al guardar imagen en Cloudinary:", error);
+        res.status(500).json({ success: false, message: "Error al guardar imagen: " + error.message });
     }
 });
 app.get('/api/productos/filtrar', async (req, res) => {
@@ -1158,9 +1264,9 @@ app.get('/api/ingresos-hoy', async (req, res) => {
         res.status(500).json({ total: 0 });
     }
 });
-// Rutas de navegación faltantes
+// Rutas usando archivos HTML estáticos
 app.get('/averias', (req, res) => {
-    res.render('averias');
+    res.sendFile(path.join(__dirname, 'public', 'averias.html'));
 });
 
 app.post('/api/guardar-averia', async (req, res) => {
@@ -1212,9 +1318,9 @@ app.post('/api/guardar-averia', async (req, res) => {
         res.status(500).json({ success: false, message: "Error interno: " + e.message });
     }
 });
-// Así se llama a un archivo .ejs
-app.get('/subir', (req, res) => {
-    res.render('subir'); // Express busca automáticamente 'views/registros.ejs'
+// Rutas usando archivos HTML estáticos
+app.get('/subir', requireAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'subir.html'));
 });
 
 app.post('/api/subir-excel', upload.single('excelFile'), (req, res) => {
@@ -1371,7 +1477,7 @@ app.get('/api/productos/buscar-unificado', async (req, res) => {
         // Usamos LIKE con % para que busque "cualquier cosa que contenga el texto"
         // Quitamos el LIMIT 1 para que pueda devolver una LISTA si hay varios
         const query = `
-            SELECT id, codigo_de_barras, codigo, descripcion, cantidad, precio, pasillo, fecha 
+            SELECT id, codigo_de_barras, codigo, descripcion, cantidad, precio, pasillo, fecha, imagen_url
             FROM inventario 
             WHERE empresa_id = ? 
             AND (
@@ -1428,43 +1534,6 @@ app.get('/api/productos/sugerencias-global', (req, res) => {
         if (err) return res.status(500).json({ success: false });
         res.json({ success: true, suggestions: results });
     });
-});
-
-app.post('/api/admin/setup-full-client', async (req, res) => {
-    const { 
-        nombre_empresa, rnc_aruba, direccion, telefono, 
-        correo_empresa, nombre_dueno, id_personal, contrasena, 
-        plan_suscripcion 
-    } = req.body;
-
-    try {
-        // 1. Insertar en tu tabla 'empresas' con tus columnas exactas
-        const qEmpresa = `INSERT INTO empresas 
-            (nombre_empresa, rnc_aruba, plan_suscripcion, direccion, telefono, id_personal, nombre_dueno) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)`;
-        
-        db.query(qEmpresa, [nombre_empresa, rnc_aruba, plan_suscripcion, direccion, telefono, id_personal, nombre_dueno], async (err, result) => {
-            if (err) return res.status(500).json({ success: false, message: 'Error al crear empresa: ' + err.message });
-
-            const nuevaEmpresaId = result.insertId;
-            const hashedPassword = await bcrypt.hash(contrasena, 10);
-
-            // 2. Crear el Usuario Admin vinculado
-            const qUsuario = `INSERT INTO usuarios (nombre_usuario, id_personal, contrasena, role, empresa_id) 
-                              VALUES (?, ?, ?, 'admin', ?)`;
-
-            db.query(qUsuario, [nombre_dueno, id_personal, hashedPassword, nuevaEmpresaId], (err2) => {
-                if (err2) return res.status(500).json({ success: false, message: 'Usuario no creado' });
-
-                // 3. Enviar Correo con los detalles del plan
-                enviarCorreoPlan(correo_empresa, nombre_empresa, plan_suscripcion);
-
-                res.json({ success: true, empresa_id: nuevaEmpresaId });
-            });
-        });
-    } catch (e) {
-        res.status(500).json({ success: false, message: 'Error interno' });
-    }
 });
 
 app.post('/api/registrar-empresa', async (req, res) => {
@@ -1537,6 +1606,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Ejemplo de uso en tus rutas del servidor:
 // app.post('/api/averias', verificarPlan('estandar'), (req, res) => { ... });
 // --- INICIO DEL SERVIDOR ---
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+    await runMigrations();
     console.log(`Servidor de ARAGON corriendo en el puerto ${PORT}`);
 });

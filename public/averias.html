@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportar Avería</title>
-    <!-- Favicons (asegurate de que las rutas sean correctas, ej. favicons/favicon-32x32.png) -->
+    <title data-i18n="averias:page_title">Reportar Avería</title>
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="favicons/android-chrome-192x192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
@@ -12,161 +14,189 @@
     <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <link rel="icon" href="favicons/android-chrome-192x192.png" type="image/x-icon">
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="/dist/output.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS Unificado -->
+    <link rel="stylesheet" href="css/unified.css">
 </head>
-<body class="background-login">
-    <header class="main-header">
-        <div class="header-left">
-            <a href="/ingreso-productos">
-                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
+<body>
+    <!-- Header Unificado -->
+    <header class="app-header">
+        <div class="header-content">
+            <a href="/ingreso-productos" class="header-logo">
+                <img src="favicons/android-chrome-192x192.png" alt="Logo Aragon">
+            </a>
+
+            <div class="header-clock">
+                <span id="reloj-fecha" class="clock-date">Cargando...</span>
+                <span id="reloj-hora" class="clock-time">--:--:--</span>
+            </div>
+
+            <nav class="header-nav">
+                <a href="/ingreso-productos" class="nav-icon-btn" data-i18n="[title]common:product_entry_link" title="Ingreso">
+                    <i class="fa-solid fa-upload"></i>
+                </a>
+                <a href="/averias" class="nav-icon-btn active" data-i18n="[title]common:report_damage_link" title="Averías">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </a>
+                <a href="/registros" class="nav-icon-btn admin-only" data-i18n="[title]common:recorded_entries_link" title="Registros">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                </a>
+                <a href="/subir" class="nav-icon-btn admin-only" data-i18n="[title]common:import_link" title="Importar">
+                    <i class="fa-solid fa-file-import"></i>
+                </a>
+            </nav>
+
+            <div class="header-user">
+                <div class="user-info">
+                    <span id="nombre-usuario-display" class="user-name">Cargando...</span>
+                    <span id="user-role-display" class="user-role">Usuario</span>
+                </div>
+                <div class="user-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <a href="/logout" class="btn-logout" data-i18n="common:logout_button">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Salir</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="app-main">
+        <div class="page-header">
+            <h1 class="page-title">
+                <i class="fa-solid fa-triangle-exclamation" style="color: var(--aragon-red);"></i>
+                <span data-i18n="averias:page_title">Reportar Avería</span>
+            </h1>
+            <p class="page-subtitle" data-i18n="averias:page_subtitle">Registra productos dañados o defectuosos</p>
+        </div>
+
+        <div class="form-card">
+            <form id="form-reportar-averia">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <input type="text" id="codigo_de_barras_averia" name="codigo_de_barras" placeholder=" " required>
+                        <label for="codigo_de_barras_averia" data-i18n="averias:barcode_label">Código de Barras</label>
+                        <small class="help-text" data-i18n="averias:barcode_help_text">Código de barras del producto</small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="number" id="cantidad_averia" name="cantidad" placeholder=" " min="1" value="1" required>
+                        <label for="cantidad_averia" data-i18n="common:product_quantity_label">Cantidad</label>
+                        <small class="help-text" data-i18n="averias:quantity_help_text">Cantidad afectada</small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="descripcion_producto_averia" name="descripcion_producto" placeholder=" " readonly>
+                        <label for="descripcion_producto_averia" data-i18n="averias:product_description_label">Descripción</label>
+                        <small class="help-text" data-i18n="averias:product_description_help_text">Se autocompleta automáticamente</small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="descripcion_averia" name="descripcion_averia" placeholder=" " required>
+                        <label for="descripcion_averia" data-i18n="averias:damage_description_label">Motivo de Avería</label>
+                        <small class="help-text" data-i18n="averias:damage_description_help_text">Describe el daño (ej: empaque roto)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="date" id="fecha_averia" name="fecha_averia" placeholder=" " required>
+                        <label for="fecha_averia" data-i18n="averias:damage_date_label">Fecha</label>
+                        <small class="help-text" data-i18n="averias:damage_date_help_text">Fecha del reporte</small>
+                    </div>
+
+                    <div class="form-group">
+                        <select id="estado_averia" name="estado" required>
+                            <option value="Pendiente" data-i18n="averias:status_pending">Pendiente</option>
+                            <option value="En Revisión" data-i18n="averias:status_in_review">En Revisión</option>
+                            <option value="Descartado" data-i18n="averias:status_discarded">Descartado</option>
+                        </select>
+                        <label for="estado_averia" data-i18n="averias:status_label">Estado</label>
+                        <small class="help-text" data-i18n="averias:status_help_text">Estado del reporte</small>
+                    </div>
+
+                    <div class="form-divider"></div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span data-i18n="averias:report_damage_button">Reportar Avería</span>
+                        </button>
+                        <button type="button" id="btn-limpiar-averia" class="btn btn-secondary">
+                            <i class="fa-solid fa-eraser"></i>
+                            <span data-i18n="common:clear_form_button">Limpiar</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Navegación Móvil -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="/ingreso-productos" class="mobile-nav-item">
+                <i class="fa-solid fa-upload"></i>
+                <span data-i18n="common:product_entry_link">Ingreso</span>
+            </a>
+            <a href="/averias" class="mobile-nav-item active">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span data-i18n="common:report_damage_link">Averías</span>
+            </a>
+            <a href="/registros" class="mobile-nav-item">
+                <i class="fa-solid fa-clipboard-list"></i>
+                <span data-i18n="common:recorded_entries_link">Registros</span>
+            </a>
+            <a href="/subir" class="mobile-nav-item">
+                <i class="fa-solid fa-file-import"></i>
+                <span data-i18n="common:import_link">Importar</span>
             </a>
         </div>
-
-    <div id="live-clock" class="centered-clock"></div>
-
-            <ul class="nav-list">
-                <!--<li><a href="/ingreso-productos" class="nav-link" data-i18n="common:home_link">Inicio</a></li>-->
-                <li class="dropdown">
-                    <!--<a href="#" class="nav-link dropdown-toggle" data-i18n="common:actions_dropdown">Acciones <span class="arrow-down"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/ingreso-productos" class="dropdown-item" data-i18n="common:product_entry_link">Ingreso Productos</a></li>
-                        <li><a href="/registros" class="dropdown-item" data-i18n="common:recorded_entries_link">Ingresos Realizados</a></li>
-                        <li><a href="/averias" class="dropdown-item" data-i18n="common:report_damage_link">Reportar Avería</a></li>
-                        <li><a href="/subir" class="dropdown-item" data-i18n="common:import_link">Importar Productos</a></li>
-                    </ul>
-                </li>-->
-                
-                <li><a href="/logout" class="nav-link" id="logout-btn-nav" data-i18n="common:logout_button">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-    </header>
-<div class="user-info-bar">
-    <nav class="header-nav">
-        <ul class="nav-main-horizontal">
-            <li>
-                <a href="/ingreso-productos" class="nav-item">
-                    <span class="nav-icon">📥</span>
-                    <span class="nav-text" data-i18n="common:product_entry_link">Ingreso</span>
-                </a>
-            </li>
-            <li>
-                <a href="/averias" class="nav-item">
-                    <span class="nav-icon">⚠️</span>
-                    <span class="nav-text" data-i18n="common:report_damage_link">Averías</span>
-                </a>
-                
-            </li>
-            <li>
-                <li class="admin-only">
-                <a href="/registros" class="nav-item">
-                    <span class="nav-icon">📋</span>
-                    <span class="nav-text" data-i18n="common:recorded_entries_link">Registros</span>
-                </a>
-            </li>
-            <li class="admin-only">
-                <a href="/subir" class="nav-item">
-                    <span class="nav-icon">🚀</span>
-                    <span class="nav-text" data-i18n="common:import_link">Importar</span>
-                </a>
-            </li>
-        </ul>
     </nav>
-    <div class="user-tag">
-        <i class="fa-solid fa-circle-user" style="color: red;"></i>
-        <span id="nombre-usuario-display">Cargando...</span>
-    </div>
-</div>
-<main id="app-container">
-    </main>
-    <main class="container">
-    <div class="header-with-langs">
-        <h1 class="page-title" data-i18n="averias:page_title">Reportar Avería de Producto</h1>
-        </div>
 
-    <form id="form-reportar-averia" class="form-grid">
-        <div class="form-row">
-            <div class="form-group">
-                <label for="codigo_de_barras_averia" data-i18n="averias:barcode_label">Código de Barras:</label>
-                <input type="text" id="codigo_de_barras_averia" name="codigo_de_barras" required>
-                <small class="help-text">Introduce el código de barras del producto.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="cantidad_averia" data-i18n="averias:quantity_label">Cantidad:</label>
-                <input type="number" id="cantidad_averia" name="cantidad" min="1" value="1" required>
-                <small class="help-text">Indica la cantidad que se descontará del stock.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="descripcion_producto_averia" data-i18n="averias:product_description_label">Descripción:</label>
-                <input type="text" id="descripcion_producto_averia" name="descripcion_producto" readonly>
-                <small class="help-text">Se autocompletará automáticamente.</small>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label for="descripcion_averia" data-i18n="averias:damage_description_label">Motivo de Avería:</label>
-                <input type="text" id="descripcion_averia" name="descripcion_averia" required>
-                <small class="help-text">Detalla el daño (ej: empaque roto).</small>
-            </div>
-
-            <div class="form-group">
-                <label for="fecha_averia" data-i18n="averias:damage_date_label">Fecha:</label>
-                <input type="date" id="fecha_averia" name="fecha_averia" required>
-                <small class="help-text">Selecciona la fecha del reporte.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="estado_averia" data-i18n="averias:status_label">Estado:</label>
-                <select id="estado_averia" name="estado" required>
-                    <option value="Pendiente" data-i18n="averias:status_pending">Pendiente</option>
-                    <option value="En Revisión" data-i18n="averias:status_in_review">En Revisión</option>
-                    <option value="Descartado" data-i18n="averias:status_discarded">Descartado</option>
-                </select>
-                <small class="help-text">Estado actual del proceso.</small>
-            </div>
-        </div>
-
-        <div class="form-actions">
-            <button type="submit" class="btn-primary-red">Reportar Avería</button>
-            <button type="button" class="btn-secondary-red" id="btn-limpiar-averia">
-                <i class="fas fa-trash"></i> Limpiar Formulario
-            </button>
-        </div>
-    </form>
-</main>
-    
+    <!-- Scripts -->
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const rol = localStorage.getItem('userRole');
-        // Si el usuario no es admin, borramos los elementos prohibidos
-        if (rol !== 'admin') {
-            document.querySelectorAll('.admin-only').forEach(el => el.remove());
+        // Actualizar reloj
+        function actualizarReloj() {
+            const ahora = new Date();
+            const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const opcionesHora = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            document.getElementById('reloj-fecha').textContent = ahora.toLocaleDateString('es-ES', opcionesFecha);
+            document.getElementById('reloj-hora').textContent = ahora.toLocaleTimeString('es-ES', opcionesHora);
         }
-    });
-</script>
+        actualizarReloj();
+        setInterval(actualizarReloj, 1000);
 
-<script type="importmap">
-{
-  "imports": {
-    "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/+esm",
-    "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/+esm",
-    "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/+esm",
-    "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
-  }
-}
-</script>
+        // Ocultar elementos admin para no admins
+        document.addEventListener('DOMContentLoaded', () => {
+            const rol = localStorage.getItem('userRole');
+            if (rol !== 'admin') {
+                document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
+            }
+        });
+    </script>
+
+    <script type="importmap">
+    {
+      "imports": {
+        "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/+esm",
+        "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/+esm",
+        "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/+esm",
+        "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
+      }
+    }
+    </script>
+
     <script src="js/i18n.js" type="module"></script>
-    <script src="js/averias.js" type="module"></script> <!-- Script para la lógica de averías -->
-    <script src="js/common.js" type="module"></script>  
+    <script src="js/averias.js" type="module"></script>
+    <script src="js/common.js" type="module"></script>
 </body>
 </html>
-

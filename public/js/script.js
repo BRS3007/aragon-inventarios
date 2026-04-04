@@ -1,18 +1,12 @@
 import Swal from 'sweetalert2';
+import { playSound } from './common.js';
+
 document.addEventListener('DOMContentLoaded', () => {
-
     // --- 1. REFERENCIAS AL DOM ---
-    const btnMoverALogin = document.getElementById("btn__iniciar-Sesion"); // Botón de la caja trasera
-    const btnMoverARegistro = document.getElementById("btn__registrarse"); // Botón de la caja trasera
-
-    const contenedor_login_register = document.querySelector(".contenedor__login-register");
-    const formulario_login = document.querySelector(".formulario__login");
-    const formulario_register = document.querySelector(".formulario__register");
-    const caja_trasera_login = document.querySelector(".caja__trasera-login");
-    const caja_trasera_register = document.querySelector(".caja__trasera-register");
-
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
+    const tabLogin = document.getElementById('tab-login');
+    const tabRegister = document.getElementById('tab-register');
 
     // --- 2. FUNCIONES DE CONEXIÓN AL SERVIDOR (BACKEND) ---
 
@@ -33,22 +27,33 @@ document.addEventListener('DOMContentLoaded', () => {
             if (result.success) {
                 localStorage.setItem('plan_usuario', result.plan);
                 localStorage.setItem('userRole', result.rol);
+                
+                playSound('success');
 
                 Swal.fire({
                     icon: 'success',
                     title: '¡Bienvenido!',
                     text: 'Ingresando al sistema...',
                     timer: 1500,
-                    showConfirmButton: false
+                    showConfirmButton: false,
+                    background: '#ffffff',
+                    timerProgressBar: true
                 }).then(() => {
                     window.location.href = '/ingreso-productos';
                 });
             } else {
+                playSound('error');
                 let icono = result.message.includes('confirmar') ? 'warning' : 'error';
-                Swal.fire({ icon: icono, title: 'Atención', text: result.message });
+                Swal.fire({ 
+                    icon: icono, 
+                    title: 'Atención', 
+                    text: result.message,
+                    background: '#ffffff'
+                });
             }
         } catch (error) {
             console.error('Error:', error);
+            playSound('error');
             Swal.fire('Error', 'No se pudo conectar con el servidor', 'error');
         }
     }
@@ -60,7 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         Swal.fire({
             title: 'Procesando...',
-            didOpen: () => { Swal.showLoading(); }
+            didOpen: () => { Swal.showLoading(); },
+            background: '#ffffff'
         });
 
         try {
@@ -73,79 +79,60 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
 
             if (result.success) {
-                Swal.fire('¡Éxito!', 'Verifica tu correo para activar tu cuenta.', 'success');
-                registerForm.reset();
-                mostrarLogin(); // Regresamos al login automáticamente
+                playSound('success');
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: 'Verifica tu correo para activar tu cuenta.',
+                    background: '#ffffff'
+                }).then(() => {
+                    registerForm.reset();
+                    if (tabLogin) tabLogin.click();
+                });
             } else {
-                Swal.fire('Error', result.message, 'error');
+                playSound('error');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: result.message,
+                    background: '#ffffff'
+                });
             }
         } catch (error) {
-            Swal.fire('Error', 'Error de conexión', 'error');
+            playSound('error');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error de conexión',
+                background: '#ffffff'
+            });
         }
     }
 
-    // --- 3. FUNCIONES DE DISEÑO (MOVIMIENTO DE CAJAS) ---
-
-    function anchoPagina() {
-        if (window.innerWidth > 850) {
-            caja_trasera_login.style.display = "block";
-            caja_trasera_register.style.display = "block";
-        } else {
-            caja_trasera_register.style.display = "block";
-            caja_trasera_register.style.opacity = "1";
-            caja_trasera_login.style.display = "none";
-            formulario_login.style.display = "block";
-            formulario_register.style.display = "none";
-            contenedor_login_register.style.left = "0px";
-        }
-    }
+    // --- 3. FUNCIONES DE DISEÑO (TABS) ---
 
     function mostrarLogin() {
-        if (window.innerWidth > 850) {
-            formulario_register.style.display = "none";
-            contenedor_login_register.style.left = "10px";
-            formulario_login.style.display = "block";
-            caja_trasera_register.style.opacity = "1";
-            caja_trasera_login.style.opacity = "0";
-        } else {
-            formulario_register.style.display = "none";
-            contenedor_login_register.style.left = "0px";
-            formulario_login.style.display = "block";
-            caja_trasera_register.style.display = "block";
-            caja_trasera_login.style.display = "none";
-        }
+        if (tabLogin) tabLogin.classList.add('active');
+        if (tabRegister) tabRegister.classList.remove('active');
+        if (loginForm) loginForm.classList.add('active');
+        if (registerForm) registerForm.classList.remove('active');
     }
 
     function mostrarRegistro() {
-        if (window.innerWidth > 850) {
-            formulario_register.style.display = "block";
-            contenedor_login_register.style.left = "410px";
-            formulario_login.style.display = "none";
-            caja_trasera_register.style.opacity = "0";
-            caja_trasera_login.style.opacity = "1";
-        } else {
-            formulario_register.style.display = "block";
-            contenedor_login_register.style.left = "0px";
-            formulario_login.style.display = "none";
-            caja_trasera_register.style.display = "none";
-            caja_trasera_login.style.display = "block";
-            caja_trasera_login.style.opacity = "1";
-        }
+        if (tabRegister) tabRegister.classList.add('active');
+        if (tabLogin) tabLogin.classList.remove('active');
+        if (registerForm) registerForm.classList.add('active');
+        if (loginForm) loginForm.classList.remove('active');
     }
 
     // --- 4. ASIGNACIÓN DE EVENTOS ---
 
-    // Botones para mover la interfaz
-    if (btnMoverALogin) btnMoverALogin.addEventListener("click", mostrarLogin);
-    if (btnMoverARegistro) btnMoverARegistro.addEventListener("click", mostrarRegistro);
+    if (tabLogin) tabLogin.addEventListener('click', mostrarLogin);
+    if (tabRegister) tabRegister.addEventListener('click', mostrarRegistro);
 
-    // Envío de formularios al servidor
     if (loginForm) loginForm.addEventListener('submit', ejecutarLogin);
     if (registerForm) registerForm.addEventListener('submit', ejecutarRegistro);
 
-    // Ajustes iniciales
-    window.addEventListener("resize", anchoPagina);
-    anchoPagina();
     actualizarIdentidadUsuario();
 });
 
@@ -156,10 +143,12 @@ async function actualizarIdentidadUsuario() {
     if (!contenedorNombre) return;
 
     try {
-        const respuesta = await fetch('/api/usuario-actual'); // Asegúrate de que esta ruta exista en tu server.js
+        const respuesta = await fetch('/api/usuario-actual');
         const datos = await respuesta.json();
         if (datos.loggedIn) {
             contenedorNombre.textContent = datos.nombre_usuario;
         }
-    } catch (e) { console.log("Sesión no iniciada"); }
+    } catch (e) { 
+        console.log("Sesión no iniciada"); 
+    }
 }

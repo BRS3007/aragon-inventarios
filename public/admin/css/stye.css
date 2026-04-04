@@ -1,117 +1,288 @@
+/* Admin Panel - Usando estilos unificados de unified.css */
+
 :root {
-            --rojo-aragon: #ff0000; /* El rojo brillante de tu logo */
-            --blanco: #ffffff;
-            --fondo: #f9f9f9;
-            --texto-negro: #000000;
-        }
+    --aragon-red: #ff1908;
+    --aragon-red-dark: #d11405;
+    --aragon-red-light: #ff5f5f;
+    --aragon-red-glow: rgba(255, 25, 8, 0.2);
+    --bg-light: #f8fafc;
+    --text-dark: #1f2937;
+    --text-gray: #6b7280;
+    --border-light: #e5e7eb;
+    --white: #ffffff;
+    --shadow-lg: 0 10px 40px rgba(0,0,0,0.08);
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: var(--blanco);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        /* Header similar al de tu imagen */
-        .header {
-            width: 100%;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-sizing: border-box;
-            border-bottom: 1px solid #eee;
-        }
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
-        .logo img {
-            height: 60px; /* Ajusta según tu logo real */
-        }
+/* Header */
+.admin-header {
+    background: var(--white);
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-bottom: 1px solid var(--border-light);
+}
 
-        .fecha-hora {
-            font-size: 0.9rem;
-            color: #333;
-        }
+.admin-header .logo img {
+    height: 60px;
+}
 
-        /* Contenedor Principal */
-        .main-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 50px;
-            margin-top: 80px;
-            padding: 20px;
-        }
+.admin-header .header-info {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
 
-        /* El cuadro rojo de Aragon */
-        .card-roja {
-            background-color: var(--rojo-aragon);
-            padding: 40px;
-            border-radius: 15px;
-            width: 350px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-        }
+.admin-header .clock {
+    text-align: right;
+}
 
-        .card-roja h2 {
-            color: var(--texto-negro);
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-        }
+.admin-header .clock-date {
+    font-size: 0.8rem;
+    color: var(--text-gray);
+}
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: none;
-            background-color: var(--blanco);
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
+.admin-header .clock-time {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--aragon-red);
+}
 
-        input::placeholder {
-            color: #aaa;
-        }
+/* Main Content */
+.admin-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
 
-        .btn-ingresar {
-            background-color: #f5f5f5;
-            color: var(--rojo-aragon);
-            border: none;
-            padding: 10px 25px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
+.admin-container {
+    display: flex;
+    gap: 40px;
+    max-width: 900px;
+    width: 100%;
+}
 
-        .btn-ingresar:hover {
-            background-color: #eeeeee;
-        }
+/* Card Formulario */
+.admin-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 420px;
+    animation: fadeInUp 0.5s ease-out;
+}
 
-        /* Sección Derecha (Información) */
-        .info-text {
-            max-width: 300px;
-        }
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        .info-text h3 {
-            font-size: 1.8rem;
-            color: var(--texto-negro);
-            margin-bottom: 20px;
-        }
+.admin-card .card-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
 
-        .info-text p {
-            color: #555;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
+.admin-card .card-header h1 {
+    color: var(--aragon-red);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
 
-        #response {
-            margin-top: 15px;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
+.admin-card .card-header p {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
 
-        .success { color: #fff; background: #28a745; padding: 5px; }
-        .error { color: #fff; background: #000; padding: 5px; }
+/* Form Groups */
+.admin-form .form-group {
+    margin-bottom: 20px;
+}
+
+.admin-form label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.admin-form input,
+.admin-form select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: var(--transition);
+    background: #f9fafb;
+}
+
+.admin-form input:focus,
+.admin-form select:focus {
+    border-color: var(--aragon-red);
+    background: var(--white);
+    box-shadow: 0 0 0 4px var(--aragon-red-glow);
+    outline: none;
+}
+
+.admin-form input::placeholder {
+    color: #9ca3af;
+}
+
+.admin-form select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px;
+    padding-right: 40px;
+}
+
+/* Botón */
+.admin-form .btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--aragon-red) 0%, var(--aragon-red-light) 100%);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px var(--aragon-red-glow);
+    margin-top: 10px;
+}
+
+.admin-form .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--aragon-red-glow);
+}
+
+.admin-form .btn-submit:active {
+    transform: translateY(0);
+}
+
+/* Info Card */
+.admin-info {
+    background: linear-gradient(135deg, var(--aragon-red) 0%, var(--aragon-red-dark) 100%);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    color: var(--white);
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.admin-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+}
+
+.admin-info p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: 24px;
+}
+
+.admin-info .features {
+    list-style: none;
+}
+
+.admin-info .features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+}
+
+.admin-info .features li i {
+    width: 24px;
+    height: 24px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+/* Toast */
+#response {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    display: none;
+}
+
+#response.show {
+    display: block;
+}
+
+#response.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+#response.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-container {
+        flex-direction: column;
+        align-items: center;
+    }
     
+    .admin-card,
+    .admin-info {
+        max-width: 100%;
+    }
+    
+    .admin-info {
+        order: -1;
+    }
+    
+    .admin-header {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+}

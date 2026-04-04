@@ -1,168 +1,214 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
- <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title data-i18n=>Importar</title>
-
- <!-- INICIO: Codigo de Favicons Corregido y Optimizado -->
-<link rel="icon" type="image/png" href="favicons/apple-touch-icon.png"> 
-<!-- Asegurate que todos estos archivos esten en la carpeta 'public/favicons/' -->
- <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
- <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
- <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-<link rel="manifest" href="favicons/site.webmanifest"> <!-- Ruta corregida para el manifest -->
- <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
-<meta name="msapplication-TileColor" content="#da532c">
- <meta name="theme-color" content="#ffffff">
- <link rel="icon" href="favicons/android-chrome-192x192.png" type="image/x-icon"> <!-- El favicon principal en formato .ico -->
- <!-- FIN: Codigo de Favicons Corregido y Optimizado -->
- 
- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-<!-- Tailwind CSS CDN para estilos -->
-<link href="/dist/output.css" rel="stylesheet">
- <!-- Inter font from Google Fonts -->
- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> <style>
-body { font-family: 'Inter', sans-serif;
-}
- </style>
- <!-- ! CLAVE: Enlace al CSS GENERAL de la aplicación ! -->
- <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="importar:page_title">Importar Productos</title>
     
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="favicons/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="manifest" href="favicons/site.webmanifest">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS Unificado -->
+    <link rel="stylesheet" href="css/unified.css">
 </head>
-<body class="background-login">
-    <header class="main-header">
-        
-        <div class="header-left">
-            <a href="/ingreso-productos">
-                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
+<body>
+    <!-- Header Unificado -->
+    <header class="app-header">
+        <div class="header-content">
+            <a href="/ingreso-productos" class="header-logo">
+                <img src="favicons/android-chrome-192x192.png" alt="Logo Aragon">
+            </a>
+
+            <div class="header-clock">
+                <span id="reloj-fecha" class="clock-date">Cargando...</span>
+                <span id="reloj-hora" class="clock-time">--:--:--</span>
+            </div>
+
+            <nav class="header-nav">
+                <a href="/ingreso-productos" class="nav-icon-btn" data-i18n="[title]common:product_entry_link" title="Ingreso">
+                    <i class="fa-solid fa-upload"></i>
+                </a>
+                <a href="/averias" class="nav-icon-btn" data-i18n="[title]common:report_damage_link" title="Averías">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </a>
+                <a href="/registros" class="nav-icon-btn" data-i18n="[title]common:recorded_entries_link" title="Registros">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                </a>
+                <a href="/subir" class="nav-icon-btn active" data-i18n="[title]common:import_link" title="Importar">
+                    <i class="fa-solid fa-file-import"></i>
+                </a>
+            </nav>
+
+            <div class="header-user">
+                <div class="user-info">
+                    <span id="nombre-usuario-display" class="user-name">Cargando...</span>
+                    <span id="user-role-display" class="user-role">Usuario</span>
+                </div>
+                <div class="user-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <a href="/logout" class="btn-logout" data-i18n="common:logout_button">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Salir</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="app-main">
+        <div class="page-header">
+            <h1 class="page-title">
+                <i class="fa-solid fa-file-import" style="color: var(--aragon-red);"></i>
+                <span data-i18n="importar:form_title">Importar Productos</span>
+            </h1>
+            <p class="page-subtitle" data-i18n="importar:page_subtitle">Carga productos desde un archivo Excel</p>
+        </div>
+
+        <div class="form-card">
+            <form id="upload-form">
+                <div class="form-grid">
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label for="excel-file" style="position: static; transform: none; font-size: 0.9rem; color: var(--text-gray); margin-bottom: 12px; display: block;">
+                            <i class="fa-solid fa-file-excel" style="color: #166534; margin-right: 8px;"></i>
+                            <span data-i18n="importar:label_file_input">Selecciona tu archivo Excel (.xlsx)</span>
+                        </label>
+                        <div class="upload-zone" id="upload-zone">
+                            <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                            <p class="upload-text" data-i18n="importar:upload_hint">Arrastra el archivo aquí o haz clic para seleccionar</p>
+                            <p class="upload-hint" data-i18n="importar:upload_formats">Formatos aceptados: .xlsx, .xls</p>
+                        </div>
+                        <input type="file" id="excel-file" accept=".xlsx, .xls" required style="display: none;">
+                        <small class="help-text" id="file-name" style="margin-top: 12px; text-align: center;"></small>
+                    </div>
+
+                    <div class="form-divider"></div>
+
+                    <div class="form-actions" style="grid-column: 1 / -1;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-rocket"></i>
+                            <span data-i18n="importar:button_process_upload">Procesar y Subir</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Estado del proceso -->
+            <div id="status-message" class="text-center mt-4" style="font-weight: 600;"></div>
+        </div>
+    </main>
+
+    <!-- Modal de Progreso -->
+    <div id="modal-progreso" class="progress-modal">
+        <div class="progress-card">
+            <i class="fa-solid fa-spinner fa-spin" style="font-size: 3rem; color: var(--aragon-red); margin-bottom: 16px;"></i>
+            <h3 class="progress-title" data-i18n="importar:modal_title">Procesando Inventario Masivo</h3>
+            <p id="texto-progreso" class="progress-subtitle" data-i18n="importar:modal_subtitle">Iniciando lectura de registros...</p>
+            <div class="progress-bar-container">
+                <div id="barra-llenado" class="progress-bar-fill" style="width: 0%;"></div>
+            </div>
+            <div class="progress-stats">
+                <span id="detalles-conteo">0 / 0</span>
+                <span id="porcentaje-texto" class="progress-percentage">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación Móvil -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="/ingreso-productos" class="mobile-nav-item">
+                <i class="fa-solid fa-upload"></i>
+                <span data-i18n="common:product_entry_link">Ingreso</span>
+            </a>
+            <a href="/averias" class="mobile-nav-item">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span data-i18n="common:report_damage_link">Averías</span>
+            </a>
+            <a href="/registros" class="mobile-nav-item">
+                <i class="fa-solid fa-clipboard-list"></i>
+                <span data-i18n="common:recorded_entries_link">Registros</span>
+            </a>
+            <a href="/subir" class="mobile-nav-item active">
+                <i class="fa-solid fa-file-import"></i>
+                <span data-i18n="common:import_link">Importar</span>
             </a>
         </div>
-
-        <div id="live-clock" class="centered-clock">
-            <span id="reloj-fecha">Cargando fecha...</span>
-            <span id="reloj-hora"></span>
-        </div>
-
-        <nav class="header-right">
-            <ul class="nav-list">
-            
- <ul class="nav-list">
-                <!--<li><a href="/ingreso-productos" class="nav-link" data-i18n="importar:home_link">Inicio</a></li>-->
-                <li class="dropdown">
-                    <!--<a href="#" class="nav-link dropdown-toggle" data-i18n="importar:actions_dropdown">Acciones <span class="arrow-down"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/ingreso-productos" class="dropdown-item" data-i18n="importar:product_entry_link">Ingreso Productos</a></li>
-                        <li><a href="/registros" class="dropdown-item" data-i18n="importar:recorded_entries_link">Ingresos Realizados</a></li>
-                        <li><a href="/averias" class="dropdown-item" data-i18n="importar:report_damage_link">Reportar Avería</a></li>
-                        <li><a href="/subir" class="dropdown-item" data-i18n="importar:import_link">Importar Productos</a></li>
-                    </ul>
-                </li>-->
-                
-                <li><a href="/logout" class="nav-link" id="logout-btn-nav" data-i18n="importar:logout_button">Cerrar Sesión</a></li>
-            </ul>
- </nav>
- </header>
-<div class="user-info-bar">
-    <nav class="header-nav">
-        <ul class="nav-main-horizontal">
-            <li>
-                <a href="/ingreso-productos" class="nav-item">
-                    <span class="nav-icon">📥</span>
-                    <span class="nav-text" data-i18n="common:product_entry_link">Ingreso</span>
-                </a>
-            </li>
-            <li>
-                <a href="/averias" class="nav-item">
-                    <span class="nav-icon">⚠️</span>
-                    <span class="nav-text" data-i18n="common:report_damage_link">Averías</span>
-                </a>
-                
-            </li>
-            <li>
-                <a href="/registros" class="nav-item">
-                    <span class="nav-icon">📋</span>
-                    <span class="nav-text" data-i18n="common:recorded_entries_link">Registros</span>
-                </a>
-            </li>
-            <li>
-                <a href="/subir" class="nav-item">
-                    <span class="nav-icon">🚀</span>
-                    <span class="nav-text" data-i18n="common:import_link">Importar</span>
-                </a>
-            </li>
-        </ul>
     </nav>
-    <div class="user-tag">
-        <i class="fa-solid fa-circle-user" style="color: red;"></i>
-        <span id="nombre-usuario-display">Cargando...</span>
-    </div>
-</div>
-<main id="app-container">
-    </main>
-<!-- Main Container para el contenido de subida -->
- <main>
- <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-2xl relative">
 
- <!-- Título principal -->
- <h1 class="text-3xl font-bold text-center text-gray-800 mb-6" data-i18n="importar:form_title">Subir Productos</h1>
+    <!-- Scripts -->
+    <script>
+        // Actualizar reloj
+        function actualizarReloj() {
+            const ahora = new Date();
+            const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const opcionesHora = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            document.getElementById('reloj-fecha').textContent = ahora.toLocaleDateString('es-ES', opcionesFecha);
+            document.getElementById('reloj-hora').textContent = ahora.toLocaleTimeString('es-ES', opcionesHora);
+        }
+        actualizarReloj();
+        setInterval(actualizarReloj, 1000);
 
- <!-- Formulario de carga de archivo -->
- <form id="upload-form" class="space-y-6">
-<div>
-<label for="excel-file" class="block text-sm font-medium text-gray-700" data-i18n="importar:label_file_input">Selecciona tu archivo Excel (.xlsx):</label>
-<input type="file" id="excel-file" accept=".xlsx, .xls" required class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-blue-100">
-</div>
+        // Drag and drop para upload
+        const uploadZone = document.getElementById('upload-zone');
+        const fileInput = document.getElementById('excel-file');
+        const fileNameDisplay = document.getElementById('file-name');
 
-<button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" data-i18n="importar:button_process_upload">
-Procesar y Subir
- </button>
- </form>
+        uploadZone.addEventListener('click', () => fileInput.click());
 
- <!-- Contenedor para mostrar mensajes y datos procesados -->
- <div class="mt-6">
-<h2 class="text-xl font-bold text-gray-800" data-i18n="importar:section_result_title">Resultado:</h2>
-<div id="status-message" class="text-center font-bold mt-2"></div>
- </div>
- </div>
-</main>
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
 
-<!-- Librería para leer archivos Excel en el navegador -->
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
 
- <script type="importmap">
-{
-  "imports": {
-    "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/+esm",
-    "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/+esm",
-    "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/+esm",
-    "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
-  }
-}
-</script>
- 
-<div id="modal-progreso" class="modal-carga" style="display:none;">
-    <div class="modal-contenido">
-        <div class="loader-icon">🚀</div>
-        <h3 data-i18n="importar:modal_title">Procesando Inventario Masivo</h3>
-        <p id="texto-progreso">Iniciando lectura de registros...</p>
-        
-        <div class="barra-contenedor">
-            <div id="barra-llenado" class="barra-llenado"></div>
-        </div>
-        
-        <div class="flex-status">
-            <span id="porcentaje-texto">0%</span>
-            <span id="detalles-conteo">0 / 0</span>
-        </div>
-    </div>
-</div>
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                fileNameDisplay.textContent = e.dataTransfer.files[0].name;
+            }
+        });
 
-<!-- Scripts JS - ¡CLAVE: Rutas relativas a la raíz del servidor! -->
- <script src="js/i18n.js" type="module"></script>
- <script src="js/subir.js" type="module"></script>
- <script src="js/common.js" type="module"></script>
- 
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                fileNameDisplay.textContent = e.target.files[0].name;
+            }
+        });
+    </script>
+
+    <script type="importmap">
+    {
+      "imports": {
+        "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/+esm",
+        "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/+esm",
+        "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/+esm",
+        "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
+      }
+    }
+    </script>
+
+    <script src="js/i18n.js" type="module"></script>
+    <script src="js/subir.js" type="module"></script>
+    <script src="js/common.js" type="module"></script>
 </body>
 </html>

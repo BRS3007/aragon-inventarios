@@ -1,30 +1,58 @@
 // common.js
-import { i18n } from "./i18n.js"; // Añade esta línea para importar el módulo
+import { i18n } from "./i18n.js";
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Funcion para manejar el cierre de sesion
-    async function handleLogout() {
-    try {
-        const response = await fetch('/api/logout', { 
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
+// ============================================
+// FUNCIONES DE SONIDO
+// ============================================
+const soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
+
+const sounds = {
+    success: new Audio('/sounds/success.mp3'),
+    error: new Audio('/sounds/error.mp3')
+};
+
+sounds.success.volume = 0.5;
+sounds.error.volume = 0.5;
+
+export function playSound(type) {
+    if (!soundEnabled) return;
+    
+    const sound = sounds[type];
+    if (sound) {
+        sound.currentTime = 0;
+        sound.play().catch(err => {
+            console.log('Audio playback prevented:', err.message);
         });
-
-        // Solo intentamos leer JSON si la respuesta fue exitosa (200 OK)
-        if (response.ok) {
-            window.location.href = '/'; // Redirige al login
-        } else {
-            const errorText = await response.text(); // Leemos como texto para ver el error
-            console.error("Respuesta del servidor no exitosa:", errorText);
-            alert("No se pudo cerrar la sesión en el servidor.");
-        }
-    } catch (error) {
-        console.error("Error de red al cerrar sesión:", error);
-        // En caso de error crítico, forzamos salida al login para no bloquear al usuario
-        window.location.href = '/';
     }
 }
-    // Buscar todos los botones/enlaces con el ID 'logout-btn-nav' y adjuntar el evento
+
+// Función global para usar desde HTML inline
+window.playSound = playSound;
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ============================================
+    // CERRAR SESIÓN
+    // ============================================
+    async function handleLogout() {
+        try {
+            const response = await fetch('/api/logout', { 
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            if (response.ok) {
+                window.location.href = '/';
+            } else {
+                const errorText = await response.text();
+                console.error("Respuesta del servidor no exitosa:", errorText);
+                alert("No se pudo cerrar la sesión en el servidor.");
+            }
+        } catch (error) {
+            console.error("Error de red al cerrar sesión:", error);
+            window.location.href = '/';
+        }
+    }
+
     const logoutButtons = document.querySelectorAll('#logout-btn-nav');
     logoutButtons.forEach(button => {
         if (button) {
@@ -35,7 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Asegurarse de que el script i18n.js ya se ha cargado antes de usarlo
+    // ============================================
+    // TRADUCCIONES
+    // ============================================
     if (typeof window.updateContent === 'function') {
         window.updateContent();
     }

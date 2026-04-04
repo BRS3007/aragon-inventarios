@@ -1,35 +1,44 @@
-// Reloj en tiempo real
-        setInterval(() => {
-            const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleTimeString();
-        }, 1000);
+import Swal from 'sweetalert2';
+
+setInterval(() => {
+    const now = new Date();
+    document.getElementById('clock-time').innerText = now.toLocaleTimeString();
+}, 1000);
 
 async function registrarNuevo() {
+    const data = {
+        nombre_empresa:   document.getElementById('nombreEmpresa').value.trim(),
+        plan_suscripcion: document.getElementById('planSuscripcion').value,
+        nombre_dueno:     document.getElementById('nombreUsuario').value.trim(),
+        rnc_aruba:        document.getElementById('rnc_aruba').value.trim(),
+        direccion:        document.getElementById('direccion').value.trim(),
+        telefono:         document.getElementById('telefono').value.trim(),
+        correo_empresa:   document.getElementById('correo').value.trim(),
+        id_personal:      document.getElementById('idPersonal').value.trim(),
+        contrasena:       document.getElementById('contrasena').value
+    };
+
+    // Validación
+    const camposVacios = Object.entries(data).filter(([key, value]) => !value);
+    if (camposVacios.length > 0) {
+        mostrarRespuesta('Por favor, complete todos los campos', 'error');
+        return;
+    }
+
+    // Validar email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.correo_empresa)) {
+        mostrarRespuesta('Por favor, ingrese un correo electrónico válido', 'error');
+        return;
+    }
+
+    // Validar contraseña (mínimo 6 caracteres)
+    if (data.contrasena.length < 6) {
+        mostrarRespuesta('La contraseña debe tener al menos 6 caracteres', 'error');
+        return;
+    }
+
     try {
-        // Buscamos el contenedor específico para evitar errores de null
-        const formulario = document.querySelector('.card-roja');
-        const campos = formulario.querySelectorAll('input');
-        const plan = formulario.querySelector('select').value;
-
-        // 2. Extraemos los valores usando los IDs del HTML
-        const data = {
-            nombre_empresa:   document.getElementById('nombreEmpresa').value,
-            plan_suscripcion: document.getElementById('planSuscripcion').value,
-            nombre_dueno:     document.getElementById('nombreUsuario').value,
-            rnc_aruba:        document.getElementById('rnc_aruba').value,
-            direccion:        document.getElementById('direccion').value,
-            telefono:         document.getElementById('telefono').value,
-            correo_empresa:   document.getElementById('correo').value,
-            id_personal:      document.getElementById('idPersonal').value,
-            contrasena:       document.getElementById('contrasena').value
-        };
-
-        // Verificación básica antes de enviar
-        if (Object.values(data).some(v => v === "")) {
-            alert("⚠️ Asegúrate de llenar todos los campos correctamente."); //
-            return;
-        }
-
         const res = await fetch('/api/admin/setup-full-client', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -37,26 +46,38 @@ async function registrarNuevo() {
         });
 
         const result = await res.json();
+        
         if (result.success) {
-            alert("✅ Empresa y Admin registrados correctamente.");
-            location.reload();
+            mostrarRespuesta('Empresa y Admin registrados correctamente', 'success');
+            
+            Swal.fire({
+                icon: 'success',
+                title: '¡Registrado!',
+                text: 'La empresa y el administrador se han creado exitosamente.',
+                confirmButtonText: 'Aceptar',
+                background: '#ffffff'
+            }).then(() => {
+                document.getElementById('registroForm').reset();
+            });
         } else {
-            alert("❌ Error: " + result.message);
+            mostrarRespuesta('Error: ' + result.message, 'error');
         }
-
     } catch (error) {
-        console.error("Fallo en la petición:", error); //
-    }
-}
-// Función para enviar el correo según el plan
-
-// Ejemplo de activación de funciones según el plan
-function configurarInterfaz(plan) {
-    if (plan === 'basico') {
-        // Ocultar botones de funciones premium como 'Averías'
-        const btnAveria = document.getElementById('reportar-averia-tab');
-        if (btnAveria) btnAveria.style.display = 'none';
+        console.error("Error:", error);
+        mostrarRespuesta('Error de conexión con el servidor', 'error');
     }
 }
 
-// Ejemplo de middleware para proteger por plan
+function mostrarRespuesta(mensaje, tipo) {
+    const responseDiv = document.getElementById('response');
+    responseDiv.textContent = mensaje;
+    responseDiv.className = 'show ' + tipo;
+    
+    // Ocultar después de 5 segundos
+    setTimeout(() => {
+        responseDiv.className = '';
+    }, 5000);
+}
+
+// Exponer al window
+window.registrarNuevo = registrarNuevo;

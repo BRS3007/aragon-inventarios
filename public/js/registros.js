@@ -44,40 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Botón Limpiar Búsqueda
-    const clearSearchBtn = document.getElementById('clear-search-btn');
-    if (clearSearchBtn) {
-        clearSearchBtn.addEventListener('click', () => {
-            if (inputBuscar) inputBuscar.value = '';
-            paginaActual = 1;
-            
-        });
-    }
+    // 3. Botón Limpiar Búsqueda - integrado en toolbar-actions
+    const toolbarActions = document.querySelector('.toolbar-actions');
+    
+    // 4. Botón Filtrar por Fechas - se llama directamente desde onclick
+    // La función cargarProductosFiltrados está definida más abajo en el archivo
 
-    // 4. Botón Filtrar por Fechas
-    const filterBtn = document.getElementById('filter-btn');
-    if (filterBtn) {
-        filterBtn.addEventListener('click', () => {
-            const inicio = document.getElementById('fecha-inicio').value;
-            const fin = document.getElementById('fecha-fin').value;
-            if (!inicio || !fin) {
-                alert("Por favor, selecciona ambas fechas.");
-                return;
-            }
-            cargarProductosFiltrados(inicio, fin);
-        });
-    }
-
-    // 5. Botón Limpiar Filtros (Papelera)
-    const btnLimpiarFiltro = document.getElementById('clear-filter-btn');
-    if (btnLimpiarFiltro) {
-        btnLimpiarFiltro.addEventListener('click', () => {
-            document.getElementById('fecha-inicio').value = '';
-            document.getElementById('fecha-fin').value = '';
-            paginaActual = 1;
-            fetchAndDisplayProducts(1);
-        });
-    }
+    // 5. Botón Limpiar Filtros (Papelera) - función limpiarFiltros()
+    // Definida más abajo en el archivo
 
     // 6. Botón Exportar Excel
     const btnExportar = document.getElementById('export-excel-btn'); // El ID de tu <a> o <button>
@@ -451,7 +425,17 @@ async function cargarProductosFiltrados() {
     }
 }
 
+// Función global para que funcione con onclick
+window.cargarProductosFiltrados = cargarProductosFiltrados;
 
+// Función global para limpiar filtros
+window.limpiarFiltros = function() {
+    document.getElementById('fecha-inicio').value = '';
+    document.getElementById('fecha-fin').value = '';
+    document.getElementById('search-input').value = '';
+    paginaActual = 1;
+    cargarRegistros(1);
+};
 
 // Funciones globales para que los botones onclick funcionen
 window.paginaAnterior = function() {

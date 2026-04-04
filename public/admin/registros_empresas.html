@@ -3,62 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Setup | Aragon Smart Inventories</title>
-    <link rel="stylesheet" href="css/stye.css">
-    <link rel="icon" href="data:,">
-        </head>
-<body>
-
-    <div class="header">
-        <div class="logo">
-            <!-- INICIO: Codigo de Favicons Corregido y Optimizado -->
-      <link rel="icon" type="image/png" href="favicons/android-chrome-192x192.png"> 
-    <!-- Asegurate que todos estos archivos esten en la carpeta 'public/favicons/' -->
-    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-    <link rel="manifest" href="favicons/site.webmanifest"> <!-- Ruta corregida para el manifest -->
-    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <title>Master Setup | ARAGON Smart Inventories</title>
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="../favicons/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicons/favicon-16x16.png">
+    <link rel="manifest" href="../favicons/site.webmanifest">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <link rel="icon" href="favicons/android-chrome-192x192.png" type="image/x-icon"> <!-- El favicon principal en formato .ico -->
-    <!-- FIN: Codigo de Favicons Corregido y Optimizado -->
 
-            <img src="favicons/android-chrome-192x192.png" alt="Logo" class="logo-img">
-        </div>
-        <div class="fecha-hora">
-            📅 Sábado, 17 de enero de 2026 | 🕒 <span id="clock">--:--:--</span>
-        </div>
-    </div>
-
-    <div class="main-container">
-        <div class="card-roja">
-    <h2>Alta Maestra</h2>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <input type="text" id="nombreEmpresa" placeholder="Nombre de Empresa">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <span class="section-label" style="color: black; display: block; text-align: left; margin-bottom: 5px; font-size: 0.8rem;">PLAN DE SUSCRIPCIÓN</span>
-    <select id="planSuscripcion" style="width: 100%; padding: 12px; margin-bottom: 15px; border: none; background-color: white; font-size: 1rem;">
-        <option value="basico">Básico (Solo Inventario)</option>
-        <option value="estandar">Estándar (Con Historial)</option>
-        <option value="premium">Premium (Full Revel POS)</option>
-    </select>
-    <input type="text" id="nombreUsuario" placeholder="Nombre de Usuario">
-    <input type="text" id="rnc_aruba" placeholder="RNC Aruba" required>
-    <input type="text" id="direccion" placeholder="Dirección Física" required>
-    <input type="tel" id="telefono" placeholder="Teléfono de Contacto" required>
-    <input type="email" id="correo" placeholder="Correo Electrónico de Contacto" required>
-    <input type="number" id="idPersonal" placeholder="ID Personal">
-    <input type="password" id="contrasena" placeholder="Contraseña">
-    <button type="button" onclick="registrarNuevo()">Registrar</button>
-    <div id="response"></div>
-</div>
-        <div class="info-text">
-            <h3>¿Nuevo Cliente en Aruba?</h3>
-            <p>Usa este panel maestro para crear una base de datos aislada y una cuenta de administrador en un solo paso.</p>
+    <!-- CSS Admin -->
+    <link rel="stylesheet" href="css/stye.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="logo">
+            <img src="../favicons/android-chrome-192x192.png" alt="Logo Aragon">
         </div>
-    </div>
+        <div class="header-info">
+            <div class="clock">
+                <div id="clock-date" class="clock-date">Cargando...</div>
+                <div id="clock-time" class="clock-time">--:--:--</div>
+            </div>
+        </div>
+    </header>
 
-    <script src="js/registros_empresas.js"></script>
+    <!-- Main Content -->
+    <main class="admin-main">
+        <div class="admin-container">
+            <!-- Formulario -->
+            <div class="admin-card">
+                <div class="card-header">
+                    <h1><i class="fa-solid fa-building"></i> Alta Maestra</h1>
+                    <p>Registrar nueva empresa y administrador</p>
+                </div>
+
+                <form id="registroForm" class="admin-form">
+                    <div class="form-group">
+                        <label for="nombreEmpresa">Nombre de Empresa</label>
+                        <input type="text" id="nombreEmpresa" placeholder="Nombre de la empresa" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="planSuscripcion">Plan de Suscripción</label>
+                        <select id="planSuscripcion">
+                            <option value="basico">Básico (Solo Inventario)</option>
+                            <option value="estandar">Estándar (Con Historial)</option>
+                            <option value="premium">Premium (Full Revel POS)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombreUsuario">Nombre del Administrador</label>
+                        <input type="text" id="nombreUsuario" placeholder="Nombre completo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rnc_aruba">RNC Aruba</label>
+                        <input type="text" id="rnc_aruba" placeholder="Número de registro" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="direccion">Dirección Física</label>
+                        <input type="text" id="direccion" placeholder="Dirección completa" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Teléfono de Contacto</label>
+                        <input type="tel" id="telefono" placeholder="+297 XXX XXXX" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="correo">Correo Electrónico</label>
+                        <input type="email" id="correo" placeholder="correo@ejemplo.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="idPersonal">ID Personal</label>
+                        <input type="text" id="idPersonal" placeholder="ID único del usuario" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contrasena">Contraseña</label>
+                        <input type="password" id="contrasena" placeholder="Contraseña segura" required>
+                    </div>
+
+                    <button type="button" onclick="registrarNuevo()" class="btn-submit">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Registrar Empresa
+                    </button>
+
+                    <div id="response"></div>
+                </form>
+            </div>
+
+            <!-- Info Card -->
+            <div class="admin-info">
+                <h2><i class="fa-solid fa-info-circle"></i> Nuevo Cliente en Aruba?</h2>
+                <p>Usa este panel maestro para crear una base de datos aislada y una cuenta de administrador en un solo paso.</p>
+                
+                <ul class="features">
+                    <li>
+                        <i class="fa-solid fa-database"></i>
+                        Base de datos独立
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-users"></i>
+                        Gestión de empleados
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        Control de inventario
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-chart-line"></i>
+                        Reportes y análisis
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Seguridad garantizada
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Reloj en tiempo real
+        function actualizarReloj() {
+            const ahora = new Date();
+            const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const opcionesHora = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            
+            document.getElementById('clock-date').textContent = ahora.toLocaleDateString('es-ES', opcionesFecha);
+            document.getElementById('clock-time').textContent = ahora.toLocaleTimeString('es-ES', opcionesHora);
+        }
+        actualizarReloj();
+        setInterval(actualizarReloj, 1000);
+    </script>
+
+    <script type="importmap">
+    {
+      "imports": {
+        "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
+      }
+    }
+    </script>
+
+    <script src="js/registros_empresas.js" type="module"></script>
 </body>
 </html>

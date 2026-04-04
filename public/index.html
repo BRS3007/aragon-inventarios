@@ -3,123 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="app_title">ARAGON Smart Inventories</title>
-
-    <!-- INICIO: Codigo de Favicons Corregido y Optimizado -->
-     <link rel="icon" type="image/png" href="favicons/apple-touch-icon.png"> 
-    <!-- Asegurate que todos estos archivos esten en la carpeta 'public/favicons/' -->
+    <title data-i18n="login:login_title">Iniciar Sesión</title>
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="favicons/android-chrome-192x192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-    <link rel="manifest" href="favicons/site.webmanifest"> <!-- Ruta corregida para el manifest -->
+    <link rel="manifest" href="favicons/site.webmanifest">
     <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <link rel="icon" href="favicons/favicon.ico" type="image/x-icon"> <!-- El favicon principal en formato .ico -->
-    <!-- FIN: Codigo de Favicons Corregido y Optimizado -->
-    
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  
-<link rel="stylesheet" href="css/estilo.css">
-<link href="/dist/output.css" rel="stylesheet">
-</head>
-<body class="background-login">
-
-    <header class="bg-white p-4 border-b border-gray-200">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between md:items-center space-y-3 md:space-y-0 text-center md:text-left">
-            
-            <div class="flex flex-col items-center md:items-start">
-                <img src="favicons/android-chrome-192x192.png" alt="Logo" class="h-24 mb-1">
-            </div>
-
-            <div class="flex flex-col items-center space-y-2">
-                <div id="reloj-vivo" class="text-gray-600 text-sm text-center font-medium">
-                    Cargando hora...
-                </div>
-            </div>
-
-            <div class="flex justify-center md:justify-end">
-                <div class="language-switcher">
-                    <select id="language-switcher" class="p-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none shadow-sm cursor-pointer">
-                        <option value="en">English</option>
-                        <option value="es" selected>Español</option>
-                        <option value="pap">Papiamento</option>
-                        <option value="zh">中文</option>
-                    </select>
-                </div>
-            </div>
-
-        </div>
-    </header>
-<main id="app-container" class="main-content" style="margin-top: 5px; padding-top: 0;">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS Unificado -->
+    <link rel="stylesheet" href="css/unified.css">
+    
+    <style>
+        /* Estilos específicos para el login */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
         
-        <div class="contenedor__todo" style="margin-top: 0;">
+        .login-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 420px;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, var(--aragon-red) 0%, var(--aragon-red-dark) 100%);
+            padding: 32px;
+            text-align: center;
+        }
+        
+        .login-logo {
+            height: 80px;
+            margin-bottom: 16px;
+        }
+        
+        .login-title {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .login-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+        
+        .login-body {
+            padding: 32px;
+        }
+        
+        .login-tabs {
+            display: flex;
+            margin-bottom: 24px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            background: #f1f5f9;
+        }
+        
+        .login-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            background: transparent;
+            border: none;
+            color: var(--text-gray);
+        }
+        
+        .login-tab.active {
+            background: var(--white);
+            color: var(--aragon-red);
+        }
+        
+        .login-form {
+            display: none;
+        }
+        
+        .login-form.active {
+            display: block;
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #f9fafb;
+        }
+        
+        .login-form input:focus {
+            border-color: var(--aragon-red);
+            background: var(--white);
+            box-shadow: 0 0 0 4px var(--aragon-red-glow);
+            outline: none;
+        }
+        
+        .login-form .btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+        }
+        
+        .login-footer {
+            text-align: center;
+            padding: 20px 32px;
+            background: #f8fafc;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .language-select {
+            padding: 10px 16px;
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            background: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .language-select:focus {
+            border-color: var(--aragon-red);
+            outline: none;
+        }
+        
+        #mensaje-login,
+        #mensaje-registro {
+            margin-top: 12px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        #mensaje-login {
+            color: #dc2626;
+        }
+        
+        #mensaje-registro {
+            color: #ea580c;
+        }
+        
+        .clock-display {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            text-align: right;
+            background: var(--white);
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .clock-display .date {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+        
+        .clock-display .time {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--aragon-red);
+        }
+        
+        @media (max-width: 480px) {
+            .login-card {
+                border-radius: var(--radius-md);
+            }
             
-            <div class="caja__trasera">
-                <div class="caja__trasera-login">
-                    <h3 data-i18n="login:already_registered_title">¿Ya estas Registrado?</h3>
-                    <p data-i18n="login:already_registered_text">Inicia sesion para Ingresar al Formulario</p>
-                    <button id="btn__iniciar-Sesion" data-i18n="login.login_button">Iniciar Sesion</button>
-                </div>
-                <div class="caja__trasera-register">
-                    <h3 data-i18n="login:not_registered_title">¿Aun no estas Registrado?</h3>
-                    <p data-i18n="login:not_registered_text">Registrate para que Puedas Ingresar al Formulario</p>
-                    <button id="btn__registrarse" data-i18n="login.register_link">Registrarse</button>
-                </div>
+            .login-header {
+                padding: 24px;
+            }
+            
+            .login-body {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body class="login-container" style="position: relative;">
+    <!-- Reloj -->
+    <div class="clock-display">
+        <div id="reloj-fecha" class="date">Cargando...</div>
+        <div id="reloj-hora" class="time">--:--:--</div>
+    </div>
+
+    <div class="login-card">
+        <div class="login-header">
+            <img src="favicons/android-chrome-192x192.png" alt="Logo" class="login-logo">
+            <h1 class="login-title" data-i18n="login:app_name">ARAGON Smart Inventories</h1>
+            <p class="login-subtitle" data-i18n="login:app_subtitle">Sistema de Gestión de Inventarios</p>
+        </div>
+        
+        <div class="login-body">
+            <!-- Tabs -->
+            <div class="login-tabs">
+                <button class="login-tab active" id="tab-login">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span data-i18n="login:login_tab">Iniciar Sesión</span>
+                </button>
+                <button class="login-tab" id="tab-register">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span data-i18n="login:register_tab">Registrarse</span>
+                </button>
             </div>
+            
+            <!-- Formulario Login -->
+            <form id="login-form" class="login-form active">
+                <div class="form-group">
+                    <input type="text" name="id_personal" data-i18n="[placeholder]login:username_label" placeholder="ID Personal" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="contrasena" data-i18n="[placeholder]login:password_label" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-sign-in-alt"></i>
+                    <span data-i18n="login:login_button">Ingresar</span>
+                </button>
+                <div id="mensaje-login"></div>
+            </form>
+            
+            <!-- Formulario Registro -->
+            <form id="register-form" class="login-form">
+                <div class="form-group">
+                    <input type="text" name="nombre_real" data-i18n="[placeholder]login:name_label" placeholder="Nombre Completo" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email_usuario" data-i18n="[placeholder]login:email_label" placeholder="Correo Electrónico" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="nombre_empresa" data-i18n="[placeholder]login:company_label" placeholder="Nombre de la Empresa" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="nombre_usuario" data-i18n="[placeholder]login:username_label" placeholder="ID Personal" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="contrasena" data-i18n="[placeholder]login:password_label" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span data-i18n="login:register_button">Crear Cuenta</span>
+                </button>
+                <div id="mensaje-registro"></div>
+            </form>
+        </div>
+        
+        <div class="login-footer">
+            <select id="language-switcher" class="language-select">
+                <option value="es" selected>Español</option>
+                <option value="en">English</option>
+                <option value="pap">Papiamento</option>
+                <option value="zh">中文</option>
+            </select>
+        </div>
+    </div>
 
-            <div class="contenedor__login-register">
-                
-                <form id="login-form" action="/login" method="POST" class="formulario__login">
-                    <h2 data-i18n="login:login_title">Iniciar Sesion</h2>
-                    <input type="text" placeholder="ID Personal" name="id_personal" required data-i18n="[placeholder]login.username_label"> 
-                    <input type="password" placeholder="Contraseña" name="contrasena" required data-i18n="[placeholder]login.password_label">
-                    <button type="submit" data-i18n="login:login_button">Ingresar</button>
-                </form>
-                <div id="mensaje-login" style="text-align: center; margin-top: 10px; font-weight: bold;"></div>
-                
-                <form id="register-form" class="formulario__register" action="/api/registrar-nuevo" method="POST">
-                    <h2 data-i18n="login:register_link">Registrar Nuevo Empleado</h2>
-                    
-                    <input type="text" placeholder="Nombre Completo" name="nombre_real" required data-i18n="[placeholder]login.name_label_placeholder"> 
-                    <input type="email" placeholder="Correo Electrónico" name="email_usuario" required> 
-                    <input type="text" placeholder="Nombre de la Empresa" name="nombre_empresa" required> 
-                    <input type="text" placeholder="ID Personal" name="nombre_usuario" required data-i18n="[placeholder]login.username_label"> 
-                    <input type="password" placeholder="Contraseña" name="contrasena" required data-i18n="[placeholder]login.password_label">
-                    
-                    <button type="submit" data-i18n="login:register_button">Registrarse</button>
-                </form>
-                
-                <div id="mensaje-registro" style="text-align: center; margin-top: 10px; color: orange;"></div>
-
-            </div> </div> </main>
-
-            <script>
+    <script>
+        // Actualizar reloj
         function actualizarReloj() {
             const ahora = new Date();
-            const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            const textoFinal = ahora.toLocaleDateString('es-ES', opciones).replace(',', '');
-            document.getElementById('reloj-vivo').innerText = textoFinal;
+            const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const opcionesHora = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            document.getElementById('reloj-fecha').textContent = ahora.toLocaleDateString('es-ES', opcionesFecha);
+            document.getElementById('reloj-hora').textContent = ahora.toLocaleTimeString('es-ES', opcionesHora);
         }
         actualizarReloj();
         setInterval(actualizarReloj, 1000);
+
+        // Tabs functionality
+        const tabLogin = document.getElementById('tab-login');
+        const tabRegister = document.getElementById('tab-register');
+        const formLogin = document.getElementById('login-form');
+        const formRegister = document.getElementById('register-form');
+
+        tabLogin.addEventListener('click', () => {
+            tabLogin.classList.add('active');
+            tabRegister.classList.remove('active');
+            formLogin.classList.add('active');
+            formRegister.classList.remove('active');
+        });
+
+        tabRegister.addEventListener('click', () => {
+            tabRegister.classList.add('active');
+            tabLogin.classList.remove('active');
+            formRegister.classList.add('active');
+            formLogin.classList.remove('active');
+        });
     </script>
     
-<script type="importmap">
-{
-  "imports": {
-    "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/+esm",
-    "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/+esm",
-    "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/+esm",
-    "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
-  }
-}
-</script>
+    <script type="importmap">
+    {
+      "imports": {
+        "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/+esm",
+        "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/+esm",
+        "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/+esm",
+        "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/+esm"
+      }
+    }
+    </script>
     
     <script src="js/i18n.js" type="module"></script>
     <script src="js/script.js" type="module"></script>
     <script src="js/common.js" type="module"></script>
-    </body>
+</body>
 </html>

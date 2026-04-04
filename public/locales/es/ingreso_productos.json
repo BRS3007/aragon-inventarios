@@ -1,10 +1,11 @@
 {
-"page_title": "Ingreso de Nuevos Productos",
-"help_text_barcode": "Introduce el código de barras del producto.",
-"help_text_code": "Introduce el código interno del producto.",
-"help_text_description": "Introduce la descripción del producto. Las sugerencias aparecerán.",
-"help_text_quantity": "Introduce la cantidad del producto.",
-"help_text_date": "Selecciona la fecha de ingreso.",
-"help_text_price": "Introduce el precio del producto.",
-"help_text_aisle": "Introduce la ubicación del pasillo del producto."
+  "page_title": "Ingreso de Nuevos Productos",
+  "page_subtitle": "Registra nuevos productos en el inventario",
+  "help_text_barcode": "Código de barras del producto",
+  "help_text_code": "Código interno del producto",
+  "help_text_description": "Descripción del producto",
+  "help_text_quantity": "Cantidad de unidades",
+  "help_text_date": "Fecha de ingreso",
+  "help_text_price": "Precio del producto",
+  "help_text_aisle": "Ubicación en almacén"
 }
